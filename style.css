@@ -82,7 +82,6 @@ body {
 
 nav {
   display: flex;
-  cursor: pointer;
 }
 
 nav a {
@@ -90,6 +89,7 @@ nav a {
   text-decoration: none;
   margin: 0 10px 0 10px;
   transition: 0.2s ease-in;
+  cursor: pointer;
 }
 
 nav a:hover {
@@ -212,7 +212,7 @@ nav a:hover {
   color: var(--green);
 }
 
-.coast-main-game {
+.prise-main-game {
   font-family: "Brutal Type Bold";
   font-size: 25px;
   letter-spacing: 3px;
@@ -225,17 +225,13 @@ nav a:hover {
   background-color: red;
   border-radius: 5px;
   color: black;
-  width: 200px;
-  height: 70px;
+  width: 150px;
+  height: 50px;
   margin-top: 10px;
   cursor: pointer;
   transition: 0.3s ease-in;
-}
-
-.button-buy-main-game span {
-  margin: 0 auto;
-  margin-top: 16px;
-  transition: 0.3s ease-out;
+  justify-content: center;
+  align-items: center;
 }
 
 .button-buy-main-game:hover {
@@ -278,7 +274,10 @@ ul li .slides:last-child {
   background-color: #36eca652;
 }
 
-.new-games {
+.new-games,
+.top-games,
+.top-week-game,
+.discount-games {
   position: relative;
   width: var(--container);
   margin: 0 auto;
@@ -287,19 +286,25 @@ ul li .slides:last-child {
   font-weight: 500;
 }
 
-.container-new-games {
+.container-new-games,
+.container-top-games,
+.container-discount-games {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
   margin-top: 20px;
 }
 
-.items-new-games {
+.items-new-games,
+.items-top-games,
+.items-discount-games {
   width: 18%;
   height: 500px;
 }
 
-.items-new-games img {
+.items-new-games img,
+.items-top-games img,
+.items-discount-games img {
   width: 100%;
   height: 70%;
   object-fit: cover;
@@ -307,7 +312,9 @@ ul li .slides:last-child {
   transition: 0.3s ease-in;
 }
 
-.items-new-games img:hover {
+.items-new-games img:hover,
+.items-top-games img:hover,
+.items-discount-games img:hover {
   filter: brightness(50%);
   box-shadow: var(--green) 0 0 20px;
 }
@@ -343,25 +350,31 @@ ul li .slides:last-child {
 }
 
 .new-game-name,
-.new-game-developer {
+.new-game-developer,
+.discount-game-developer {
   font-family: "Brutal Type Light";
 }
 
-.new-game-name {
+.new-game-name,
+.top-game-name,
+.discount-game-name {
   margin-top: 20px;
 }
 
-.new-game-developer {
+.new-game-developer,
+.top-game-developer,
+.discount-game-developer {
   color: var(--gray);
   margin-top: 5px;
 }
 
-.new-game-coast {
+.new-game-prise,
+.top-game-prise {
   margin-top: 20px;
   font-family: "Brutal Type Regular";
 }
 
-.top-chart {
+.popular-games {
   width: var(--container);
   display: block;
   height: 700px;
@@ -372,19 +385,23 @@ ul li .slides:last-child {
   color: white;
 }
 
-.sall-title {
+.popular-title {
   display: flex;
   align-items: center;
   padding: 20px 0 0 20px;
   margin-bottom: 20px;
 }
 
-.top-chart span {
+.popular-title img {
+  margin-top: -5px;
+}
+
+.popular-games span {
   font-family: "Brutal Type Bold";
   color: white;
   font-size: 30px;
   letter-spacing: 2px;
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .grid-container {
@@ -396,38 +413,38 @@ ul li .slides:last-child {
   grid-gap: 10px;
 }
 
-.first-sall-item {
+.first-popular-item {
   grid-row-start: 1;
   grid-row-end: 3;
   grid-column-start: 1;
   grid-column-end: 2;
   border-bottom-left-radius: 5px;
 }
-.second-sall-item {
+.second-popular-item {
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 2;
   grid-column-end: 4;
 }
-.third-sall-item {
+.third-popular-item {
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 4;
   grid-column-end: 5;
 }
-.forth-sall-item {
+.forth-popular-item {
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 2;
   grid-column-end: 3;
 }
-.fivth-sall-item {
+.fivth-popular-item {
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 3;
   grid-column-end: 4;
 }
-.sixth-sall-item {
+.sixth-popular-item {
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 4;
@@ -442,28 +459,19 @@ ul li .slides:last-child {
   transition: 0.3s ease-in;
 }
 
-.first-sall-item img {
+.first-popular-item img {
   height: 588px;
   border-bottom-left-radius: 10px;
 }
 
-.second-sall-item img {
+.second-popular-item img,
+.third-popular-item img,
+.forth-popular-item img,
+.fivth-popular-item img {
   height: 287px;
 }
 
-.third-sall-item img {
-  height: 287px;
-}
-
-.forth-sall-item img {
-  height: 287px;
-}
-
-.fivth-sall-item img {
-  height: 287px;
-}
-
-.sixth-sall-item img {
+.sixth-popular-item img {
   height: 287px;
   border-bottom-right-radius: 10px;
 }
@@ -471,4 +479,138 @@ ul li .slides:last-child {
 .grid-container img:hover {
   filter: brightness(60%);
   box-shadow: var(--green) 0 0 10px;
+}
+
+.items-top-games {
+  width: 32%;
+  height: 350px;
+}
+
+.container-top-games {
+  justify-content: space-between;
+}
+
+.top-games {
+  margin-top: 40px;
+}
+
+.top-game-prise {
+  margin-top: 0px;
+}
+
+.upper-section-top-games {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upper-section-top-games div,
+.button-buy-top-week-game {
+  display: flex;
+  border: solid rgba(255, 255, 255, 0.3) 2px;
+  color: rgba(255, 255, 255, 0.3);
+  width: 300px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease-in;
+}
+
+.upper-section-top-games div:hover {
+  color: var(--green);
+  border: solid var(--green) 2px;
+  box-shadow: var(--green) 0 0 5px;
+}
+
+.top-week-game {
+  margin-top: 40px;
+}
+
+.top-week-game img {
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.inormatio-top-week-game {
+  position: absolute;
+  left: 100px;
+  top: 450px;
+  width: 300px;
+}
+
+.title-top-week-game {
+  font-family: "Brutal Type Bold";
+  font-size: 30px;
+}
+
+.name-top-week-game {
+  font-family: "Brutal Type Bold";
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: orange;
+}
+
+.short-inormatio-top-week-game {
+  font-size: 25px;
+}
+
+.prise-top-week-game {
+  margin-top: 10px;
+  font-family: "Brutal Type Bold";
+  letter-spacing: 2px;
+  font-size: 30px;
+}
+
+.button-buy-top-week-game {
+  border: none;
+  background-color: orange;
+  color: black;
+  width: 200px;
+  margin-top: 15px;
+}
+
+.button-buy-top-week-game:hover {
+  box-shadow: orange 0 0 10px;
+}
+
+.discount-games {
+  margin-top: 40px;
+}
+
+.discount-information {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Brutal Type Bold";
+}
+
+.discount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  width: 20%;
+  background-color: var(--green);
+  color: black;
+}
+
+.befor-discount-game-prise {
+  color: rgba(255, 255, 255, 0.15);
+  text-decoration: line-through;
+  letter-spacing: 1px;
+  font-size: 25px;
+}
+
+.after-discount-game-prise {
+  color: white;
+  letter-spacing: 1px;
+  font-size: 25px;
 }
