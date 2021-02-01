@@ -13,7 +13,7 @@
 @font-face {
   font-family: "Brutal Type Thin";
   src: local("Brutal Type Thin"), local("Brutal-Type-Thin"),
-    url("./fonts/BrutalType-Thin.woff2") format("woff2");
+    url("/Client/fonts/BrutalType-Thin.woff2") format("woff2");
   /* url("BrutalType-Thin.woff") format("woff"),
     url("BrutalType-Thin.ttf") format("truetype"); */
   font-weight: 100;
@@ -23,7 +23,7 @@
 @font-face {
   font-family: "Brutal Type Regular";
   src: local("Brutal Type Regular"), local("Brutal-Type-Regular"),
-    url("./fonts/BrutalType.woff2") format("woff2");
+    url("/Client/fonts/BrutalType.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
@@ -31,9 +31,7 @@
 @font-face {
   font-family: "Brutal Type Medium";
   src: local("Brutal Type Medium"), local("Brutal-Type-Medium"),
-    url("./fonts/BrutalType-Medium.woff2") format("woff2");
-  /* url("BrutalType-Medium.woff") format("woff"),
-    url("BrutalType-Medium.ttf") format("truetype"); */
+    url("/Client/fonts/BrutalType-Medium.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
 }
@@ -41,9 +39,7 @@
 @font-face {
   font-family: "Brutal Type Bold";
   src: local("Brutal Type Bold"), local("Brutal-Type-Bold"),
-    url("./fonts/BrutalType-Bold.woff2") format("woff2");
-  /* url("BrutalType-Bold.woff") format("woff"),
-    url("BrutalType-Bold.ttf") format("truetype"); */
+    url("/Client/fonts/BrutalType-Bold.woff2") format("woff2");
   font-weight: 1000;
   font-style: normal;
 }
@@ -51,9 +47,7 @@
 @font-face {
   font-family: "Brutal Type Light";
   src: local("Brutal Type Extra Light"), local("Brutal-Type-Extra-Light"),
-    url("./fonts/BrutalType-Light.woff2") format("woff2");
-  /* url("BrutalType-ExtraLight.woff") format("woff"),
-    url("BrutalType-ExtraLight.ttf") format("truetype"); */
+    url("/Client/fonts/BrutalType-Light.woff2") format("woff2");
   font-weight: 200;
   font-style: normal;
 }
@@ -75,7 +69,7 @@ body {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  font-size: 25px;
+  font-size: 20px;
   padding: 20px 0 20px 0;
   align-items: center;
 }
@@ -94,6 +88,137 @@ nav a {
 
 nav a:hover {
   color: #36eca6;
+}
+
+.enter-site {
+  display: flex;
+  width: 400px;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Brutal Type Regular";
+}
+
+.enter-site a {
+  position: relative;
+  display: flex;
+  color: var(--green);
+  text-decoration: none;
+  transition: 0.5s;
+  letter-spacing: 4px;
+  overflow: hidden;
+  width: 140px;
+  height: 30px;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border: solid rgba(255, 255, 255, 0.13) 2px;
+  cursor: pointer;
+}
+
+.enter-site a img {
+  width: 30px;
+  height: 30px;
+  background-color: var(--green);
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.enter-site a:hover {
+  background: var(--green);
+  color: #050801;
+  box-shadow: 0 0 5px var(--green), 0 0 25px var(--green), 0 0 50px var(--green),
+    0 0 200px var(--green);
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+.enter-site a:nth-child(1) {
+  filter: hue-rotate(0deg);
+}
+
+.enter-site a:nth-child(2) {
+  filter: hue-rotate(200deg);
+}
+
+.enter-site a span {
+  position: absolute;
+  display: block;
+}
+
+.enter-site a span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green));
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.enter-site a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--green));
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.enter-site a span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, var(--green));
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.enter-site a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, var(--green));
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
 }
 
 .lower-header {
@@ -124,15 +249,16 @@ nav a:hover {
 .search-wrapper {
   position: relative;
   display: flex;
-  width: 435px;
-  height: 32px;
+  width: 500px;
+  height: 45px;
   left: 365px;
   top: 0;
-  margin-right: 345px;
+  margin-right: 500px;
+  border-radius: 25px;
 }
 
 .search {
-  display: block;
+  display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -140,6 +266,10 @@ nav a:hover {
   border-color: black;
   border-width: 1px;
   border-style: solid;
+  border-radius: 20px;
+  outline: none;
+  font-size: 25px;
+  padding-left: 10px;
 }
 
 .search:focus {
@@ -152,7 +282,7 @@ nav a:hover {
   background-size: 100%;
   height: 20px;
   width: 20px;
-  top: 5px;
+  top: 12px;
   border: none;
   background: no-repeat;
   right: 10px;
@@ -202,40 +332,20 @@ nav a:hover {
 }
 
 .short-info-main-game {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   color: var(--gray);
   transition: 0.3s ease-in;
   cursor: none;
 }
 
 .short-info-main-game:hover {
-  color: var(--green);
+  color: white;
 }
 
 .prise-main-game {
   font-family: "Brutal Type Bold";
   font-size: 25px;
   letter-spacing: 3px;
-}
-
-.button-buy-main-game {
-  font-family: "Brutal Type Bold";
-  display: flex;
-  font-size: 25px;
-  background-color: red;
-  border-radius: 5px;
-  color: black;
-  width: 150px;
-  height: 50px;
-  margin-top: 10px;
-  cursor: pointer;
-  transition: 0.3s ease-in;
-  justify-content: center;
-  align-items: center;
-}
-
-.button-buy-main-game:hover {
-  box-shadow: red 0 0 15px;
 }
 
 li {
@@ -277,7 +387,10 @@ ul li .slides:last-child {
 .new-games,
 .top-games,
 .top-week-game,
-.discount-games {
+.discount-games,
+.free-test,
+.preproduces,
+.best-online-games {
   position: relative;
   width: var(--container);
   margin: 0 auto;
@@ -288,7 +401,9 @@ ul li .slides:last-child {
 
 .container-new-games,
 .container-top-games,
-.container-discount-games {
+.container-discount-games,
+.container-preproduce-games,
+.container-best-online-games {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
@@ -297,14 +412,23 @@ ul li .slides:last-child {
 
 .items-new-games,
 .items-top-games,
-.items-discount-games {
+.items-discount-games,
+.items-preproduce-games,
+.items-best-online-games {
   width: 18%;
   height: 500px;
 }
 
+.items-preproduce-games {
+  width: 22%;
+  height: 570px;
+}
+
 .items-new-games img,
 .items-top-games img,
-.items-discount-games img {
+.items-discount-games img,
+.items-preproduce-games img,
+.items-best-online-games img {
   width: 100%;
   height: 70%;
   object-fit: cover;
@@ -314,7 +438,9 @@ ul li .slides:last-child {
 
 .items-new-games img:hover,
 .items-top-games img:hover,
-.items-discount-games img:hover {
+.items-discount-games img:hover,
+.items-preproduce-games img:hover,
+.items-best-online-games img:hover {
   filter: brightness(50%);
   box-shadow: var(--green) 0 0 20px;
 }
@@ -351,26 +477,34 @@ ul li .slides:last-child {
 
 .new-game-name,
 .new-game-developer,
-.discount-game-developer {
+.discount-game-developer,
+.preproduce-game-developer,
+.best-online-game-developer {
   font-family: "Brutal Type Light";
 }
 
 .new-game-name,
 .top-game-name,
-.discount-game-name {
+.discount-game-name,
+.preproduce-game-name,
+.best-online-game-name {
   margin-top: 20px;
 }
 
 .new-game-developer,
 .top-game-developer,
-.discount-game-developer {
-  color: var(--gray);
+.discount-game-developer,
+.preproduce-game-developer,
+.best-online-game-developer {
+  color: #92969bcb;
   margin-top: 5px;
 }
 
 .new-game-prise,
-.top-game-prise {
-  margin-top: 20px;
+.preproduce-game-prise,
+.top-game-prise,
+.best-online-game-prise {
+  margin-top: 10px;
   font-family: "Brutal Type Regular";
 }
 
@@ -396,12 +530,22 @@ ul li .slides:last-child {
   margin-top: -5px;
 }
 
+.new-games span,
+.top-games span {
+  font-family: "Brutal Type Bold";
+  font-size: 25px;
+}
+
 .popular-games span {
   font-family: "Brutal Type Bold";
   color: white;
   font-size: 30px;
   letter-spacing: 2px;
   margin-left: 20px;
+}
+
+.popular-title img {
+  filter: invert(1);
 }
 
 .grid-container {
@@ -460,7 +604,7 @@ ul li .slides:last-child {
 }
 
 .first-popular-item img {
-  height: 588px;
+  height: 593px;
   border-bottom-left-radius: 10px;
 }
 
@@ -468,11 +612,11 @@ ul li .slides:last-child {
 .third-popular-item img,
 .forth-popular-item img,
 .fivth-popular-item img {
-  height: 287px;
+  height: 290px;
 }
 
 .sixth-popular-item img {
-  height: 287px;
+  height: 290px;
   border-bottom-right-radius: 10px;
 }
 
@@ -494,10 +638,6 @@ ul li .slides:last-child {
   margin-top: 40px;
 }
 
-.top-game-prise {
-  margin-top: 0px;
-}
-
 .upper-section-top-games {
   display: flex;
   width: 100%;
@@ -506,7 +646,7 @@ ul li .slides:last-child {
 }
 
 .upper-section-top-games div,
-.button-buy-top-week-game {
+.button {
   display: flex;
   border: solid rgba(255, 255, 255, 0.3) 2px;
   color: rgba(255, 255, 255, 0.3);
@@ -525,11 +665,13 @@ ul li .slides:last-child {
   box-shadow: var(--green) 0 0 5px;
 }
 
-.top-week-game {
+.top-week-game,
+.free-test {
   margin-top: 40px;
 }
 
-.top-week-game img {
+.top-week-game img,
+.free-test img {
   width: 100%;
   height: 700px;
   object-fit: cover;
@@ -537,46 +679,80 @@ ul li .slides:last-child {
   border-radius: 10px;
 }
 
-.inormatio-top-week-game {
+.inormatio-top-week-game,
+.inormatio-free-test-game {
   position: absolute;
   left: 100px;
-  top: 450px;
+  top: 350px;
   width: 300px;
 }
 
-.title-top-week-game {
+.title-top-week-game,
+.title-free-test-game {
   font-family: "Brutal Type Bold";
   font-size: 30px;
 }
 
-.name-top-week-game {
+.name-top-week-game,
+.name-free-test-game {
   font-family: "Brutal Type Bold";
   font-size: 30px;
   margin-bottom: 20px;
   color: orange;
 }
 
-.short-inormatio-top-week-game {
+.name-free-test-game {
+  color: rgb(0, 140, 255);
+}
+
+.short-inormatio-top-week-game,
+.short-information-free-test-game {
   font-size: 25px;
 }
 
 .prise-top-week-game {
-  margin-top: 10px;
+  margin-top: 30px;
   font-family: "Brutal Type Bold";
   letter-spacing: 2px;
   font-size: 30px;
 }
 
-.button-buy-top-week-game {
+.full-butt {
   border: none;
-  background-color: orange;
   color: black;
   width: 200px;
   margin-top: 15px;
+  transition: 0.1s ease-in;
+  font-weight: 500;
+  font-size: 20px;
 }
 
-.button-buy-top-week-game:hover {
-  box-shadow: orange 0 0 10px;
+.orange {
+  background-color: orange;
+}
+
+.orange:hover {
+  box-shadow: orange 0 0 15px;
+}
+
+.blue {
+  background-color: rgb(0, 140, 255);
+}
+
+.blue:hover {
+  box-shadow: rgb(0, 140, 255) 0 0 15px;
+}
+
+.red {
+  background-color: red;
+}
+
+.red:hover {
+  box-shadow: red 0 0 15px;
+}
+
+.lern-more-butt {
+  margin-top: 60px;
 }
 
 .discount-games {
@@ -613,4 +789,42 @@ ul li .slides:last-child {
   color: white;
   letter-spacing: 1px;
   font-size: 25px;
+}
+
+.preproduces {
+  margin-top: 40px;
+}
+
+.best-online-game {
+  margin-top: 20px;
+}
+
+footer {
+  background-color: black;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+footer a {
+  display: flex;
+  border: solid var(--green) 2px;
+  border-radius: 50%;
+  background-color: #36eca680;
+  align-items: center;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+  margin: 10px 5px 10px 5px;
+}
+
+footer a img {
+  cursor: pointer;
+}
+
+footer a:last-child {
+  margin-right: 30px;
+}
+
+footer a:hover {
+  background-color: var(--green);
 }
