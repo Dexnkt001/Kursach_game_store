@@ -417,6 +417,32 @@ ul li .slides:last-child {
 .items-best-online-games {
   width: 18%;
   height: 500px;
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+/* .animation-for-slider {
+  animation: slider 2s linear;
+  animation-play-state: running;
+}
+
+@keyframes slider {
+  0% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+} */
+
+.slider-popcity {
+  opacity: 0;
 }
 
 .items-preproduce-games {
@@ -451,7 +477,7 @@ ul li .slides:last-child {
   top: 35%;
   transition: 0.3s ease-in;
   cursor: pointer;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 700;
 }
 
@@ -531,9 +557,18 @@ ul li .slides:last-child {
 }
 
 .new-games span,
-.top-games span {
+.top-games span,
+.discount-games span {
   font-family: "Brutal Type Bold";
   font-size: 25px;
+}
+
+.new-games .new-prev,
+.new-games .new-next,
+.discount-games .new-prev,
+.discount-games .new-next {
+  font-family: "Brutal Type Regular";
+  font-size: 50px;
 }
 
 .popular-games span {
