@@ -100,8 +100,9 @@ new Promise((resolve)=>{
     resolve(default_slider(id_game, mas_pict_new_game, place_new_pict))
   },1000)
 }).then((result)=>{
-  delete_class()
-  console.log(result)
+  console.log('lololol rabotaets')
+  setTimeout(()=>{ delete_class()}, 200)
+  console.log('new id after fun : ', result)
   id_new_game = result;
 });
 }
