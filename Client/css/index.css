@@ -6,7 +6,7 @@
   --danger: #dc3545;
   --success: #28a745;
   --black: black;
-  --green: #36eca6;
+  --green: rgb(54, 236, 166);
   --container: 75%;
 }
 
@@ -149,7 +149,7 @@ nav a:hover {
   width: 100%;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--green));
-  animation: animate1 1s linear infinite;
+  animation: animate1 2s linear infinite;
 }
 
 @keyframes animate1 {
@@ -169,7 +169,7 @@ nav a:hover {
   height: 100%;
   background: linear-gradient(180deg, transparent, var(--green));
   animation: animate2 1s linear infinite;
-  animation-delay: 0.25s;
+  animation-delay: 0.5s;
 }
 
 @keyframes animate2 {
@@ -188,8 +188,8 @@ nav a:hover {
   width: 100%;
   height: 2px;
   background: linear-gradient(270deg, transparent, var(--green));
-  animation: animate3 1s linear infinite;
-  animation-delay: 0.5s;
+  animation: animate3 2s linear infinite;
+  animation-delay: 1s;
 }
 
 @keyframes animate3 {
@@ -209,7 +209,7 @@ nav a:hover {
   height: 100%;
   background: linear-gradient(360deg, transparent, var(--green));
   animation: animate4 1s linear infinite;
-  animation-delay: 0.75s;
+  animation-delay: 0.25s;
 }
 @keyframes animate4 {
   0% {
@@ -270,6 +270,11 @@ nav a:hover {
   outline: none;
   font-size: 25px;
   padding-left: 10px;
+  cursor: pointer;
+}
+
+.search:hover {
+  border-color: #36eca6;
 }
 
 .search:focus {
@@ -335,7 +340,6 @@ nav a:hover {
   margin-bottom: 40px;
   color: var(--gray);
   transition: 0.3s ease-in;
-  cursor: none;
 }
 
 .short-info-main-game:hover {
@@ -420,26 +424,6 @@ ul li .slides:last-child {
   opacity: 1;
   transition: opacity 1s ease-in;
 }
-
-/* .animation-for-slider {
-  animation: slider 2s linear;
-  animation-play-state: running;
-}
-
-@keyframes slider {
-  0% {
-    opacity: 1;
-  }
-  30% {
-    opacity: 0;
-  }
-  70% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-} */
 
 .slider-popcity {
   opacity: 0;
@@ -558,7 +542,9 @@ ul li .slides:last-child {
 
 .new-games span,
 .top-games span,
-.discount-games span {
+.discount-games span,
+.preproduces span,
+.best-online-games span {
   font-family: "Brutal Type Bold";
   font-size: 25px;
 }
@@ -566,7 +552,11 @@ ul li .slides:last-child {
 .new-games .new-prev,
 .new-games .new-next,
 .discount-games .new-prev,
-.discount-games .new-next {
+.discount-games .new-next,
+.preproduces .new-prev,
+.preproduces .new-next,
+.best-online-games .new-prev,
+.best-online-games .new-next {
   font-family: "Brutal Type Regular";
   font-size: 50px;
 }

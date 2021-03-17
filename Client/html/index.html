@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game store</title>
   <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/moduls_window.css">
   <link rel="icon" href="../images/iconfinder-gamepad-4341293_120527.png" type="image/x-icon">
   <script src="../Js/script.js" defer type="module"></script>
 </head>
@@ -13,16 +14,17 @@
   <div class="upper-header">
   <span>Game store</span>
   <nav>
-    <a href="">Новинки</a>
-    <a href="">Скидки</a>
-    <a href="">Топ чарт</a>
-    <a href="">Предзаказ</a>
-    <a href="">Популярные</a>
-    <a href="">Бестселлеры</a>
-    <a href="">Соц.сети</a>
+    <a href="#New">Новинки</a>
+    <a href="#Popular">Популярные</a>
+    <a href="#Top">Топ чарт</a>
+    <a href="#Week">Игра недели</a>
+    <a href="#Discount">Скидки</a>
+    <a href="#Free">Бесплатная</a>
+    <a href="#Pre">Предзаказ</a>
+    <a href="#Online">Онлайн</a>
   </nav>
   <div class="enter-site">
-    <a href="#">
+    <a id="log_in" href="#">
       <span></span>
       <span></span>
       <span></span>
@@ -30,7 +32,7 @@
       <img src="../images/3289576-individual-man-people-person_107097.png" alt="login">
       Login
   </a>
-  <a href="#">
+  <a id="sign_up" href="#">
     <span></span>
     <span></span>
     <span></span>
@@ -47,7 +49,7 @@
   <div class="lower-header">
     <div>
       <span class="find">Найти</span>
-      <span class="view">Просмотр</span>
+      <span id ="view" class="view">Просмотр</span>
     </div>
     <div class="search-wrapper">
 
@@ -57,6 +59,170 @@
     </div>
   </div>
 </header>
+<!-- <div class="back-modul"></div>
+<div id = 'module-all-game' class="modul-window">
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class="main-section-modul-window all-game">
+   <ul class='sort-bar'>
+   <li><div class="sort-elements"><div class='title-sort-elements'><span>Жанр</span><span class="arrow arrow-dawn">></span></div>
+     <ul class="sort-elements-list genre">
+     <li>Шутер</li>
+     <li>Онлайн</li>
+     <li>Гонки</li>
+     <li>РПГ</li>
+     <li>Стратегии</li>
+     <li>Спортивные</li>
+     <li>Файтинг</li>
+     <li>Хоррор</li>
+     </ul>
+   </div></li>
+   <li><div class="sort-elements"><div class='title-sort-elements'><span>Цена</span><span class="arrow">></span></div>
+     <ul class="sort-elements-list sort-price">
+     <li>Ниже | 1000&#8381;</li>
+     <li>Ниже | 2000&#8381;</li>
+     <li>Ниже | 3000&#8381;</li>
+     <li>Выше | 3000&#8381;</li></ul>
+   </div></li>
+   <li><div class="sort-elements"><div class='title-sort-elements'><span>Рэйтинг</span><span class="arrow">></span></div>
+     <ul class="sort-elements-list sort-rait">
+     <li>Выше | 1	&#9734;</li>
+     <li>Выше | 2	&#9734;</li>
+     <li>Выше | 3	&#9734;</li>
+     <li>Выше | 4	&#9734;</li>
+    </ul>
+   </div></li>
+  </ul>
+    <div class="module-content">
+      <img class="slides module-content-items" src="../images/FarCray.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/Left4Dead.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/TombRaider.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/WatchDogs.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/NFS.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/Assasin.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/FarCray.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/Left4Dead.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/TombRaider.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/WatchDogs.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/NFS.jpg" alt="cyber">
+      <img class="slides module-content-items" src="../images/Assasin.jpg" alt="cyber">
+    </div>
+  </div>
+</div> -->
+<!-- <div class="back-modul"></div>
+<div id = 'module-all-game' class="modul-window">
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class="main-section-modul-window all-game">
+    <div class="module-content top-chart">
+      <img class="slides module-content-items top-chart-items-game" src="../images/FarCray.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/Left4Dead.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/TombRaider.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/WatchDogs.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/NFS.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/Assasin.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/FarCray.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/Left4Dead.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/TombRaider.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/WatchDogs.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/NFS.jpg" alt="cyber">
+      <img class="slides module-content-items top-chart-items-game" src="../images/Assasin.jpg" alt="cyber">
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="back-modul"></div>
+<div class='log_in'>
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class='content_log_in'>
+    <h1>Log in</h1>
+<div class="inputs">
+  <div class="nick"><span>Nickname</span><input type="text"></div>
+<div class="nick"><span>Password</span><input type="password"></div>
+</div>
+  </div>
+</div> -->
+
+
+<!-- <div class="back-modul"></div>
+<div class='sign_up'>
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class='content_log_in'>
+    <h1>Sign up</h1>
+<div class="inputs inputs_sign_up">
+  <div class="nick"><span>Nickname</span><input type="text"></div>
+  <div class="nick"><span>Email</span><input type="text"></div>
+<div class="nick"><span>Password</span><input type="password"></div>
+
+</div>
+  </div>
+</div> -->
+<div class="back-modul"></div>
+<div class="modul-window assasin_bg">
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class="img_game">
+    <img src="../images/Batman.jpg" alt="assasin">
+  </div>
+  <div class="short_module_info">
+    <img src="../images/Batman.jpg" alt="assasin">
+    <div class="short_text_module">
+      Игра про человека-мышь который спасает грешный готэм
+      от зладеев и оберегает всех мирных граждан от погибели
+    </div>
+    <div class="module_conteiner_prize">
+      <div class="module_prize">
+        <div class="numb_prize"><span>2000 &#8381;</span></div>
+        <div class="module_button_buy">Купить сейчас</div>
+      </div>
+    </div>
+  </div>
+  <div class="full_module_info">
+    <div class="title_module">
+      Об игре Batman
+    </div>
+    <div class="info_for_module_game">
+      <div class="module_game_dev">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="module_game_publisher">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="module_game_data">
+        <div></div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div class="module_rait"></div>
+  <div class="system_requirements"></div>
+</div>
+
+
+
+
+
 <section class="main-slider">
   <div class="container-slider">
     <div class="main-slide-container">
@@ -78,7 +244,7 @@
     </ul>
   </div>
 </section>
-<section class="new-games">
+<section id="New" class="new-games">
   <span>Новые игры</span>
   <span id='new-prev' class="new-prev">	&lt; </span>
   <span id='new-next' class="new-next">	&gt; </span>
@@ -121,7 +287,7 @@
     </div>
   </div>
 </section>
-<section class="popular-games">
+<section id="Popular" class="popular-games">
 <div class="popular-title">
   <img src="../images/bag_buy_cart_market_shop_shopping_tote_icon_123191.png" alt="first" width="">
   <span>Популярные игры</span>
@@ -135,8 +301,8 @@
   <div class="sixth-popular-item"><img src="../images/TombRaider.jpg" alt=""></div>
 </div>
 </section>
-<section class="top-games">
-  <div class="upper-section-top-games">
+<section id="Top" class="top-games">
+  <div id='more_top_gaems' class="upper-section-top-games">
     <span>Топ чарт</span>
     <div>Показать больше</div>
   </div>
@@ -164,7 +330,7 @@
     </div>
   </div>
 </section>
-<section class='top-week-game'>
+<section id = "Week" class='top-week-game'>
   <span class="title-top-week-game">Лучшая игра недели</span>
 <img src="../images/TombRaider.jpg" alt="top-week-game">
 <div class="inormatio-top-week-game">
@@ -174,7 +340,7 @@
   <div class="button full-butt orange">Купить</div>
 </div>
 </section>
-<section class="discount-games">
+<section id="Discount" class="discount-games">
   <span>Игры на скидке</span>
   <span id='discount-prev' class="new-prev">	&lt; </span>
   <span id='discount-next' class="new-next">	&gt; </span>
@@ -237,7 +403,7 @@
     </div>
   </div>
 </section>
-<section class="free-test">
+<section id="Free" class="free-test">
   <span class="title-free-test-game">Бесплатная пробная версия игры</span>
   <img src="../images/Assasin.jpg" alt="free-test-game">
   <div class="inormatio-free-test-game">
@@ -246,7 +412,7 @@
     <div class="button full-butt blue lern-more-butt">Узнать больше</div>
   </div>
 </section>
-<section class="preproduces">
+<section id="Pre" class="preproduces">
   <span>Игры на предзаказе</span>
   <span id='preproduces-prev' class="new-prev">	&lt; </span>
   <span id='preproduces-next' class="new-next">	&gt; </span>
@@ -280,12 +446,12 @@
         <div class="preproduce-game-prise">3999&#8381;</div>
     </div>
 </section>
-<section class="best-online-games">
-  <span>Игры на предзаказе</span>
+<section id="Online" class="best-online-games">
+  <span>Лучшие онлайн игры</span>
   <span id='best-online-prev' class="new-prev">	&lt; </span>
   <span id='best-online-next' class="new-next">	&gt; </span>
   <div class="container-best-online-games">
-    <div class="items-new-games">
+    <div class="items-best-online-games">
 
       <img src="../images/WatchDogs.jpg" alt="cyber">
 
