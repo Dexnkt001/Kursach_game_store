@@ -290,66 +290,64 @@ input[type="password"] {
 
 /* --------------------------------------- */
 
-
-.img_game{
+.img_game {
   display: block;
   margin: 0 auto;
   width: 95%;
   height: 600px;
 }
 
-.img_game img{
+.img_game img {
   display: block;
- margin:0 auto;
+  margin: 0 auto;
   width: auto;
   height: 100%;
   object-fit: cover;
-  box-shadow: 0 0 25px rgb(197, 197, 197);
+  box-shadow: 0 0 25px rgb(255, 0, 0);
 }
 
-.assasin_bg{
-  background: rgb(18, 18, 18);;
+.assasin_bg {
+  background: rgba(0, 0, 0, 0.8);
 }
 
-.short_module_info{
+.short_module_info {
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-top: 50px;
-  width:100%;
+  width: 100%;
   height: 250px;
 }
 
-.short_module_info img{
+.short_module_info img {
   display: block;
   height: 100%;
   width: auto;
   object-fit: cover;
-  box-shadow: 0 0 15px rgb(197, 197, 197);
+  box-shadow: 0 0 15px rgb(255, 0, 0);
 }
 
-
-.short_text_module{
+.short_text_module {
   display: block;
   width: 30%;
   color: white;
   font-size: 25px;
 }
 
-.module_conteiner_prize{
-display: block;
-width: 200px;
-height: 100%;
+.module_conteiner_prize {
+  display: block;
+  width: 200px;
+  height: 100%;
 }
 
-.module_prize{
+.module_prize {
   display: block;
   width: 100%;
   height: 60%;
   margin-top: 20px;
 }
 
-.numb_prize{
+.numb_prize {
   display: flex;
   width: 100%;
   height: 45%;
@@ -361,13 +359,116 @@ height: 100%;
   font-weight: 1000;
 }
 
-.module_button_buy{
+.module_button_buy {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: red;
   border-radius: 5px;
   width: 100%;
   height: 45%;
-  margin-top: 5px;
+  margin-top: 15px;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.back-modul-game {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background-image: url(../images/HITMAN.jpeg);
+  filter: brightness(0.4);
+}
+
+.full_module_info {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 3fr;
+  grid-auto-rows: minmax(200px, auto);
+  color: white;
+  margin-top: 40px;
+}
+
+.title_module {
+  display: block;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.info_for_module_game {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 100px);
+  grid-column-start: 2;
+  grid-column-end: 5;
+  font-size: 20px;
+}
+
+.module_full_info_text {
+  display: block;
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+.title_full_info_module_game {
+  font-size: 23px;
+  letter-spacing: 1px;
+}
+
+.text_full_info_under_title {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.module-imgs-game {
+  margin-top: 40px;
+  grid-column-start: 2;
+  grid-column-end: 5;
+  position: relative;
+}
+
+.container-slider-module-imgs-game {
+  display: grid;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2fr 1fr;
+}
+
+.container-slider-module-imgs-game img {
+  border-radius: 5px;
+}
+
+.container-slider-module-imgs-game img:first-child {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.open-close-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(126, 126, 126, 0.5);
+  color: white;
+  position: absolute;
+  top: 600px;
+  left: 0;
+  font-size: 23px;
+  transition: 0.1s ease-in;
+}
+
+.open-close-img:hover {
+  cursor: pointer;
+  background-color: rgba(126, 126, 126, 0.3);
 }

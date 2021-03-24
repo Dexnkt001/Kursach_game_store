@@ -127,6 +127,41 @@ let return_promise = await promise;
 return return_promise
 }
 
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            data: [20, 19, 8, 11, 15, 17],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.5)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)'
+            ],
+            borderDash:[5,6,7,8,9,10],
+            borderCapStyle : 'butt',
+            borderWidth: 1,
+            borderDashOffset:1,
+            fill:true,
+            pointBackgroundColor: ['rgba(255, 99, 132, 1)']
+        }]
+    },
+
+    options : {
+      scale: {
+          angleLines: {
+              display: false
+          },
+          ticks: {
+              suggestedMin: 0,
+              suggestedMax: 30
+          }
+      }
+  },
+});
+
 
 
 document.getElementById('new-prev').addEventListener('click',()=>{default_slider_for_previus_elements(id_new_game,mass_pict_new_game, place_new_pict, 5).then(res => id_new_game = res)});
