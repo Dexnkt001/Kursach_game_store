@@ -1,3 +1,5 @@
+import {add_new_game_db} from "./script.js"
+
 function all_game(massPict){
   const sort_bar = `<ul class='sort-bar'>
   <li><div class="sort-elements"><div class='title-sort-elements'><span>Жанр</span><span class="arrow arrow-dawn">></span></div>
@@ -55,7 +57,7 @@ massPict.forEach(element => {
   img.classList.add('slides');
   img.classList.add('module-content-items');
   img.setAttribute('src', `${element.link}`);
-  img.setAttribute('alt', 'lol');
+  img.setAttribute('alt', `${element.name}`);
 module_content.append(img);
 });
 
@@ -95,7 +97,7 @@ massPict.forEach(element => {
   img.classList.add('module-content-items');
   img.classList.add('top-chart-items-game');
   img.setAttribute('src', `${element.link}`);
-  img.setAttribute('alt', 'lol');
+  img.setAttribute('alt', `${element.name}`);
 module_content.append(img);
 });
 
@@ -113,7 +115,8 @@ function log_in(){
   inputs = document.createElement('div'),
   up_modul = document.createElement('div'),
   h1 = document.createElement('h1'),
-  exit = document.createElement('div');
+  exit = document.createElement('div'),
+  button = document.createElement('button');
   back_module_window.classList.add('back-modul');
   log_window.classList.add('log_in');
   up_modul.classList.add('up-module-window');
@@ -149,6 +152,11 @@ nick.append(span);
 nick.append(input)
 }
 
+button.classList.add('add_user');
+button.setAttribute('type', 'submit');
+button.innerHTML="Submit"
+inputs.append(button);
+
 document.querySelector('.exit').addEventListener('click', ()=>{
   document.querySelector('.log_in').parentNode.removeChild(document.querySelector('.log_in'));
   document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
@@ -163,7 +171,8 @@ function sign_up(){
   inputs = document.createElement('div'),
   up_modul = document.createElement('div'),
   h1 = document.createElement('h1'),
-  exit = document.createElement('div');
+  exit = document.createElement('div'),
+  button = document.createElement('button');
   back_module_window.classList.add('back-modul');
   log_window.classList.add('sign_up');
   up_modul.classList.add('up-module-window');
@@ -202,7 +211,10 @@ inputs.append(nick);
 nick.append(span);
 nick.append(input)
 }
-
+button.classList.add('add_user');
+button.setAttribute('type', 'submit');
+button.innerHTML="Submit"
+inputs.append(button);
 document.querySelector('.exit').addEventListener('click', ()=>{
   document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
   document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
@@ -210,5 +222,225 @@ document.querySelector('.exit').addEventListener('click', ()=>{
 
 }
 
+function module_game(obj){
+let str = obj.all_img.map(element => {
+ return  `<img class="main-slide" src="${element}" alt="cyber">`
+}).join(',').replace(/[,]/g, '');
 
-export {all_game, top_chart, log_in, sign_up};
+let html_text = `
+<div class="back-modul-game"></div>
+<div class="modul-window assasin_bg">
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class="img_game">
+    <img src="${obj.link}" alt="assasin">
+  </div>
+  <div class="short_module_info">
+    <img src="${obj.link}" alt="assasin">
+    <div class="short_text_module">
+    ${obj.short_info}
+    </div>
+    <div class="module_conteiner_prize">
+      <div class="module_prize">
+        <div class="numb_prize"><span>${obj.prize} &#8381;</span></div>
+        <div class="module_button_buy">Купить сейчас</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full_module_info">
+    <div class="title_module">
+      Об игре ${obj.name}
+    </div>
+    <div class="info_for_module_game">
+      <div class="module_game_dev">
+        <div>Developer</div>
+        <div>${obj.developer}</div>
+      </div>
+      <div class="module_game_publisher">
+        <div>Publisher</div>
+        <div>${obj.publish}</div>
+      </div>
+      <div class="module_game_data">
+        <div>Release data</div>
+        <div>${obj.release}</div>
+      </div>
+      <div class="module_game_tags">
+        <div>Tags</div>
+        <div>${obj.tag}</div>
+      </div>
+      <div class="module_game_raiting">
+        <div>Raiting</div>
+        <div>${obj.rait}</div>
+      </div>
+      <div class="module_game_platform">
+        <div>Platforma</div>
+        <div>${obj.platform}</div>
+      </div>
+    </div>
+      <div class="module_full_info_text">
+        <div class="title_full_info_module_game">${obj.name}</div>
+        <div class="text_full_info_under_title">${obj.full_info}</div>
+      </div>
+      <div class="main-slider module-imgs-game">
+        <div class="container-slider-module-imgs-game">
+           ${str}
+        </div>
+        <div class="open-close-img"><span>Свернуть картинки</span></div>
+      </div>
+    </div>
+    <div class="full_module_info">
+      <div class="title_module">
+       Системные требования
+      </div>
+      <div class="info_for_req_module_game">
+        <div class="minimal_req">
+          <div>
+            <div class="title_req">Minimal</div>
+          </div>
+          <div>
+            <div class="title_req">OS</div>
+            <div>Windows 10</div>
+          </div>
+          <div>
+            <div class="title_req">Processor</div>
+            <div>${obj.proc[0]}</div>
+          </div>
+          <div><div class="title_req">CPU</div>
+            <div>${obj.cpu[0]}</div>
+          </div>
+          <div><div class="title_req">Memory</div>
+            <div>${obj.memory[0]}</div>
+          </div>
+          <div><div class="title_req">Direct X</div>
+            <div>${obj.direct[0]}</div>
+          </div>
+          <div><div class="title_req">Video card</div>
+            <div>${obj.video[0]}</div>
+          </div>
+        </div>
+        <div class="recommended_req">
+          <div>
+            <div class="title_req">Minimal</div>
+          </div>
+          <div>
+            <div class="title_req">OS</div>
+            <div>Windows 10</div>
+          </div>
+          <div>
+            <div class="title_req">Processor</div>
+            <div>${obj.proc[1]}</div>
+          </div>
+          <div><div class="title_req">CPU</div>
+            <div>${obj.cpu[1]}</div>
+          </div>
+          <div><div class="title_req">Memory</div>
+            <div>${obj.memory[1]}</div>
+          </div>
+          <div><div class="title_req">Direct X</div>
+            <div>${obj.direct[1]}</div>
+          </div>
+          <div><div class="title_req">Video card</div>
+            <div>${obj.video[1]}</div>
+          </div>
+        </div>
+        </div>
+      </div>
+  </div>
+
+</div>
+`
+
+
+document.querySelector('header').insertAdjacentHTML("afterend", html_text);
+
+document.getElementById('exit').addEventListener('click', ()=>{
+  document.querySelector('.modul-window').parentNode.removeChild(document.querySelector('.modul-window'));
+  document.querySelector('.back-modul-game').parentNode.removeChild(document.querySelector('.back-modul-game'));
+})
+}
+
+function add_new_game(){
+  let html_text = `
+  <div class="back-modul"></div>
+  <form action="new_game" method='POST' class='module_wind_new_game' onsubmit="return false;">
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class='content_log_in'>
+    <h1>New game</h1>
+<div class="inputs inputs_add_new_game">
+  <div class="nick"><span>main image</span><input type="text"></div>
+  <div class="nick"><span>name game</span><input type="text"></div>
+<div class="nick"><span>develop</span><input type="text"></div>
+<div class="nick"><span>prize</span><input type="text"></div>
+<div class="nick"><span>all image</span><input type="text"></div>
+<div class="nick"><span>short info</span><input type="text"></div>
+<div class="nick"><span>publish</span><input type="text"></div>
+<div class="nick"><span>release</span><input type="text"></div>
+<div class="nick"><span>tag</span><input type="text"></div>
+<div class="nick"><span>raiting</span><input type="text"></div>
+<div class="nick"><span>platforma</span><input type="text"></div>
+<div class="nick"><span>full info</span><input type="text"></div>
+<div class="nick"><span>proc</span><input type="text"></div>
+<div class="nick"><span>cpu</span><input type="text"></div>
+<div class="nick"><span>memory</span><input type="text"></div>
+<div class="nick"><span>direct</span><input type="text"></div>
+<div class="nick"><span>video</span><input type="text"></div>
+<button type="submit" class="add_user">Add</button>
+</div>
+  </div>
+</form>
+`
+document.querySelector('header').insertAdjacentHTML("afterend", html_text);
+
+const full_information_new_game = document.querySelectorAll('.nick input');
+console.log(full_information_new_game)
+document.querySelector('.add_user').addEventListener('click',()=>{
+  const info_items = Array.from(full_information_new_game).map(element=>element.value)
+  console.log(info_items);
+  add_new_game_db(info_items)});
+document.getElementById('exit').addEventListener('click', ()=>{
+  document.querySelector('.module_wind_new_game').parentNode.removeChild(document.querySelector('.module_wind_new_game'));
+  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
+})
+}
+
+
+function change_game(){
+  let html_text = `
+  <div class="back-modul"></div>
+  <form action="change_game" class='sign_up' method='POST'onsubmit = "return false;">
+    <div class="up-module-window">
+      <div id='exit' class="exit"><span>&#10006</span></div>
+    </div>
+    <div class='content_log_in'>
+      <h1>Change_game</h1>
+  <div class="inputs inputs_sign_up">
+    <div class="nick"><input type="text" placeholder="Name"></div>
+    <div class="nick"><input type="text" placeholder="Effect"></div>
+  <button type="submit" class="add_user">Add</button>
+  </div>
+    </div>
+  </div>
+
+`
+document.querySelector('header').insertAdjacentHTML("afterend", html_text);
+
+const full_information_new_game = document.querySelectorAll('.nick input');
+console.log(full_information_new_game)
+document.querySelector('.add_user').addEventListener('click',()=>{
+  const info_items = Array.from(full_information_new_game).map(element=>element.value)
+  console.log(info_items);
+  add_new_game_db(info_items)});
+document.getElementById('exit').addEventListener('click', ()=>{
+  document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
+  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
+})
+}
+
+
+
+
+export {all_game, top_chart, log_in, sign_up,module_game,add_new_game,change_game};

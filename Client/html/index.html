@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="../css/moduls_window.css">
   <link rel="icon" href="../images/iconfinder-gamepad-4341293_120527.png" type="image/x-icon">
   <script src="../Js/script.js" defer type="module"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
 <header>
@@ -51,16 +50,16 @@
     <div>
       <span class="find">Найти</span>
       <span id ="view" class="view">Просмотр</span>
+      <span id="add_new_game" class="add_new_game">Добавить игру</span>
+      <span id="change_game" class="change_game">Изменить игру</span>
     </div>
-    <div class="search-wrapper">
+    <form class="search-wrapper" onsubmit="return false;">
 
-      <input class="search" type="search">
+      <input  class="search" type="search">
       <img class="search__magnifier" src="../images/kisspng-computer-icons-magnifying-glass-magnifier-clip-art-zoom-in-5b2e324dbaad37.0563569515297541897646.jpg">
-
-    </div>
+    </form>
   </div>
 </header>
-<canvas id="myChart"></canvas>
 <!-- <div class="back-modul"></div>
 <div id = 'module-all-game' class="modul-window">
   <div class="up-module-window">
@@ -134,7 +133,6 @@
     </div>
   </div>
 </div> -->
-
 <!-- <div class="back-modul"></div>
 <div class='log_in'>
   <div class="up-module-window">
@@ -148,8 +146,6 @@
 </div>
   </div>
 </div> -->
-
-
 <!-- <div class="back-modul"></div>
 <div class='sign_up'>
   <div class="up-module-window">
@@ -165,11 +161,6 @@
 </div>
   </div>
 </div> -->
-
-
-
-
-
 <!-- <div class="back-modul-game"></div>
 <div class="modul-window assasin_bg">
   <div class="up-module-window">
@@ -191,6 +182,7 @@
       </div>
     </div>
   </div>
+
   <div class="full_module_info">
     <div class="title_module">
       Об игре HITMAN 3
@@ -221,7 +213,6 @@
         <div>Kakaya-to</div>
       </div>
     </div>
-    <div>
       <div class="module_full_info_text">
         <div class="title_full_info_module_game">HITMAN 3</div>
         <div class="text_full_info_under_title">Смерть ждёт. Агент 47 возвращается в HITMAN 3 — эффектном завершении трилогии «Мир наемных убийц».</div>
@@ -235,9 +226,108 @@
         <div class="open-close-img"><span>Свернуть картинки</span></div>
       </div>
     </div>
+    <div class="full_module_info">
+      <div class="title_module">
+       Системные требования
+      </div>
+      <div class="info_for_req_module_game">
+        <div class="minimal_req">
+          <div>
+            <div class="title_req">Minimal</div>
+          </div>
+          <div>
+            <div class="title_req">OS</div>
+            <div>Windows 10</div>
+          </div>
+          <div>
+            <div class="title_req">Processor</div>
+            <div>Intel</div>
+          </div>
+          <div><div class="title_req">CPU</div>
+            <div>8 gb</div>
+          </div>
+          <div><div class="title_req">Memory</div>
+            <div>70 gb</div>
+          </div>
+          <div><div class="title_req">Direct X</div>
+            <div>11</div>
+          </div>
+          <div><div class="title_req">Video card</div>
+            <div>Nvidia GeForce 750ti</div>
+          </div>
+        </div>
+        <div class="recommended_req">
+          <div>
+            <div class="title_req">Minimal</div>
+          </div>
+          <div>
+            <div class="title_req">OS</div>
+            <div>Windows 10</div>
+          </div>
+          <div>
+            <div class="title_req">Processor</div>
+            <div>Intel</div>
+          </div>
+          <div><div class="title_req">CPU</div>
+            <div>8 gb</div>
+          </div>
+          <div><div class="title_req">Memory</div>
+            <div>70 gb</div>
+          </div>
+          <div><div class="title_req">Direct X</div>
+            <div>11</div>
+          </div>
+          <div><div class="title_req">Video card</div>
+            <div>Nvidia GeForce 750ti</div>
+          </div>
+        </div>
+        </div>
+      </div>
   </div>
-  <div class="module_rait"></div>
-  <div class="system_requirements"></div>
+
+</div> -->
+<!-- <div class="back-modul"></div>
+<form method='POST' class='module_wind_new_game' onsubmit="return false;">
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class='content_log_in'>
+    <h1>New game</h1>
+<div class="inputs inputs_add_new_game">
+  <div class="nick"><span>main image</span><input type="text"></div>
+  <div class="nick"><span>name game</span><input type="text"></div>
+<div class="nick"><span>develop</span><input type="text"></div>
+<div class="nick"><span>prize</span><input type="text"></div>
+<div class="nick"><span>all image</span><input type="text"></div>
+<div class="nick"><span>short info</span><input type="text"></div>
+<div class="nick"><span>publish</span><input type="text"></div>
+<div class="nick"><span>release</span><input type="text"></div>
+<div class="nick"><span>tag</span><input type="text"></div>
+<div class="nick"><span>raiting</span><input type="text"></div>
+<div class="nick"><span>platforma</span><input type="text"></div>
+<div class="nick"><span>full info</span><input type="text"></div>
+<div class="nick"><span>proc</span><input type="text"></div>
+<div class="nick"><span>cpu</span><input type="text"></div>
+<div class="nick"><span>memory</span><input type="text"></div>
+<div class="nick"><span>direct</span><input type="text"></div>
+<div class="nick"><span>video</span><input type="text"></div>
+<button type="submit" class="add_user">Add</button>
+</div>
+  </div>
+</form> -->
+<!-- <div class="back-modul"></div>
+<div class='sign_up'>
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class='content_log_in'>
+    <h1>Change_game</h1>
+<div class="inputs inputs_sign_up">
+  <div class="nick"><span>Game name</span><input type="text"></div>
+  <div class="nick"><span>effect</span><input type="text"></div>
+<button type="submit" class="add_user">Add</button>
+</div>
+  </div>
 </div> -->
 
 
@@ -247,7 +337,7 @@
 <section class="main-slider">
   <div class="container-slider">
     <div class="main-slide-container">
-      <img class="main-slide" src="../images/HITMAN.jpeg" alt="cyber">
+      <img class="main-slide" src="../images/HITMAN.jpeg" alt="Hitman">
       <div class="information-main-slide">
         <div class="relize">Уже вышла</div>
         <div class="short-info-main-game">Очень классная игра, где ты играешь в роли ахерительного лысого мужика, бесшумного как НИНЗЯ и с навыками убицы как сын маминой подруги!</div>
@@ -256,12 +346,12 @@
       </div>
     </div>
     <ul class="main-list">
-      <li><img class="slides" src="../images/FarCray.jpg" alt="cyber"><span>FarCray</span></li>
-      <li><img class="slides" src="../images/Left4Dead.jpg" alt="cyber"><span>Left 4 Dead</span></li>
-      <li><img class="slides" src="../images/TombRaider.jpg" alt="cyber"><span>TombRaider</span></li>
-      <li><img class="slides" src="../images/WatchDogs.jpg" alt="cyber"><span>Watch Dogs</span></li>
-      <li><img class="slides" src="../images/NFS.jpg" alt="cyber"><span>Need for speed</span></li>
-      <li><img class="slides" src="../images/Assasin.jpg" alt="cyber"><span>Assasin</span></li>
+      <li><img class="slides" src="../images/FarCray.jpg" alt="FarCray"><span>FarCray</span></li>
+      <li><img class="slides" src="../images/Left4Dead.jpg" alt="Left4Dead"><span>Left 4 Dead</span></li>
+      <li><img class="slides" src="../images/TombRaider.jpg" alt="Tomb Raider"><span>TombRaider</span></li>
+      <li><img class="slides" src="../images/WatchDogs.jpg" alt="WatchDogs"><span>Watch Dogs</span></li>
+      <li><img class="slides" src="../images/NFS.jpg" alt="NFS"><span>Need for speed</span></li>
+      <li><img class="slides" src="../images/Assasin.jpg" alt="Assasin"><span>Assasin</span></li>
     </ul>
   </div>
 </section>
@@ -272,35 +362,35 @@
   <div class="container-new-games">
     <div class="items-new-games">
 
-      <img src="../images/Assasin.jpg" alt="cyber">
+      <img class="click_img" src="../images/Assasin.jpg" alt="Assasin">
       <div class="new-game-name">Assasin</div>
       <div class="new-game-developer ">UBISOFT</div>
       <div class="new-game-prise">999 &#8381;</div>
     </div>
     <div class="items-new-games">
 
-      <img src="../images/FarCray.jpg" alt="cyber">
+      <img class="click_img" src="../images/FarCray.jpg" alt="FarCray">
       <div class="new-game-name">FarCray Ptimal</div>
       <div class="new-game-developer ">EA Sports</div>
       <div class="new-game-prise">1999 &#8381;</div>
     </div>
     <div class="items-new-games">
 
-      <img src="../images/NFS.jpg" alt="cyber">
+      <img class="click_img" src="../images/NFS.jpg" alt="NFS">
       <div class="new-game-name">Ned For Speed</div>
       <div class="new-game-developer ">UBISOFT</div>
       <div class="new-game-prise">2999 &#8381;</div>
     </div>
     <div class="items-new-games">
 
-      <img src="../images/TombRaider.jpg" alt="cyber">
+      <img class="click_img" src="../images/TombRaider.jpg" alt="Tomb Raider">
       <div class="new-game-name">Tomb Raider</div>
       <div class="new-game-developer ">Ubisoft</div>
       <div class="new-game-prise">3999 &#8381;</div>
     </div>
     <div class="items-new-games">
 
-      <img src="../images/WatchDogs.jpg" alt="cyber">
+      <img class="click_img" src="../images/WatchDogs.jpg" alt="WatchDogs">
 
       <div class="new-game-name">Watch Dogs</div>
       <div class="new-game-developer ">BLIZZARD</div>
@@ -310,16 +400,16 @@
 </section>
 <section id="Popular" class="popular-games">
 <div class="popular-title">
-  <img src="../images/bag_buy_cart_market_shop_shopping_tote_icon_123191.png" alt="first" width="">
+  <img class="click_img" src="../images/bag_buy_cart_market_shop_shopping_tote_icon_123191.png" alt="first" width="">
   <span>Популярные игры</span>
 </div>
 <div class="grid-container">
-  <div class="first-popular-item"><img src="../images/HITMAN.jpeg" alt=""></div>
-  <div class="second-popular-item"><img src="../images/WatchDogs.jpg" alt=""></div>
-  <div class="third-popular-item"><img src="../images/Assasin.jpg" alt=""></div>
-  <div class="forth-popular-item"><img src="../images/NFS.jpg" alt=""></div>
-  <div class="fivth-popular-item"><img src="../images/FarCray.jpg" alt=""></div>
-  <div class="sixth-popular-item"><img src="../images/TombRaider.jpg" alt=""></div>
+  <div class="first-popular-item"><img class="click_img" src="../images/HITMAN.jpeg" alt="Hitman"></div>
+  <div class="second-popular-item"><img class="click_img" src="../images/WatchDogs.jpg" alt="WatchDogs"></div>
+  <div class="third-popular-item"><img class="click_img" src="../images/Assasin.jpg" alt="Assasin"></div>
+  <div class="forth-popular-item"><img class="click_img" src="../images/NFS.jpg" alt="NFS"></div>
+  <div class="fivth-popular-item"><img class="click_img" src="../images/FarCray.jpg" alt="FarCray"></div>
+  <div class="sixth-popular-item"><img class="click_img" src="../images/TombRaider.jpg" alt="Tomb Raider"></div>
 </div>
 </section>
 <section id="Top" class="top-games">
@@ -330,21 +420,21 @@
   <div class="container-top-games">
     <div class="items-top-games">
 
-      <img src="../images/Assasin.jpg" alt="cyber">
+      <img class="click_img" src="../images/Assasin.jpg" alt="Assasin">
       <div class="top-game-name">Assasin</div>
       <div class="top-game-developer ">UBISOFT</div>
       <div class="top-game-prise">999 &#8381;</div>
     </div>
     <div class="items-top-games">
 
-      <img src="../images/NFS.jpg" alt="cyber">
+      <img class="click_img" src="../images/NFS.jpg" alt="NFS">
       <div class="top-game-name">Ned For Speed</div>
       <div class="top-game-developer ">EA Sports</div>
       <div class="top-game-prise">1999 &#8381;</div>
     </div>
     <div class="items-top-games">
 
-      <img src="../images/TombRaider.jpg" alt="cyber">
+      <img class="click_img" src="../images/TombRaider.jpg" alt="Tomb Raider">
       <div class="top-game-name">Tomb Raider</div>
       <div class="top-game-developer ">UBISOFT</div>
       <div class="top-game-prise">2999 &#8381;</div>
@@ -353,7 +443,7 @@
 </section>
 <section id = "Week" class='top-week-game'>
   <span class="title-top-week-game">Лучшая игра недели</span>
-<img src="../images/TombRaider.jpg" alt="top-week-game">
+<img src="../images/TombRaider.jpg" alt="Tomb Raider">
 <div class="inormatio-top-week-game">
   <div class="name-top-week-game">Tomb Raider</div>
   <div class="short-inormatio-top-week-game">Игра про школьницу-рвсхитительницу грабниц с красивыми глазами</div>
@@ -368,7 +458,7 @@
   <div class="container-discount-games">
     <div class="items-discount-games">
 
-      <img src="../images/Assasin.jpg" alt="cyber">
+      <img class="click_img" src="../images/Assasin.jpg" alt="Assasin">
       <div class="discount-game-name">Assasin</div>
       <div class="discount-game-developer ">UBISOFT</div>
       <div class="discount-information">
@@ -379,7 +469,7 @@
     </div>
     <div class="items-discount-games">
 
-      <img src="../images/FarCray.jpg" alt="cyber">
+      <img class="click_img" src="../images/FarCray.jpg" alt="FarCray">
       <div class="discount-game-name">FarCray Ptimal</div>
       <div class="discount-game-developer ">EA Sports</div>
       <div class="discount-information">
@@ -390,7 +480,7 @@
     </div>
     <div class="items-discount-games">
 
-      <img src="../images/NFS.jpg" alt="cyber">
+      <img class="click_img" src="../images/NFS.jpg" alt="NFS">
       <div class="discount-game-name">Ned For Speed</div>
       <div class="discount-game-developer ">UBISOFT</div>
       <div class="discount-information">
@@ -401,7 +491,7 @@
     </div>
     <div class="items-discount-games">
 
-      <img src="../images/TombRaider.jpg" alt="cyber">
+      <img class="click_img" src="../images/TombRaider.jpg" alt="Tomb Raider">
       <div class="discount-game-name">Tomb Raider</div>
       <div class="discount-game-developer ">Ubisoft</div>
       <div class="discount-information">
@@ -412,7 +502,7 @@
     </div>
     <div class="items-discount-games">
 
-      <img src="../images/WatchDogs.jpg" alt="cyber">
+      <img class="click_img" src="../images/WatchDogs.jpg" alt="WatchDogs">
 
       <div class="discount-game-name">Watch Dogs</div>
       <div class="discount-game-developer ">BLIZZARD</div>
@@ -426,7 +516,7 @@
 </section>
 <section id="Free" class="free-test">
   <span class="title-free-test-game">Бесплатная пробная версия игры</span>
-  <img src="../images/Assasin.jpg" alt="free-test-game">
+  <img class="click_img" src="../images/Assasin.jpg" alt="Assasin">
   <div class="inormatio-free-test-game">
     <div class="name-free-test-game">Assassin's Creed</div>
     <div class="short-inormatio-free-test-game">Игра про брутального мудака в капюшоне</div>
@@ -440,28 +530,28 @@
   <div class="container-preproduce-games">
     <div class="items-preproduce-games">
 
-      <img src="../images/Assasin.jpg" alt="cyber">
+      <img class="click_img" src="../images/Assasin.jpg" alt="Assasin">
       <div class="preproduce-game-name">Assasin</div>
       <div class="preproduce-game-developer">UBISOFT</div>
         <div class="preproduce-game-prise">999&#8381;</div>
     </div>
     <div class="items-preproduce-games">
 
-      <img src="../images/FarCray.jpg" alt="cyber">
+      <img class="click_img" src="../images/FarCray.jpg" alt="FarCray">
       <div class="preproduce-game-name">FarCray Ptimal</div>
       <div class="preproduce-game-developer">EA Sports</div>
         <div class="preproduce-game-prise">1999&#8381;</div>
     </div>
     <div class="items-preproduce-games">
 
-      <img src="../images/NFS.jpg" alt="cyber">
+      <img class="click_img" src="../images/NFS.jpg" alt="NFS">
       <div class="preproduce-game-name">Ned For Speed</div>
       <div class="preproduce-game-developer">UBISOFT</div>
         <div class="preproduce-game-prise">2999&#8381;</div>
     </div>
     <div class="items-preproduce-games">
 
-      <img src="../images/TombRaider.jpg" alt="cyber">
+      <img class="click_img" src="../images/TombRaider.jpg" alt="Tomb Raider">
       <div class="preproduce-game-name">Tomb Raider</div>
       <div class="preproduce-game-developer">Ubisoft</div>
         <div class="preproduce-game-prise">3999&#8381;</div>
@@ -474,7 +564,7 @@
   <div class="container-best-online-games">
     <div class="items-best-online-games">
 
-      <img src="../images/WatchDogs.jpg" alt="cyber">
+      <img class="click_img" src="../images/WatchDogs.jpg" alt="WatchDogs">
 
       <div class="new-game-name">Watch Dogs</div>
       <div class="new-game-developer ">BLIZZARD</div>
@@ -482,28 +572,28 @@
     </div>
     <div class="items-best-online-games">
 
-      <img src="../images/FarCray.jpg" alt="cyber">
+      <img class="click_img" src="../images/FarCray.jpg" alt="FarCray">
       <div class="best-online-game-name">FarCray Ptimal</div>
       <div class="best-online-game-developer">EA Sports</div>
       <div class="best-online-game-prise">1999&#8381;</div>
     </div>
     <div class="items-best-online-games">
 
-      <img src="../images/TombRaider.jpg" alt="cyber">
+      <img class="click_img" src="../images/TombRaider.jpg" alt="Tomb Raider">
       <div class="best-online-game-name">Tomb Raider</div>
       <div class="best-online-game-developer">Ubisoft</div>
       <div class="best-online-game-prise">3999&#8381;</div>
     </div>
     <div class="items-best-online-games">
 
-      <img src="../images/Assasin.jpg" alt="cyber">
+      <img class="click_img" src="../images/Assasin.jpg" alt="Assasin">
       <div class="best-online-game-name">Assasin</div>
       <div class="best-online-game-developer">UBISOFT</div>
       <div class="best-online-game-prise">999&#8381;</div>
     </div>
     <div class="items-best-online-games">
 
-      <img src="../images/NFS.jpg" alt="cyber">
+      <img class="click_img" src="../images/NFS.jpg" alt="NFS">
       <div class="best-online-game-name">Ned For Speed</div>
       <div class="best-online-game-developer">UBISOFT</div>
       <div class="best-online-game-prise">2999&#8381;</div>

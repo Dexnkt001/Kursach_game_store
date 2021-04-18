@@ -1,5 +1,5 @@
 import {default_previus_slider, default_next_slider} from "./sliders.js"
-import {all_game, top_chart, log_in, sign_up} from "./moduls_forms.js"
+import {all_game, top_chart, log_in, sign_up, module_game, add_new_game, change_game} from "./moduls_forms.js"
 
 console.log('lol')
 
@@ -19,7 +19,22 @@ prize:"1100"},
 {link:"../images/FarCray.jpg",
 name:"FarCray",
 develop:"Ubisoft",
-prize:"1500"},
+prize:"1500",
+all_img:["../images/FarCray.jpg", "../images/FarCry_2.jpg","../images/FarCry_3.jpg"],
+short_info:'Игра про времена индертальцев как в те далекие времена выживали наши предки',
+publish:"Ubisoft",
+release:"6 октября 2015",
+tag:"За жизнь надо бороться!",
+rait:'4',
+platform:'Windows',
+full_info:'игра про давние времена когда челоек еще не находился на вершине пищевой цепи и каждый день был на грани жизни и смерти и что бы выжить люди шли на отчаенные меры',
+proc:['intel_1', 'intel_2'],
+cpu:['8gb','16gb'],
+memory:['70gb','100gb'],
+direct:['10','11'],
+video:['960','1660ti']
+},
+
 {link:"../images/GTA_5.jpg",
 name:"GTA 5",
 develop:"Rockstar Games",
@@ -46,7 +61,7 @@ name:"NFS",
 develop:"Electronic Arts",
 prize:"2800"},
 {link:"../images/TombRaider.jpg",
-name:"TombRaider",
+name:"Tomb Raider",
 develop:"Eidos Montreal",
 prize:"2700"},
 {link:"../images/WatchDogs.jpg",
@@ -73,7 +88,8 @@ prize:"3000"}
 id_new_game = 0,
 //id_discount_game = 0,
 id_preproduces_game = 0,
-id_best_online_game = 0;
+id_best_online_game = 0,
+click_img = document.querySelectorAll('.click_img');
 const place_new_pict = document.querySelectorAll('.items-new-games'),
 //place_discount_pict = document.querySelectorAll('.items-discount-games'),
 place_preproduce_pict = document.querySelectorAll('.items-preproduce-games'),
@@ -127,41 +143,58 @@ let return_promise = await promise;
 return return_promise
 }
 
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'radar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            data: [20, 19, 8, 11, 15, 17],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.5)'
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)'
-            ],
-            borderDash:[5,6,7,8,9,10],
-            borderCapStyle : 'butt',
-            borderWidth: 1,
-            borderDashOffset:1,
-            fill:true,
-            pointBackgroundColor: ['rgba(255, 99, 132, 1)']
-        }]
-    },
+function listener_for_img(){
+  for (let i = 0; i < click_img.length; i++){
+    click_img[i].addEventListener('click', (e)=>{find_choose_game(e)})
+  }
+}
 
-    options : {
-      scale: {
-          angleLines: {
-              display: false
-          },
-          ticks: {
-              suggestedMin: 0,
-              suggestedMax: 30
-          }
-      }
-  },
-});
 
+
+function find_choose_game(e){
+const name = e.target.alt;
+for (let i = 0; i < mass_pict_new_game.length; i++){
+  if (mass_pict_new_game[i].name === name){
+    module_game(mass_pict_new_game[i]);
+    break
+}
+}
+}
+
+async function add_new_game_db(arr){
+  console.log(arr)
+  const game_info = arr;
+  if (game_info.length === 2){
+    try{
+      await fetch('http://localhost:5500/new_game',{
+        method:'POST',
+        body:JSON.stringify({
+          game_info,
+        }),
+        headers:{
+          'Content-type':'application/json'
+        },
+      })
+    }catch(error){
+      console.log(error);
+  }
+  }
+ else {
+  try{
+    await fetch('http://localhost:5500/n_new_game',{
+      method:'POST',
+      body:JSON.stringify({
+        game_info,
+      }),
+      headers:{
+        'Content-type':'application/json'
+      },
+    })
+  }catch(error){
+    console.log(error);
+}
+}
+ }
 
 
 document.getElementById('new-prev').addEventListener('click',()=>{default_slider_for_previus_elements(id_new_game,mass_pict_new_game, place_new_pict, 5).then(res => id_new_game = res)});
@@ -186,3 +219,22 @@ document.getElementById('log_in').addEventListener('click', () => {
 document.getElementById('sign_up').addEventListener('click', () => {
   sign_up();
 })
+listener_for_img();
+
+// document.querySelector('.search_game').addEventListener('');
+document.getElementById('add_new_game').addEventListener('click', ()=> {
+  add_new_game();
+})
+document.getElementById('change_game').addEventListener('click', ()=> {
+  change_game();
+})
+
+document.querySelector('.search-wrapper').addEventListener('submit', ()=> {
+  console.log('submit')
+})
+
+
+
+
+
+export {add_new_game_db};

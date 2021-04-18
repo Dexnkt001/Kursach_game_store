@@ -232,17 +232,23 @@ nav a:hover {
 }
 
 .find,
-.view {
+.view,
+.add_new_game,
+.change_game {
   transition: 0.2s ease-in;
   cursor: pointer;
 }
 
-.view {
+.view,
+.add_new_game,
+.change_game {
   margin-left: 20px;
 }
 
 .find:hover,
-.view:hover {
+.view:hover,
+.add_new_game:hover,
+.change_game:hover {
   color: #36eca6;
 }
 
