@@ -1,8 +1,10 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const keys = require('./config/keys.js')
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const express = require('express'),
+ mongoose = require('mongoose'),
+ keys = require('./config/keys.js'),
+ cors = require('cors'),
+ bodyParser = require('body-parser'),
+ User = require('./models/users'),
+ Game = require('./models/games');
 
 const PORT = process.env.PORT || 5500
 
@@ -18,7 +20,8 @@ await mongoose.connect(keys.mongoURL, {
   useUnifiedTopology: true,
   useFindAndModify:false
   })
-  .then(()=>console.log('MongoDB connected'))
+  .then(()=>{console.log('MongoDB connected')
+  var db = mongoose.connection})
   .catch(error=>console.log(error));
 app.listen(PORT, ()=>{
   console.log(`Server ${PORT} is work!`)
@@ -36,9 +39,68 @@ app.listen(PORT, ()=>{
 
 
 app.post('/new_game', cb, (req, res)=>{
-  const info_new_game = req.body.game_info;
-  console.log('начала ',info_new_game, ' конец')
+  const game_info = req.body.game_info;
+
+const game = new Game({
+  name:game_info[0],
+ developer:game_info[1],
+ prize:game_info[2],
+publish:game_info[5],
+info:{
+  short_info:game_info[4],
+  full_info:game_info[11],
+  release:game_info[6],
+  rait:game_info[8],
+  tag:game_info[7],
+},
+images:{
+  main_img:game_info[9],
+  all_img:game_info[3],
+},
+full_info:{
+  platform:game_info[10],
+  proc:game_info[12],
+  cpu:game_info[13],
+  memory:game_info[14],
+  direct:game_info[15],
+  video_card:game_info[16],
+},
+})
+
+  game.save();
   res.sendStatus(200);
 })
+
+app.post('/change_game', cb, (req, res)=>{
+  console.log(req.body.game_info);
+  const change_game_info = req.body.game_info;
+  if(change_game_info[3] === 'Effect'){db.users.update({name : change_game_info[1]}, {effect:change_game_info[2], discaunt:change_game_info[0
+  ]}, {upsert: true})
+}else{
+  db.users.update({name : change_game_info[1]}, {prize:change_game_info[2]}, {upsert: true})
+}
+  res.sendStatus(200);
+})
+
+app.post('/new_user', cb, (req, res)=>{
+const user_info = req.body.user_info;
+
+const user = new User({
+  login:user_info[0],
+  email:user_info[1],
+  password:user_info[2],
+})
+
+user.save();
+res.sendStatus(200);
+})
+
+app.get('/log_in/:word', (req, res) => {
+  const val = req.params.word.toString().split(',');
+  let arr = [];
+console.log(Array.from(val));
+res.send(200);
+// JSON.stringify(arr)
+});
 
 start();

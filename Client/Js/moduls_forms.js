@@ -1,4 +1,4 @@
-import {add_new_game_db} from "./script.js"
+import {add_new_game_db, add_new_user,log_in_user} from "./script.js"
 
 function all_game(massPict){
   const sort_bar = `<ul class='sort-bar'>
@@ -140,12 +140,12 @@ for(let i=0; i < 2; i++){
  input = document.createElement('input');
  nick.classList.add('nick');
  if(i === 0){
-   span.innerHTML = "Nickname";
    input.setAttribute('type', 'text');
+   input.setAttribute('placeholder', 'Login')
  }
  else{
-  span.innerHTML = "Password";
-   input.setAttribute('type', 'password')
+   input.setAttribute('type', 'password');
+   input.setAttribute('placeholder', 'Password')
  }
 inputs.append(nick);
 nick.append(span);
@@ -162,6 +162,12 @@ document.querySelector('.exit').addEventListener('click', ()=>{
   document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
 })
 
+const full_information_new_game = document.querySelectorAll('.nick input');
+console.log(full_information_new_game)
+document.querySelector('.add_user').addEventListener('click',()=>{
+  const info_items = Array.from(full_information_new_game).map(element=>element.value)
+  console.log(info_items);
+  log_in_user(info_items)});
 }
 
 function sign_up(){
@@ -197,15 +203,15 @@ for(let i=0; i < 3; i++){
  input = document.createElement('input');
  nick.classList.add('nick');
  if(i === 0){
-   span.innerHTML = "Nickname";
    input.setAttribute('type', 'text');
+   input.setAttribute('placeholder', 'Login')
  } else if(i === 1){
-  span.innerHTML = "Email";
    input.setAttribute('type', 'text');
+   input.setAttribute('placeholder', 'Email')
  }
  else{
-  span.innerHTML = "Password";
    input.setAttribute('type', 'password')
+   input.setAttribute('placeholder', 'password')
  }
 inputs.append(nick);
 nick.append(span);
@@ -215,6 +221,12 @@ button.classList.add('add_user');
 button.setAttribute('type', 'submit');
 button.innerHTML="Submit"
 inputs.append(button);
+const full_information_new_game = document.querySelectorAll('.nick input');
+console.log(full_information_new_game)
+document.querySelector('.add_user').addEventListener('click',()=>{
+  const info_items = Array.from(full_information_new_game).map(element=>element.value)
+  console.log(info_items);
+  add_new_user(info_items)});
 document.querySelector('.exit').addEventListener('click', ()=>{
   document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
   document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
@@ -371,23 +383,23 @@ function add_new_game(){
   <div class='content_log_in'>
     <h1>New game</h1>
 <div class="inputs inputs_add_new_game">
-  <div class="nick"><span>main image</span><input type="text"></div>
-  <div class="nick"><span>name game</span><input type="text"></div>
-<div class="nick"><span>develop</span><input type="text"></div>
-<div class="nick"><span>prize</span><input type="text"></div>
-<div class="nick"><span>all image</span><input type="text"></div>
-<div class="nick"><span>short info</span><input type="text"></div>
-<div class="nick"><span>publish</span><input type="text"></div>
-<div class="nick"><span>release</span><input type="text"></div>
-<div class="nick"><span>tag</span><input type="text"></div>
-<div class="nick"><span>raiting</span><input type="text"></div>
-<div class="nick"><span>platforma</span><input type="text"></div>
-<div class="nick"><span>full info</span><input type="text"></div>
-<div class="nick"><span>proc</span><input type="text"></div>
-<div class="nick"><span>cpu</span><input type="text"></div>
-<div class="nick"><span>memory</span><input type="text"></div>
-<div class="nick"><span>direct</span><input type="text"></div>
-<div class="nick"><span>video</span><input type="text"></div>
+  <div class="nick"><input placeholder="Name" type="text"></div>
+<div class="nick"><input placeholder="Developer" type="text"></div>
+<div class="nick"><input placeholder="Prize" type="text"></div>
+<div class="nick"><input placeholder="All imges" type="text"></div>
+<div class="nick"><input placeholder="Short info" type="text"></div>
+<div class="nick"><input placeholder="Publisher" type="text"></div>
+<div class="nick"><input placeholder="Release" type="text"></div>
+<div class="nick"><input placeholder="Tag" type="text"></div>
+<div class="nick"><input placeholder="Raiting" type="text"></div>
+<div class="nick"><input placeholder="Main image" type="text"></div>
+<div class="nick"><input placeholder="Platform" type="text"></div>
+<div class="nick"><input placeholder="Full information" type="text"></div>
+<div class="nick"><input placeholder="Processor" type="text"></div>
+<div class="nick"><input placeholder="Cpu" type="text"></div>
+<div class="nick"><input placeholder="Memory" type="text"></div>
+<div class="nick"><input placeholder="Direct" type="text"></div>
+<div class="nick"><input placeholder="Video card" type="text"></div>
 <button type="submit" class="add_user">Add</button>
 </div>
   </div>
@@ -411,35 +423,79 @@ document.getElementById('exit').addEventListener('click', ()=>{
 function change_game(){
   let html_text = `
   <div class="back-modul"></div>
-  <form action="change_game" class='sign_up' method='POST'onsubmit = "return false;">
-    <div class="up-module-window">
-      <div id='exit' class="exit"><span>&#10006</span></div>
-    </div>
-    <div class='content_log_in'>
-      <h1>Change_game</h1>
-  <div class="inputs inputs_sign_up">
-    <div class="nick"><input type="text" placeholder="Name"></div>
-    <div class="nick"><input type="text" placeholder="Effect"></div>
-  <button type="submit" class="add_user">Add</button>
+<form action="change_game" class='sign_up' method='POST'onsubmit = "return false;">
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
   </div>
-    </div>
+  <div class='content_log_in'>
+    <h1>Change_game</h1>
+<div class="inputs inputs_sign_up">
+  <div class="nick"><input type="text" placeholder="Name"></div>
+  <div class="nick nick-flex"><div><select size="0" name="hero[]">
+    <option selected>Choose function</option>
+    <option value="Prize">Prize</option>
+    <option value="Effect">Effect</option>
+   </select></div><input type="text" id='change_effect' placeholder="Effect"></div>
+<button type="submit" id="change_game" class="add_user">Add</button>
+</div>
   </div>
+</form>
 
 `
 document.querySelector('header').insertAdjacentHTML("afterend", html_text);
 
-const full_information_new_game = document.querySelectorAll('.nick input');
-console.log(full_information_new_game)
+const select = document.querySelector('select'),
+change_btn = document.querySelector('.add_user'),
+change_effect = document.getElementById('change_effect');
+
+select.addEventListener('change', ()=>{
+  console.log(select.value);
+})
+change_btn.addEventListener('click', ()=> {
+  if (change_effect.value === 'discaunt' || change_effect.value === 'Discaunt'){
+    const select_val = select.value;
+    discaunt(select_val);
+  }else{
+    const full_information_new_game = document.querySelectorAll('.nick input');
 document.querySelector('.add_user').addEventListener('click',()=>{
   const info_items = Array.from(full_information_new_game).map(element=>element.value)
-  console.log(info_items);
   add_new_game_db(info_items)});
 document.getElementById('exit').addEventListener('click', ()=>{
   document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
   document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
 })
+  }
+})
 }
 
+function discaunt(select){
+  const html = `<div id="discaunt_module" class='sign_up up_mod' method='POST'onsubmit = "return false;">
+  <div class='content_log_in'>
+    <h1>Discaunt</h1>
+<div class="inputs inputs_sign_up">
+  <div class="nick"><input type="text" id="amount_of_discaunt" placeholder="Discaunt"></div>
+<button type="submit" id="add_discaunt" class="add_user">Add</button>
+</div>
+  </div>
+</div>`
+document.querySelector('header').insertAdjacentHTML("afterend", html);
+
+
+console.log('rabotaet tyt')
+console.log('rabotaet posle')
+document.getElementById('add_discaunt').addEventListener('click', ()=>{
+  const full_information_new_game = document.querySelectorAll('.nick input');
+  const info_items = Array.from(full_information_new_game).map(element=>element.value);
+  info_items.push(select)
+  console.log(info_items)
+  add_new_game_db(info_items)
+  document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
+ });
+  document.getElementById('exit').addEventListener('click', ()=>{
+    document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
+    document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
+  })
+}
 
 
 

@@ -93,7 +93,8 @@ click_img = document.querySelectorAll('.click_img');
 const place_new_pict = document.querySelectorAll('.items-new-games'),
 //place_discount_pict = document.querySelectorAll('.items-discount-games'),
 place_preproduce_pict = document.querySelectorAll('.items-preproduce-games'),
-place_best_online_pict = document.querySelectorAll('.items-best-online-games');
+place_best_online_pict = document.querySelectorAll('.items-best-online-games'),
+admin = false;
 
 
 function ForEach(mass, fun){
@@ -164,9 +165,9 @@ for (let i = 0; i < mass_pict_new_game.length; i++){
 async function add_new_game_db(arr){
   console.log(arr)
   const game_info = arr;
-  if (game_info.length === 2){
+  if (game_info.length === 4){
     try{
-      await fetch('http://localhost:5500/new_game',{
+      await fetch('http://localhost:5500/change_game',{
         method:'POST',
         body:JSON.stringify({
           game_info,
@@ -181,7 +182,7 @@ async function add_new_game_db(arr){
   }
  else {
   try{
-    await fetch('http://localhost:5500/n_new_game',{
+    await fetch('http://localhost:5500/new_game',{
       method:'POST',
       body:JSON.stringify({
         game_info,
@@ -195,6 +196,37 @@ async function add_new_game_db(arr){
 }
 }
  }
+
+async function add_new_user(arr){
+ const user_info = arr;
+  try{
+    await fetch('http://localhost:5500/new_user',{
+      method:'POST',
+      body:JSON.stringify({
+        user_info,
+      }),
+      headers:{
+        'Content-type':'application/json'
+      },
+    })
+  }catch(error){
+    console.log(error);
+}
+}
+
+async function log_in_user(arr){
+  const val = arr;
+  console.log(val)
+  try {
+    console.log(val);
+    const response = await fetch(`http://localhost:5500/log_in/${val}`);
+    const list = await response.json().then();
+    console.log(list);
+  } catch (error) {
+    console.log(error);
+  }
+ }
+
 
 
 document.getElementById('new-prev').addEventListener('click',()=>{default_slider_for_previus_elements(id_new_game,mass_pict_new_game, place_new_pict, 5).then(res => id_new_game = res)});
@@ -237,4 +269,4 @@ document.querySelector('.search-wrapper').addEventListener('submit', ()=> {
 
 
 
-export {add_new_game_db};
+export {add_new_game_db, add_new_user, log_in_user};

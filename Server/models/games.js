@@ -1,0 +1,39 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+const gameSchema = new Schema({
+ name:String,
+ developer:String,
+ prize:String,
+publish:String,
+info:{
+  short_info:String,
+  full_info:String,
+  release:String,
+  rait:String,
+  tag:String,
+},
+images:{
+  main_img:String,
+  all_img:Array,
+},
+full_info:{
+  platform:String,
+  proc:String,
+  cpu:String,
+  memory:String,
+  direct:String,
+  video_card:String,
+},
+effect:{
+  type:String,
+  default:'none'
+},
+discaunt:{
+  type:String,
+  default:0,
+}
+}
+)
+
+module.exports = mongoose.model('game', gameSchema);

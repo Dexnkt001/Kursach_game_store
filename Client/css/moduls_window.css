@@ -188,6 +188,10 @@
   overflow-y: scroll;
 }
 
+.up_mod {
+  z-index: 11000;
+}
+
 .module_wind_new_game {
   top: 100px;
   width: 50vw;
@@ -524,4 +528,14 @@ input[type="password"] {
   font-size: 20px;
   font-weight: 500;
   opacity: 0.7;
+}
+
+.nick-flex {
+  display: flex;
+  align-items: center;
+}
+
+select {
+  margin-right: 10px;
+  margin-bottom: 8px;
 }
