@@ -21,7 +21,7 @@ await mongoose.connect(keys.mongoURL, {
   useFindAndModify:false
   })
   .then(()=>{console.log('MongoDB connected')
-  var db = mongoose.connection})
+})
   .catch(error=>console.log(error));
 app.listen(PORT, ()=>{
   console.log(`Server ${PORT} is work!`)
@@ -31,11 +31,7 @@ app.listen(PORT, ()=>{
   }
 }
 
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function() {
-//   console.log('db connected')
-// });
+start();
 
 
 app.post('/new_game', cb, (req, res)=>{
@@ -74,33 +70,44 @@ full_info:{
 app.post('/change_game', cb, (req, res)=>{
   console.log(req.body.game_info);
   const change_game_info = req.body.game_info;
-  if(change_game_info[3] === 'Effect'){db.users.update({name : change_game_info[1]}, {effect:change_game_info[2], discaunt:change_game_info[0
+  if(change_game_info[3] === 'Effect'){db.games.update({name : change_game_info[1]}, {effect:change_game_info[2], discaunt:change_game_info[0
   ]}, {upsert: true})
 }else{
-  db.users.update({name : change_game_info[1]}, {prize:change_game_info[2]}, {upsert: true})
+  db.games.update({name : change_game_info[1]}, {prize:change_game_info[2]}, {upsert: true})
 }
-  res.sendStatus(200);
+  res.sendStatus(200)
 })
 
 app.post('/new_user', cb, (req, res)=>{
 const user_info = req.body.user_info;
 
-const user = new User({
+User.find({login:user_info[0]}).then((result) => {
+if(result.length === 0){
+  const user = new User({
   login:user_info[0],
   email:user_info[1],
   password:user_info[2],
 })
+ user.save();
+ res.sendStatus(200);
+}else{
+  console.log('существует')
+  res.send('пользователь существует!')
+}
+});
 
-user.save();
-res.sendStatus(200);
 })
 
 app.get('/log_in/:word', (req, res) => {
   const val = req.params.word.toString().split(',');
   let arr = [];
-console.log(Array.from(val));
-res.send(200);
+console.log(val);
+User.find({login:val[0],password:val[1]}).then(result=>{
+if(result.length !== 0){
+  res.send([val[0], 'Welcome!'])
+}else{
+  res.send('Error!')
+}
+})
 // JSON.stringify(arr)
 });
-
-start();

@@ -216,12 +216,26 @@ async function add_new_user(arr){
 
 async function log_in_user(arr){
   const val = arr;
-  console.log(val)
+  //console.log(val)
   try {
     console.log(val);
     const response = await fetch(`http://localhost:5500/log_in/${val}`);
     const list = await response.json().then();
-    console.log(list);
+    if(list.length === 2){
+      document.getElementById('log_in').style.display = 'none';
+      document.getElementById('sign_up').style.display = 'none';
+      let html = `
+      <a id="sign_up" href="#">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <img src="../images/account_edit_icon_135995.png" alt="sign up">
+      ${list[0]}
+  </a>
+      `
+      document.querySelector('.enter-site').insertAdjacentHTML("beforeend", html);
+    }
   } catch (error) {
     console.log(error);
   }

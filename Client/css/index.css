@@ -859,3 +859,7 @@ footer a:last-child {
 footer a:hover {
   background-color: var(--green);
 }
+
+.disp_none {
+  display: none;
+}

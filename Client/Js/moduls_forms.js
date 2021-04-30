@@ -166,7 +166,6 @@ const full_information_new_game = document.querySelectorAll('.nick input');
 console.log(full_information_new_game)
 document.querySelector('.add_user').addEventListener('click',()=>{
   const info_items = Array.from(full_information_new_game).map(element=>element.value)
-  console.log(info_items);
   log_in_user(info_items)});
 }
 
