@@ -1,4 +1,4 @@
-import {add_new_game_db, add_new_user,log_in_user} from "./script.js"
+import {add_new_game_db, add_new_user,log_in_user,add_new_status} from "./script.js"
 
 function all_game(massPict){
   const sort_bar = `<ul class='sort-bar'>
@@ -225,12 +225,62 @@ console.log(full_information_new_game)
 document.querySelector('.add_user').addEventListener('click',()=>{
   const info_items = Array.from(full_information_new_game).map(element=>element.value)
   console.log(info_items);
-  add_new_user(info_items)});
+  add_new_user(info_items, full_information_new_game)});
 document.querySelector('.exit').addEventListener('click', ()=>{
   document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
   document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
 })
 
+}
+
+function status(){
+  const log_window = document.createElement('div'),
+  back_module_window = document.createElement('div'),
+  content_log_in = document.createElement('div'),
+  inputs = document.createElement('div'),
+  up_modul = document.createElement('div'),
+  h1 = document.createElement('h1'),
+  exit = document.createElement('div'),
+  button = document.createElement('button');
+  back_module_window.classList.add('back-modul');
+  log_window.classList.add('log_in');
+  up_modul.classList.add('up-module-window');
+  exit.classList.add('exit');
+  exit.setAttribute('id', 'exit');
+  exit.innerHTML = '<span>&#10006</span>';
+content_log_in.classList.add('content_log_in');
+inputs.classList.add('inputs');
+document.querySelector('header').after(back_module_window);
+back_module_window.after(log_window);
+log_window.prepend(up_modul);
+up_modul.append(exit);
+log_window.append(content_log_in);
+h1.innerHTML="Status";
+content_log_in.prepend(h1);
+content_log_in.append(inputs);
+ let nick =  document.createElement('div'),
+ span =  document.createElement('span'),
+ input = document.createElement('input');
+ nick.classList.add('nick');
+   input.setAttribute('type', 'text');
+   input.setAttribute('placeholder', 'Login')
+inputs.append(nick);
+nick.append(span);
+nick.append(input);
+button.classList.add('add_user');
+button.setAttribute('type', 'submit');
+button.innerHTML="Submit"
+inputs.append(button);
+
+document.querySelector('.exit').addEventListener('click', ()=>{
+  document.querySelector('.log_in').parentNode.removeChild(document.querySelector('.log_in'));
+  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
+})
+
+document.querySelector('.add_user').addEventListener('click',()=>{
+  const user = document.querySelector('.nick input').value;
+console.log(user);
+  add_new_status(user)});
 }
 
 function module_game(obj){
@@ -419,7 +469,7 @@ document.getElementById('exit').addEventListener('click', ()=>{
 }
 
 
-function change_game(){
+function change_game_but(){
   let html_text = `
   <div class="back-modul"></div>
 <form action="change_game" class='sign_up' method='POST'onsubmit = "return false;">
@@ -459,13 +509,31 @@ change_btn.addEventListener('click', ()=> {
 document.querySelector('.add_user').addEventListener('click',()=>{
   const info_items = Array.from(full_information_new_game).map(element=>element.value)
   add_new_game_db(info_items)});
+  }
+})
 document.getElementById('exit').addEventListener('click', ()=>{
   document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
   document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
 })
-  }
-})
 }
+
+
+function admin_buttons(){
+  const add_game = `<span id="add_new_game" class="add_new_game">Добавить игру</span>`,
+  change_game = ` <span id="change_game" class="change_game">Изменить игру</span>`;
+
+  document.querySelector('.lower-header div').insertAdjacentHTML("beforeend", add_game);
+  document.querySelector('.lower-header div').insertAdjacentHTML("beforeend", change_game);
+
+  document.getElementById('add_new_game').addEventListener('click', ()=> {
+    add_new_game();
+  })
+  document.getElementById('change_game').addEventListener('click', ()=> {
+    change_game_but();
+  })
+
+  }
+
 
 function discaunt(select){
   const html = `<div id="discaunt_module" class='sign_up up_mod' method='POST'onsubmit = "return false;">
@@ -498,4 +566,4 @@ document.getElementById('add_discaunt').addEventListener('click', ()=>{
 
 
 
-export {all_game, top_chart, log_in, sign_up,module_game,add_new_game,change_game};
+export {all_game, top_chart, log_in, sign_up,module_game,status, admin_buttons};
