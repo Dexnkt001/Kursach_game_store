@@ -1,4 +1,4 @@
-const { response } = require("express");
+//const { response } = require("express");
 const express = require("express"),
   mongoose = require("mongoose"),
   keys = require("./config/keys.js"),
@@ -39,6 +39,16 @@ start();
 app.post("/new_game", cb, (req, res) => {
   const game_info = req.body.game_info;
 
+  console.log(game_info);
+
+  const all_img = game_info[3].split(","),
+    proc = game_info[12].split(","),
+    platforma = game_info[10].split(","),
+    ram = game_info[13].split(","),
+    memory = game_info[14].split(","),
+    direct = game_info[15].split(","),
+    video_card = game_info[16].split(",");
+
   const game = new Game({
     name: game_info[0],
     developer: game_info[1],
@@ -53,15 +63,23 @@ app.post("/new_game", cb, (req, res) => {
     },
     images: {
       main_img: game_info[9],
-      all_img: game_info[3],
+      all_img: all_img,
     },
-    full_info: {
-      platform: game_info[10],
-      proc: game_info[12],
-      cpu: game_info[13],
-      memory: game_info[14],
-      direct: game_info[15],
-      video_card: game_info[16],
+    full_min_info: {
+      platform: platforma[0],
+      proc: proc[0],
+      RAM: ram[0],
+      memory: memory[0],
+      direct: direct[0],
+      video_card: video_card[0],
+    },
+    full_recomend_info: {
+      platform: platforma[1],
+      proc: proc[1],
+      RAM: ram[1],
+      memory: memory[1],
+      direct: direct[1],
+      video_card: video_card[1],
     },
   });
 

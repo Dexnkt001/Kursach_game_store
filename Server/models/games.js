@@ -6,10 +6,6 @@ const gameSchema = new Schema({
   developer: String,
   prize: String,
   publish: String,
-  format: {
-    type: Array,
-    default: [],
-  },
   info: {
     short_info: String,
     full_info: String,
@@ -24,7 +20,7 @@ const gameSchema = new Schema({
   full_min_info: {
     platform: String,
     proc: String,
-    cpu: String,
+    RAM: String,
     memory: String,
     direct: String,
     video_card: String,
@@ -32,7 +28,7 @@ const gameSchema = new Schema({
   full_recomend_info: {
     platform: String,
     proc: String,
-    cpu: String,
+    RAM: String,
     memory: String,
     direct: String,
     video_card: String,

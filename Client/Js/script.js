@@ -9,12 +9,47 @@ import {
   admin_buttons,
 } from "./moduls_forms.js";
 
+import {
+  main_list,
+  main_list_new_games,
+  main_list_popular_games,
+  main_list_top_games,
+  main_list_week_game,
+  main_list_discount_games,
+  main_list_free_game,
+  main_list_preprodaction_games,
+  main_list_online_games,
+} from "./home_page.js";
+
 let mass_pict_new_game = [
     {
       link: "../images/Medal_of_honor.jpg",
       name: "Medal of honor",
       develop: "Respawn Entartaimont",
       prize: "1000",
+      // link: "../images/FarCray.jpg",
+      // name: "FarCray",
+      // develop: "Ubisoft",
+      // prize: "1500",
+      // all_img: [
+      //   "../images/FarCray.jpg",
+      //   "../images/FarCry_2.jpg",
+      //   "../images/FarCry_3.jpg",
+      // ],
+      // short_info:
+      //   "Игра про времена индертальцев как в те далекие времена выживали наши предки",
+      // publish: "Ubisoft",
+      // release: "6 октября 2015",
+      // tag: "За жизнь надо бороться!",
+      // rait: "4",
+      // platform: "Windows",
+      // full_info:
+      //   "игра про давние времена когда челоек еще не находился на вершине пищевой цепи и каждый день был на грани жизни и смерти и что бы выжить люди шли на отчаенные меры",
+      // proc: ["intel_1", "intel_2"],
+      // cpu: ["8gb", "16gb"],
+      // memory: ["70gb", "100gb"],
+      // direct: ["10", "11"],
+      // video: ["960", "1660ti"],
     },
     {
       link: "../images/Back4Blood.jpg",
@@ -441,6 +476,17 @@ document.getElementById("new-next").addEventListener("click", () => {
     5
   ).then((res) => (id_new_game = res));
 });
+
+//-------------------------------------------------------
+
+window.onload = () => {
+  console.log("lol_onload");
+  console.log(document.body);
+  console.log(document.querySelector(".main-slider"));
+};
+
+//---------------------------------------------------------
+
 // document.getElementById('discount-prev').addEventListener('click',()=>{default_slider_prev_game(id_discount_game,mass_pict_new_game, place_new_pict)});
 // document.getElementById('discount-next').addEventListener('click',()=>{default_slider_next_game(id_discount_game,mass_pict_new_game, place_new_pict)});
 document.getElementById("preproduces-prev").addEventListener("click", () => {

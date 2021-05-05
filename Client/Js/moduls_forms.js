@@ -1,6 +1,11 @@
-import {add_new_game_db, add_new_user,log_in_user,add_new_status} from "./script.js"
+import {
+  add_new_game_db,
+  add_new_user,
+  log_in_user,
+  add_new_status,
+} from "./script.js";
 
-function all_game(massPict){
+function all_game(massPict) {
   const sort_bar = `<ul class='sort-bar'>
   <li><div class="sort-elements"><div class='title-sort-elements'><span>Жанр</span><span class="arrow arrow-dawn">></span></div>
     <ul class="sort-elements-list genre">
@@ -29,266 +34,291 @@ function all_game(massPict){
     <li>Выше | 4	&#9734;</li>
    </ul>
   </div></li>
- </ul>`
-  const module_window_all_game = document.createElement('div'),
-  back_module_window = document.createElement('div'),
-  main_section_module_window = document.createElement('div'),
-  module_content = document.createElement('div'),
-  up_modul = document.createElement('div'),
-  exit = document.createElement('div');
-  back_module_window.classList.add('back-modul');
-  module_window_all_game.classList.add('modul-window');
-  up_modul.classList.add('up-module-window');
-  exit.classList.add('exit');
-  exit.setAttribute('id', 'exit');
-  exit.innerHTML = '<span>&#10006</span>';
-  main_section_module_window.classList.add('main-section-modul-window');
-  main_section_module_window.classList.add('all-game');
-module_content.classList.add('module-content');
-document.querySelector('header').after(back_module_window);
-back_module_window.after(module_window_all_game);
-module_window_all_game.prepend(up_modul);
-up_modul.append(exit);
-module_window_all_game.append(main_section_module_window);
-main_section_module_window.innerHTML = sort_bar;
-main_section_module_window.append(module_content);
-massPict.forEach(element => {
-  let img = document.createElement('img');
-  img.classList.add('slides');
-  img.classList.add('module-content-items');
-  img.setAttribute('src', `${element.link}`);
-  img.setAttribute('alt', `${element.name}`);
-module_content.append(img);
-});
+ </ul>`;
+  const module_window_all_game = document.createElement("div"),
+    back_module_window = document.createElement("div"),
+    main_section_module_window = document.createElement("div"),
+    module_content = document.createElement("div"),
+    up_modul = document.createElement("div"),
+    exit = document.createElement("div");
+  back_module_window.classList.add("back-modul");
+  module_window_all_game.classList.add("modul-window");
+  up_modul.classList.add("up-module-window");
+  exit.classList.add("exit");
+  exit.setAttribute("id", "exit");
+  exit.innerHTML = "<span>&#10006</span>";
+  main_section_module_window.classList.add("main-section-modul-window");
+  main_section_module_window.classList.add("all-game");
+  module_content.classList.add("module-content");
+  document.querySelector("header").after(back_module_window);
+  back_module_window.after(module_window_all_game);
+  module_window_all_game.prepend(up_modul);
+  up_modul.append(exit);
+  module_window_all_game.append(main_section_module_window);
+  main_section_module_window.innerHTML = sort_bar;
+  main_section_module_window.append(module_content);
+  massPict.forEach((element) => {
+    let img = document.createElement("img");
+    img.classList.add("slides");
+    img.classList.add("module-content-items");
+    img.setAttribute("src", `${element.link}`);
+    img.setAttribute("alt", `${element.name}`);
+    module_content.append(img);
+  });
 
-document.querySelector('.exit').addEventListener('click', ()=>{
-  document.querySelector('.modul-window').parentNode.removeChild(document.querySelector('.modul-window'));
-  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
-})
-
+  document.querySelector(".exit").addEventListener("click", () => {
+    document
+      .querySelector(".modul-window")
+      .parentNode.removeChild(document.querySelector(".modul-window"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
 }
 
-function top_chart(massPict){
-  const module_window_all_game = document.createElement('div'),
-  back_module_window = document.createElement('div'),
-  main_section_module_window = document.createElement('div'),
-  module_content = document.createElement('div'),
-  up_modul = document.createElement('div'),
-  exit = document.createElement('div');
-  back_module_window.classList.add('back-modul');
-  module_window_all_game.classList.add('modul-window');
-  up_modul.classList.add('up-module-window');
-  exit.classList.add('exit');
-  exit.setAttribute('id', 'exit');
-  exit.innerHTML = '<span>&#10006</span>';
-  main_section_module_window.classList.add('main-section-modul-window');
-  main_section_module_window.classList.add('all-game');
-module_content.classList.add('module-content');
-module_content.classList.add('top-chart');
-document.querySelector('header').after(back_module_window);
-back_module_window.after(module_window_all_game);
-module_window_all_game.prepend(up_modul);
-up_modul.append(exit);
-module_window_all_game.append(main_section_module_window);
-main_section_module_window.append(module_content);
-massPict.forEach(element => {
-  let img = document.createElement('img');
-  img.classList.add('slides');
-  img.classList.add('module-content-items');
-  img.classList.add('top-chart-items-game');
-  img.setAttribute('src', `${element.link}`);
-  img.setAttribute('alt', `${element.name}`);
-module_content.append(img);
-});
+function top_chart(massPict) {
+  const module_window_all_game = document.createElement("div"),
+    back_module_window = document.createElement("div"),
+    main_section_module_window = document.createElement("div"),
+    module_content = document.createElement("div"),
+    up_modul = document.createElement("div"),
+    exit = document.createElement("div");
+  back_module_window.classList.add("back-modul");
+  module_window_all_game.classList.add("modul-window");
+  up_modul.classList.add("up-module-window");
+  exit.classList.add("exit");
+  exit.setAttribute("id", "exit");
+  exit.innerHTML = "<span>&#10006</span>";
+  main_section_module_window.classList.add("main-section-modul-window");
+  main_section_module_window.classList.add("all-game");
+  module_content.classList.add("module-content");
+  module_content.classList.add("top-chart");
+  document.querySelector("header").after(back_module_window);
+  back_module_window.after(module_window_all_game);
+  module_window_all_game.prepend(up_modul);
+  up_modul.append(exit);
+  module_window_all_game.append(main_section_module_window);
+  main_section_module_window.append(module_content);
+  massPict.forEach((element) => {
+    let img = document.createElement("img");
+    img.classList.add("slides");
+    img.classList.add("module-content-items");
+    img.classList.add("top-chart-items-game");
+    img.setAttribute("src", `${element.link}`);
+    img.setAttribute("alt", `${element.name}`);
+    module_content.append(img);
+  });
 
-document.querySelector('.exit').addEventListener('click', ()=>{
-  document.querySelector('.modul-window').parentNode.removeChild(document.querySelector('.modul-window'));
-  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
-})
-
+  document.querySelector(".exit").addEventListener("click", () => {
+    document
+      .querySelector(".modul-window")
+      .parentNode.removeChild(document.querySelector(".modul-window"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
 }
 
-function log_in(){
-  const log_window = document.createElement('div'),
-  back_module_window = document.createElement('div'),
-  content_log_in = document.createElement('div'),
-  inputs = document.createElement('div'),
-  up_modul = document.createElement('div'),
-  h1 = document.createElement('h1'),
-  exit = document.createElement('div'),
-  button = document.createElement('button');
-  back_module_window.classList.add('back-modul');
-  log_window.classList.add('log_in');
-  up_modul.classList.add('up-module-window');
-  exit.classList.add('exit');
-  exit.setAttribute('id', 'exit');
-  exit.innerHTML = '<span>&#10006</span>';
-content_log_in.classList.add('content_log_in');
-inputs.classList.add('inputs');
-document.querySelector('header').after(back_module_window);
-back_module_window.after(log_window);
-log_window.prepend(up_modul);
-up_modul.append(exit);
-log_window.append(content_log_in);
-h1.innerHTML="Log in";
-content_log_in.prepend(h1);
-content_log_in.append(inputs);
-for(let i=0; i < 2; i++){
-  console.log(i);
- let nick =  document.createElement('div'),
- span =  document.createElement('span'),
- input = document.createElement('input');
- nick.classList.add('nick');
- if(i === 0){
-   input.setAttribute('type', 'text');
-   input.setAttribute('placeholder', 'Login')
- }
- else{
-   input.setAttribute('type', 'password');
-   input.setAttribute('placeholder', 'Password')
- }
-inputs.append(nick);
-nick.append(span);
-nick.append(input)
+function log_in() {
+  const log_window = document.createElement("div"),
+    back_module_window = document.createElement("div"),
+    content_log_in = document.createElement("div"),
+    inputs = document.createElement("div"),
+    up_modul = document.createElement("div"),
+    h1 = document.createElement("h1"),
+    exit = document.createElement("div"),
+    button = document.createElement("button");
+  back_module_window.classList.add("back-modul");
+  log_window.classList.add("log_in");
+  up_modul.classList.add("up-module-window");
+  exit.classList.add("exit");
+  exit.setAttribute("id", "exit");
+  exit.innerHTML = "<span>&#10006</span>";
+  content_log_in.classList.add("content_log_in");
+  inputs.classList.add("inputs");
+  document.querySelector("header").after(back_module_window);
+  back_module_window.after(log_window);
+  log_window.prepend(up_modul);
+  up_modul.append(exit);
+  log_window.append(content_log_in);
+  h1.innerHTML = "Log in";
+  content_log_in.prepend(h1);
+  content_log_in.append(inputs);
+  for (let i = 0; i < 2; i++) {
+    console.log(i);
+    let nick = document.createElement("div"),
+      span = document.createElement("span"),
+      input = document.createElement("input");
+    nick.classList.add("nick");
+    if (i === 0) {
+      input.setAttribute("type", "text");
+      input.setAttribute("placeholder", "Login");
+    } else {
+      input.setAttribute("type", "password");
+      input.setAttribute("placeholder", "Password");
+    }
+    inputs.append(nick);
+    nick.append(span);
+    nick.append(input);
+  }
+
+  button.classList.add("add_user");
+  button.setAttribute("type", "submit");
+  button.innerHTML = "Submit";
+  inputs.append(button);
+
+  document.querySelector(".exit").addEventListener("click", () => {
+    document
+      .querySelector(".log_in")
+      .parentNode.removeChild(document.querySelector(".log_in"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
+
+  const full_information_new_game = document.querySelectorAll(".nick input");
+  console.log(full_information_new_game);
+  document.querySelector(".add_user").addEventListener("click", () => {
+    const info_items = Array.from(full_information_new_game).map(
+      (element) => element.value
+    );
+    log_in_user(info_items);
+  });
 }
 
-button.classList.add('add_user');
-button.setAttribute('type', 'submit');
-button.innerHTML="Submit"
-inputs.append(button);
-
-document.querySelector('.exit').addEventListener('click', ()=>{
-  document.querySelector('.log_in').parentNode.removeChild(document.querySelector('.log_in'));
-  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
-})
-
-const full_information_new_game = document.querySelectorAll('.nick input');
-console.log(full_information_new_game)
-document.querySelector('.add_user').addEventListener('click',()=>{
-  const info_items = Array.from(full_information_new_game).map(element=>element.value)
-  log_in_user(info_items)});
+function sign_up() {
+  const log_window = document.createElement("div"),
+    back_module_window = document.createElement("div"),
+    content_log_in = document.createElement("div"),
+    inputs = document.createElement("div"),
+    up_modul = document.createElement("div"),
+    h1 = document.createElement("h1"),
+    exit = document.createElement("div"),
+    button = document.createElement("button");
+  back_module_window.classList.add("back-modul");
+  log_window.classList.add("sign_up");
+  up_modul.classList.add("up-module-window");
+  exit.classList.add("exit");
+  exit.setAttribute("id", "exit");
+  exit.innerHTML = "<span>&#10006</span>";
+  content_log_in.classList.add("content_log_in");
+  inputs.classList.add("inputs");
+  inputs.classList.add("inputs_sign_up");
+  document.querySelector("header").after(back_module_window);
+  back_module_window.after(log_window);
+  log_window.prepend(up_modul);
+  up_modul.append(exit);
+  log_window.append(content_log_in);
+  h1.innerHTML = "Sign up";
+  content_log_in.prepend(h1);
+  content_log_in.append(inputs);
+  for (let i = 0; i < 3; i++) {
+    console.log(i);
+    let nick = document.createElement("div"),
+      span = document.createElement("span"),
+      input = document.createElement("input");
+    nick.classList.add("nick");
+    if (i === 0) {
+      input.setAttribute("type", "text");
+      input.setAttribute("placeholder", "Login");
+    } else if (i === 1) {
+      input.setAttribute("type", "text");
+      input.setAttribute("placeholder", "Email");
+    } else {
+      input.setAttribute("type", "password");
+      input.setAttribute("placeholder", "password");
+    }
+    inputs.append(nick);
+    nick.append(span);
+    nick.append(input);
+  }
+  button.classList.add("add_user");
+  button.setAttribute("type", "submit");
+  button.innerHTML = "Submit";
+  inputs.append(button);
+  const full_information_new_game = document.querySelectorAll(".nick input");
+  console.log(full_information_new_game);
+  document.querySelector(".add_user").addEventListener("click", () => {
+    const info_items = Array.from(full_information_new_game).map(
+      (element) => element.value
+    );
+    console.log(info_items);
+    add_new_user(info_items, full_information_new_game);
+  });
+  document.querySelector(".exit").addEventListener("click", () => {
+    document
+      .querySelector(".sign_up")
+      .parentNode.removeChild(document.querySelector(".sign_up"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
 }
 
-function sign_up(){
-  const log_window = document.createElement('div'),
-  back_module_window = document.createElement('div'),
-  content_log_in = document.createElement('div'),
-  inputs = document.createElement('div'),
-  up_modul = document.createElement('div'),
-  h1 = document.createElement('h1'),
-  exit = document.createElement('div'),
-  button = document.createElement('button');
-  back_module_window.classList.add('back-modul');
-  log_window.classList.add('sign_up');
-  up_modul.classList.add('up-module-window');
-  exit.classList.add('exit');
-  exit.setAttribute('id', 'exit');
-  exit.innerHTML = '<span>&#10006</span>';
-content_log_in.classList.add('content_log_in');
-inputs.classList.add('inputs');
-inputs.classList.add('inputs_sign_up');
-document.querySelector('header').after(back_module_window);
-back_module_window.after(log_window);
-log_window.prepend(up_modul);
-up_modul.append(exit);
-log_window.append(content_log_in);
-h1.innerHTML="Sign up";
-content_log_in.prepend(h1);
-content_log_in.append(inputs);
-for(let i=0; i < 3; i++){
-  console.log(i);
- let nick =  document.createElement('div'),
- span =  document.createElement('span'),
- input = document.createElement('input');
- nick.classList.add('nick');
- if(i === 0){
-   input.setAttribute('type', 'text');
-   input.setAttribute('placeholder', 'Login')
- } else if(i === 1){
-   input.setAttribute('type', 'text');
-   input.setAttribute('placeholder', 'Email')
- }
- else{
-   input.setAttribute('type', 'password')
-   input.setAttribute('placeholder', 'password')
- }
-inputs.append(nick);
-nick.append(span);
-nick.append(input)
-}
-button.classList.add('add_user');
-button.setAttribute('type', 'submit');
-button.innerHTML="Submit"
-inputs.append(button);
-const full_information_new_game = document.querySelectorAll('.nick input');
-console.log(full_information_new_game)
-document.querySelector('.add_user').addEventListener('click',()=>{
-  const info_items = Array.from(full_information_new_game).map(element=>element.value)
-  console.log(info_items);
-  add_new_user(info_items, full_information_new_game)});
-document.querySelector('.exit').addEventListener('click', ()=>{
-  document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
-  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
-})
+function status() {
+  const log_window = document.createElement("div"),
+    back_module_window = document.createElement("div"),
+    content_log_in = document.createElement("div"),
+    inputs = document.createElement("div"),
+    up_modul = document.createElement("div"),
+    h1 = document.createElement("h1"),
+    exit = document.createElement("div"),
+    button = document.createElement("button");
+  back_module_window.classList.add("back-modul");
+  log_window.classList.add("log_in");
+  up_modul.classList.add("up-module-window");
+  exit.classList.add("exit");
+  exit.setAttribute("id", "exit");
+  exit.innerHTML = "<span>&#10006</span>";
+  content_log_in.classList.add("content_log_in");
+  inputs.classList.add("inputs");
+  document.querySelector("header").after(back_module_window);
+  back_module_window.after(log_window);
+  log_window.prepend(up_modul);
+  up_modul.append(exit);
+  log_window.append(content_log_in);
+  h1.innerHTML = "Status";
+  content_log_in.prepend(h1);
+  content_log_in.append(inputs);
+  let nick = document.createElement("div"),
+    span = document.createElement("span"),
+    input = document.createElement("input");
+  nick.classList.add("nick");
+  input.setAttribute("type", "text");
+  input.setAttribute("placeholder", "Login");
+  inputs.append(nick);
+  nick.append(span);
+  nick.append(input);
+  button.classList.add("add_user");
+  button.setAttribute("type", "submit");
+  button.innerHTML = "Submit";
+  inputs.append(button);
 
+  document.querySelector(".exit").addEventListener("click", () => {
+    document
+      .querySelector(".log_in")
+      .parentNode.removeChild(document.querySelector(".log_in"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
+
+  document.querySelector(".add_user").addEventListener("click", () => {
+    const user = document.querySelector(".nick input").value;
+    console.log(user);
+    add_new_status(user);
+  });
 }
 
-function status(){
-  const log_window = document.createElement('div'),
-  back_module_window = document.createElement('div'),
-  content_log_in = document.createElement('div'),
-  inputs = document.createElement('div'),
-  up_modul = document.createElement('div'),
-  h1 = document.createElement('h1'),
-  exit = document.createElement('div'),
-  button = document.createElement('button');
-  back_module_window.classList.add('back-modul');
-  log_window.classList.add('log_in');
-  up_modul.classList.add('up-module-window');
-  exit.classList.add('exit');
-  exit.setAttribute('id', 'exit');
-  exit.innerHTML = '<span>&#10006</span>';
-content_log_in.classList.add('content_log_in');
-inputs.classList.add('inputs');
-document.querySelector('header').after(back_module_window);
-back_module_window.after(log_window);
-log_window.prepend(up_modul);
-up_modul.append(exit);
-log_window.append(content_log_in);
-h1.innerHTML="Status";
-content_log_in.prepend(h1);
-content_log_in.append(inputs);
- let nick =  document.createElement('div'),
- span =  document.createElement('span'),
- input = document.createElement('input');
- nick.classList.add('nick');
-   input.setAttribute('type', 'text');
-   input.setAttribute('placeholder', 'Login')
-inputs.append(nick);
-nick.append(span);
-nick.append(input);
-button.classList.add('add_user');
-button.setAttribute('type', 'submit');
-button.innerHTML="Submit"
-inputs.append(button);
+function module_game(obj) {
+  let str = obj.all_img
+    .map((element) => {
+      return `<img class="main-slide" src="${element}" alt="cyber">`;
+    })
+    .join(",")
+    .replace(/[,]/g, "");
 
-document.querySelector('.exit').addEventListener('click', ()=>{
-  document.querySelector('.log_in').parentNode.removeChild(document.querySelector('.log_in'));
-  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
-})
-
-document.querySelector('.add_user').addEventListener('click',()=>{
-  const user = document.querySelector('.nick input').value;
-console.log(user);
-  add_new_status(user)});
-}
-
-function module_game(obj){
-let str = obj.all_img.map(element => {
- return  `<img class="main-slide" src="${element}" alt="cyber">`
-}).join(',').replace(/[,]/g, '');
-
-let html_text = `
+  let html_text = `
 <div class="back-modul-game"></div>
 <div class="modul-window assasin_bg">
   <div class="up-module-window">
@@ -411,18 +441,21 @@ let html_text = `
   </div>
 
 </div>
-`
+`;
 
+  document.querySelector("header").insertAdjacentHTML("afterend", html_text);
 
-document.querySelector('header').insertAdjacentHTML("afterend", html_text);
-
-document.getElementById('exit').addEventListener('click', ()=>{
-  document.querySelector('.modul-window').parentNode.removeChild(document.querySelector('.modul-window'));
-  document.querySelector('.back-modul-game').parentNode.removeChild(document.querySelector('.back-modul-game'));
-})
+  document.getElementById("exit").addEventListener("click", () => {
+    document
+      .querySelector(".modul-window")
+      .parentNode.removeChild(document.querySelector(".modul-window"));
+    document
+      .querySelector(".back-modul-game")
+      .parentNode.removeChild(document.querySelector(".back-modul-game"));
+  });
 }
 
-function add_new_game(){
+function add_new_game() {
   let html_text = `
   <div class="back-modul"></div>
   <form action="new_game" method='POST' class='module_wind_new_game' onsubmit="return false;">
@@ -453,23 +486,35 @@ function add_new_game(){
 </div>
   </div>
 </form>
-`
-document.querySelector('header').insertAdjacentHTML("afterend", html_text);
+`;
+  document.querySelector("header").insertAdjacentHTML("afterend", html_text);
 
-const full_information_new_game = document.querySelectorAll('.nick input');
-console.log(full_information_new_game)
-document.querySelector('.add_user').addEventListener('click',()=>{
-  const info_items = Array.from(full_information_new_game).map(element=>element.value)
-  console.log(info_items);
-  add_new_game_db(info_items)});
-document.getElementById('exit').addEventListener('click', ()=>{
-  document.querySelector('.module_wind_new_game').parentNode.removeChild(document.querySelector('.module_wind_new_game'));
-  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
-})
+  const full_information_new_game = document.querySelectorAll(".nick input");
+  console.log(full_information_new_game);
+  document.querySelector(".add_user").addEventListener("click", () => {
+    const info_items = Array.from(full_information_new_game).map(
+      (element) => element.value
+    );
+    console.log(info_items);
+    add_new_game_db(info_items);
+    document
+      .querySelector(".module_wind_new_game")
+      .parentNode.removeChild(document.querySelector(".module_wind_new_game"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
+  document.getElementById("exit").addEventListener("click", () => {
+    document
+      .querySelector(".module_wind_new_game")
+      .parentNode.removeChild(document.querySelector(".module_wind_new_game"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
 }
 
-
-function change_game_but(){
+function change_game_but() {
   let html_text = `
   <div class="back-modul"></div>
 <form action="change_game" class='sign_up' method='POST'onsubmit = "return false;">
@@ -490,52 +535,65 @@ function change_game_but(){
   </div>
 </form>
 
-`
-document.querySelector('header').insertAdjacentHTML("afterend", html_text);
+`;
+  document.querySelector("header").insertAdjacentHTML("afterend", html_text);
 
-const select = document.querySelector('select'),
-change_btn = document.querySelector('.add_user'),
-change_effect = document.getElementById('change_effect');
+  const select = document.querySelector("select"),
+    change_btn = document.querySelector(".add_user"),
+    change_effect = document.getElementById("change_effect");
 
-select.addEventListener('change', ()=>{
-  console.log(select.value);
-})
-change_btn.addEventListener('click', ()=> {
-  if (change_effect.value === 'discaunt' || change_effect.value === 'Discaunt'){
-    const select_val = select.value;
-    discaunt(select_val);
-  }else{
-    const full_information_new_game = document.querySelectorAll('.nick input');
-document.querySelector('.add_user').addEventListener('click',()=>{
-  const info_items = Array.from(full_information_new_game).map(element=>element.value)
-  add_new_game_db(info_items)});
-  }
-})
-document.getElementById('exit').addEventListener('click', ()=>{
-  document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
-  document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
-})
+  select.addEventListener("change", () => {
+    console.log(select.value);
+  });
+  change_btn.addEventListener("click", () => {
+    if (
+      change_effect.value === "discaunt" ||
+      change_effect.value === "Discaunt"
+    ) {
+      const select_val = select.value;
+      discaunt(select_val);
+    } else {
+      const full_information_new_game = document.querySelectorAll(
+        ".nick input"
+      );
+      document.querySelector(".add_user").addEventListener("click", () => {
+        const info_items = Array.from(full_information_new_game).map(
+          (element) => element.value
+        );
+        add_new_game_db(info_items);
+      });
+    }
+  });
+  document.getElementById("exit").addEventListener("click", () => {
+    document
+      .querySelector(".sign_up")
+      .parentNode.removeChild(document.querySelector(".sign_up"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
 }
 
-
-function admin_buttons(){
+function admin_buttons() {
   const add_game = `<span id="add_new_game" class="add_new_game">Добавить игру</span>`,
-  change_game = ` <span id="change_game" class="change_game">Изменить игру</span>`;
+    change_game = ` <span id="change_game" class="change_game">Изменить игру</span>`;
 
-  document.querySelector('.lower-header div').insertAdjacentHTML("beforeend", add_game);
-  document.querySelector('.lower-header div').insertAdjacentHTML("beforeend", change_game);
+  document
+    .querySelector(".lower-header div")
+    .insertAdjacentHTML("beforeend", add_game);
+  document
+    .querySelector(".lower-header div")
+    .insertAdjacentHTML("beforeend", change_game);
 
-  document.getElementById('add_new_game').addEventListener('click', ()=> {
+  document.getElementById("add_new_game").addEventListener("click", () => {
     add_new_game();
-  })
-  document.getElementById('change_game').addEventListener('click', ()=> {
+  });
+  document.getElementById("change_game").addEventListener("click", () => {
     change_game_but();
-  })
+  });
+}
 
-  }
-
-
-function discaunt(select){
+function discaunt(select) {
   const html = `<div id="discaunt_module" class='sign_up up_mod' method='POST'onsubmit = "return false;">
   <div class='content_log_in'>
     <h1>Discaunt</h1>
@@ -544,26 +602,39 @@ function discaunt(select){
 <button type="submit" id="add_discaunt" class="add_user">Add</button>
 </div>
   </div>
-</div>`
-document.querySelector('header').insertAdjacentHTML("afterend", html);
+</div>`;
+  document.querySelector("header").insertAdjacentHTML("afterend", html);
 
-
-console.log('rabotaet tyt')
-console.log('rabotaet posle')
-document.getElementById('add_discaunt').addEventListener('click', ()=>{
-  const full_information_new_game = document.querySelectorAll('.nick input');
-  const info_items = Array.from(full_information_new_game).map(element=>element.value);
-  info_items.push(select)
-  console.log(info_items)
-  add_new_game_db(info_items)
-  document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
- });
-  document.getElementById('exit').addEventListener('click', ()=>{
-    document.querySelector('.sign_up').parentNode.removeChild(document.querySelector('.sign_up'));
-    document.querySelector('.back-modul').parentNode.removeChild(document.querySelector('.back-modul'));
-  })
+  console.log("rabotaet tyt");
+  console.log("rabotaet posle");
+  document.getElementById("add_discaunt").addEventListener("click", () => {
+    const full_information_new_game = document.querySelectorAll(".nick input");
+    const info_items = Array.from(full_information_new_game).map(
+      (element) => element.value
+    );
+    info_items.push(select);
+    console.log(info_items);
+    add_new_game_db(info_items);
+    document
+      .querySelector(".sign_up")
+      .parentNode.removeChild(document.querySelector(".sign_up"));
+  });
+  document.getElementById("exit").addEventListener("click", () => {
+    document
+      .querySelector(".sign_up")
+      .parentNode.removeChild(document.querySelector(".sign_up"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
 }
 
-
-
-export {all_game, top_chart, log_in, sign_up,module_game,status, admin_buttons};
+export {
+  all_game,
+  top_chart,
+  log_in,
+  sign_up,
+  module_game,
+  status,
+  admin_buttons,
+};
