@@ -398,7 +398,7 @@ function module_game(obj) {
             <div class="title_req">Processor</div>
             <div>${obj.proc[0]}</div>
           </div>
-          <div><div class="title_req">CPU</div>
+          <div><div class="title_req">RAM</div>
             <div>${obj.cpu[0]}</div>
           </div>
           <div><div class="title_req">Memory</div>
@@ -478,7 +478,7 @@ function add_new_game() {
 <div class="nick"><input placeholder="Platform" type="text"></div>
 <div class="nick"><input placeholder="Full information" type="text"></div>
 <div class="nick"><input placeholder="Processor" type="text"></div>
-<div class="nick"><input placeholder="Cpu" type="text"></div>
+<div class="nick"><input placeholder="RAM" type="text"></div>
 <div class="nick"><input placeholder="Memory" type="text"></div>
 <div class="nick"><input placeholder="Direct" type="text"></div>
 <div class="nick"><input placeholder="Video card" type="text"></div>
@@ -560,7 +560,14 @@ function change_game_but() {
         const info_items = Array.from(full_information_new_game).map(
           (element) => element.value
         );
+        info_items.push(select.value);
         add_new_game_db(info_items);
+        document
+          .querySelector(".sign_up")
+          .parentNode.removeChild(document.querySelector(".sign_up"));
+        document
+          .querySelector(".back-modul")
+          .parentNode.removeChild(document.querySelector(".back-modul"));
       });
     }
   });
@@ -622,7 +629,7 @@ function discaunt(select) {
   document.getElementById("exit").addEventListener("click", () => {
     document
       .querySelector(".sign_up")
-      .parentNode.removeChild(document.querySelector(".sign_up"));
+      .parentNode.removeChild(document.querySelector(".sign_up .up_mod"));
     document
       .querySelector(".back-modul")
       .parentNode.removeChild(document.querySelector(".back-modul"));

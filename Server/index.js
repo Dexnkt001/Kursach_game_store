@@ -90,10 +90,33 @@ app.post("/new_game", cb, (req, res) => {
 app.post("/change_game", cb, (req, res) => {
   console.log(req.body.game_info);
   const change_game_info = req.body.game_info;
-  if (change_game_info[3] === "Effect") {
+  if (change_game_info[2] === "Effect" && change_game_info.length === 3) {
+    console.log("effect");
+    console.log("ne disc");
+    Game.findOneAndUpdate(
+      { name: change_game_info[0] },
+      { $push: { effect: change_game_info[1] } },
+      { new: true },
+      (err, respons) => {
+        if (err) {
+          console.log(err);
+          res.json({ status: "error" });
+        } else {
+          console.log(respons);
+          res.json({ status: "complite" });
+        }
+      }
+    );
+  } else if (
+    change_game_info[3] === "Effect" &&
+    change_game_info.length === 4
+  ) {
     Game.findOneAndUpdate(
       { name: change_game_info[1] },
-      { effect: change_game_info[2], discaunt: change_game_info[0] },
+      {
+        $push: { effect: change_game_info[2] },
+        $set: { discaunt: change_game_info[0] },
+      },
       { new: true },
       (err, respons) => {
         if (err) {
@@ -182,6 +205,144 @@ app.get("/log_in/:word", (req, res) => {
     if (result.length !== 0) {
       console.log(result[0].status);
       res.json({ login: val[0], status: result[0].status });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+//--------------------------------------------
+
+app.get("/new_game_arr/:word", (req, res) => {
+  // const val = req.params.word.toString().split(",");
+  console.log("new_game_arr");
+  let arr_new = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      console.log(result);
+      arr_new = result.filter((element) => {
+        return element.effect.includes("new");
+      });
+      console.log(arr_new);
+      res.json({ arr_new_games: arr_new });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+app.get("/popular_arr/:word", (req, res) => {
+  let popular_games = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      console.log(result);
+      popular_games = result.filter((element) => {
+        return element.effect.includes("popular");
+      });
+      console.log(popular_games);
+      res.json({ arr_popular_games: popular_games });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+app.get("/top_arr/:word", (req, res) => {
+  let top_games = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      console.log(result);
+      top_games = result.filter((element) => {
+        return element.effect.includes("top");
+      });
+      console.log(top_games);
+      res.json({ arr_top_games: top_games });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+app.get("/week_arr/:word", (req, res) => {
+  let week_games = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      console.log(result);
+      week_games = result.filter((element) => {
+        return element.effect.includes("week");
+      });
+      console.log(week_games);
+      res.json({ arr_week_games: week_games });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+app.get("/free_arr/:word", (req, res) => {
+  let free_games = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      console.log(result);
+      free_games = result.filter((element) => {
+        return element.effect.includes("free");
+      });
+      console.log(free_games);
+      res.json({ arr_free_games: free_games });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+app.get("/preprodaction_arr/:word", (req, res) => {
+  let preprodaction_games = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      console.log(result);
+      preprodaction_games = result.filter((element) => {
+        return element.effect.includes("preprodaction");
+      });
+      console.log(preprodaction_games);
+      res.json({ arr_preprodaction_games: preprodaction_games });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+app.get("/online_arr/:word", (req, res) => {
+  let online_games = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      online_games = result.filter((element) => {
+        return element.effect.includes("online");
+      });
+      console.log(online_games);
+      res.json({ arr_online_games: online_games });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+app.get("/discaunt_arr/:word", (req, res) => {
+  let discaunt_games = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      discaunt_games = result.filter((element) => {
+        return element.effect.includes("discaunt");
+      });
+      console.log(discaunt_games);
+      res.json({ arr_discaunt_games: discaunt_games });
     } else {
       res.json({ status: "Error!" });
     }

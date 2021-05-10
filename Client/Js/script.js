@@ -167,8 +167,18 @@ let mass_pict_new_game = [
   //id_discount_game = 0,
   id_preproduces_game = 0,
   id_best_online_game = 0,
-  click_img = document.querySelectorAll(".click_img"),
-  admin = false;
+  click_img = document.querySelectorAll("click_img"),
+  admin = false,
+  discaunt_arr = [],
+  arr_new_games = [],
+  arr_popular_games = [],
+  arr_top_games = [],
+  arr_week_game = [],
+  arr_discount_games = [],
+  arr_free_game = [],
+  arr_preprodaction_games = [],
+  arr_online_games = [];
+
 const place_new_pict = document.querySelectorAll(".items-new-games"),
   //place_discount_pict = document.querySelectorAll('.items-discount-games'),
   place_preproduce_pict = document.querySelectorAll(".items-preproduce-games"),
@@ -268,7 +278,7 @@ function find_choose_game(e) {
 async function add_new_game_db(arr) {
   console.log(arr);
   const game_info = arr;
-  if (game_info.length === 4) {
+  if (game_info.length <= 4) {
     try {
       await fetch("http://localhost:5500/change_game", {
         method: "POST",
@@ -477,12 +487,122 @@ document.getElementById("new-next").addEventListener("click", () => {
   ).then((res) => (id_new_game = res));
 });
 
+//------------------------------
+//массивы на слайдеры
+
+// discaunt_arr=[],
+//   arr_new_games=[],
+//   arr_popular_games=[],
+//   arr_top_games=[],
+//   arr_week_game=[],
+//   arr_discount_games=[],
+//   arr_free_game=[],
+//   arr_preprodaction_games=[],
+//   arr_online_games=[];
+
+async function serv_arr_new_games() {
+  console.log("вызов");
+  try {
+    const response = await fetch(`http://localhost:5500/new_game_arr/new_game`);
+    await response.json().then((res) => (arr_new_games = res.arr_new_games));
+    console.log(arr_new_games);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//serv_arr_new_games();
+
+async function serv_arr_popular_games() {
+  try {
+    const response = await fetch(`http://localhost:5500/popular_arr/popular`);
+    await response.json().then((res) => {
+      arr_popular_games = res.arr_popular_games;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function serv_arr_top_games() {
+  try {
+    const response = await fetch(`http://localhost:5500/top_arr/top`);
+    await response.json().then((res) => {
+      arr_top_games = res.arr_top_games;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function serv_arr_week_game() {
+  try {
+    const response = await fetch(`http://localhost:5500/week_arr/week`);
+    await response.json().then((res) => {
+      arr_week_game = res.arr_week_game;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function serv_arr_free_game() {
+  try {
+    const response = await fetch(`http://localhost:5500/free_arr/free`);
+    await response.json().then((res) => {
+      arr_free_game = res.arr_free_game;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function serv_arr_discount_games() {
+  try {
+    const response = await fetch(`http://localhost:5500/discaunt_arr/discaunt`);
+    await response.json().then((res) => {
+      arr_discount_games = res.arr_discount_games;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function serv_arr_preprodaction_games() {
+  try {
+    const response = await fetch(
+      `http://localhost:5500/preprodaction_arr/preprodaction`
+    );
+    await response.json().then((res) => {
+      arr_preprodaction_games = res.arr_preprodaction_games;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function serv_arr_online_games() {
+  try {
+    const response = await fetch(`http://localhost:5500/online_arr/online`);
+    await response.json().then((res) => {
+      arr_online_games = res.arr_online_games;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 //-------------------------------------------------------
 
 window.onload = () => {
-  console.log("lol_onload");
-  console.log(document.body);
-  console.log(document.querySelector(".main-slider"));
+  serv_arr_new_games();
+  serv_arr_online_games();
+  serv_arr_preprodaction_games();
+  serv_arr_discount_games();
+  serv_arr_free_game();
+  serv_arr_week_game();
+  serv_arr_top_games();
+  serv_arr_popular_games();
 };
 
 //---------------------------------------------------------
