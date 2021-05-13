@@ -212,6 +212,20 @@ app.get("/log_in/:word", (req, res) => {
   // JSON.stringify(arr)
 });
 
+app.get("/find_game/:word", (req, res) => {
+  const val = req.params.word;
+  console.log("finde_game ----- ", val);
+  Game.find({ name: val }).then((result) => {
+    if (result.length !== 0) {
+      console.log(result[0].status);
+      res.json({ game: result[0] });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
 //--------------------------------------------
 
 app.get("/new_game_arr/:word", (req, res) => {
@@ -226,6 +240,20 @@ app.get("/new_game_arr/:word", (req, res) => {
       });
       console.log(arr_new);
       res.json({ arr_new_games: arr_new });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+app.get("/arr_all_games/:word", (req, res) => {
+  // const val = req.params.word.toString().split(",");
+  console.log("arr_all_games");
+  let arr_new = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      res.json({ arr_all_games: result });
     } else {
       res.json({ status: "Error!" });
     }

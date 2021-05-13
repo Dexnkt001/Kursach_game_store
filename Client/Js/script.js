@@ -1,4 +1,9 @@
-import { default_previus_slider, default_next_slider } from "./sliders.js";
+import {
+  default_previus_slider,
+  default_next_slider,
+  discaunt_previus_slider,
+  discaunt_next_slider,
+} from "./sliders.js";
 import {
   all_game,
   top_chart,
@@ -164,12 +169,11 @@ let mass_pict_new_game = [
     },
   ],
   id_new_game = 0,
-  //id_discount_game = 0,
+  id_discaunt_game = 0,
   id_preproduces_game = 0,
   id_best_online_game = 0,
   click_img = document.querySelectorAll("click_img"),
   admin = false,
-  discaunt_arr = [],
   arr_new_games = [],
   arr_popular_games = [],
   arr_top_games = [],
@@ -177,14 +181,13 @@ let mass_pict_new_game = [
   arr_discount_games = [],
   arr_free_game = [],
   arr_preprodaction_games = [],
-  arr_online_games = [];
+  arr_online_games = [],
+  arr_all_games = [];
 
-const place_new_pict = document.querySelectorAll(".items-new-games"),
-  //place_discount_pict = document.querySelectorAll('.items-discount-games'),
-  place_preproduce_pict = document.querySelectorAll(".items-preproduce-games"),
-  place_best_online_pict = document.querySelectorAll(
-    ".items-best-online-games"
-  );
+let place_new_pict,
+  place_discount_pict,
+  place_preproduce_pict,
+  place_best_online_pict;
 
 function ForEach(mass, fun) {
   return Array.prototype.forEach.call(mass, fun);
@@ -257,21 +260,83 @@ async function default_slider_for_next_elements(
   return return_promise;
 }
 
-function listener_for_img() {
-  for (let i = 0; i < click_img.length; i++) {
-    click_img[i].addEventListener("click", (e) => {
-      find_choose_game(e);
-    });
-  }
+async function discaunt_slider_for_next_elements(
+  id_game,
+  mass_pict_new_game,
+  place_pict,
+  numb_pict
+) {
+  console.log("id - game(postupivshee) :", id_game);
+  add_class(place_pict);
+  let promise = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        discaunt_next_slider(id_game, mass_pict_new_game, place_pict, numb_pict)
+      );
+    }, 1000);
+  }).then((result) => {
+    console.log("lololol rabotaets");
+    setTimeout(() => {
+      delete_class(place_pict);
+    }, 200);
+    console.log("new id after fun : ", result);
+    return result;
+  });
+  let return_promise = await promise;
+
+  return return_promise;
 }
 
-function find_choose_game(e) {
-  const name = e.target.alt;
-  for (let i = 0; i < mass_pict_new_game.length; i++) {
-    if (mass_pict_new_game[i].name === name) {
-      module_game(mass_pict_new_game[i]);
-      break;
-    }
+async function discaunt_slider_for_previus_elements(
+  id_game,
+  mass_pict_new_game,
+  place_pict,
+  numb_pict
+) {
+  add_class(place_pict);
+  let promise = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        discaunt_previus_slider(
+          id_game,
+          mass_pict_new_game,
+          place_pict,
+          numb_pict
+        )
+      );
+    }, 1000);
+  }).then((result) => {
+    setTimeout(() => {
+      delete_class(place_pict);
+    }, 200);
+    return result;
+  });
+
+  let return_promise = await promise;
+
+  return return_promise;
+}
+
+// function listener_for_img() {
+//   for (let i = 0; i < click_img.length; i++) {
+//     click_img[i].addEventListener("click", (e) => {
+//       find_choose_game(e);
+//     });
+//   }
+// }
+
+async function find_choose_game(name) {
+  console.log("lol");
+  const val = name;
+  try {
+    console.log(val);
+    const response = await fetch(`http://localhost:5500/find_game/${val}`);
+    const game = await response.json().then((res) => {
+      return res.game;
+    });
+    module_game(game);
+  } catch (err) {
+    console.log(err);
   }
 }
 
@@ -473,7 +538,7 @@ async function add_new_status(user) {
 document.getElementById("new-prev").addEventListener("click", () => {
   default_slider_for_previus_elements(
     id_new_game,
-    mass_pict_new_game,
+    arr_new_games,
     place_new_pict,
     5
   ).then((res) => (id_new_game = res));
@@ -481,7 +546,7 @@ document.getElementById("new-prev").addEventListener("click", () => {
 document.getElementById("new-next").addEventListener("click", () => {
   default_slider_for_next_elements(
     id_new_game,
-    mass_pict_new_game,
+    arr_new_games,
     place_new_pict,
     5
   ).then((res) => (id_new_game = res));
@@ -535,11 +600,22 @@ async function serv_arr_top_games() {
   }
 }
 
+async function serv_arr_all_games() {
+  try {
+    const response = await fetch(`http://localhost:5500/arr_all_games/all`);
+    await response.json().then((res) => {
+      arr_all_games = res.arr_all_games;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function serv_arr_week_game() {
   try {
     const response = await fetch(`http://localhost:5500/week_arr/week`);
     await response.json().then((res) => {
-      arr_week_game = res.arr_week_game;
+      arr_week_game = res.arr_week_games;
     });
   } catch (error) {
     console.log(error);
@@ -550,7 +626,7 @@ async function serv_arr_free_game() {
   try {
     const response = await fetch(`http://localhost:5500/free_arr/free`);
     await response.json().then((res) => {
-      arr_free_game = res.arr_free_game;
+      arr_free_game = res.arr_free_games;
     });
   } catch (error) {
     console.log(error);
@@ -561,7 +637,7 @@ async function serv_arr_discount_games() {
   try {
     const response = await fetch(`http://localhost:5500/discaunt_arr/discaunt`);
     await response.json().then((res) => {
-      arr_discount_games = res.arr_discount_games;
+      arr_discount_games = res.arr_discaunt_games;
     });
   } catch (error) {
     console.log(error);
@@ -594,15 +670,39 @@ async function serv_arr_online_games() {
 
 //-------------------------------------------------------
 
-window.onload = () => {
-  serv_arr_new_games();
-  serv_arr_online_games();
-  serv_arr_preprodaction_games();
-  serv_arr_discount_games();
-  serv_arr_free_game();
-  serv_arr_week_game();
-  serv_arr_top_games();
-  serv_arr_popular_games();
+window.onload = async function () {
+  await serv_arr_new_games();
+  await serv_arr_online_games();
+  await serv_arr_preprodaction_games();
+  await serv_arr_discount_games();
+  await serv_arr_free_game();
+  await serv_arr_week_game();
+  await serv_arr_top_games();
+  await serv_arr_popular_games();
+  await serv_arr_all_games();
+
+  main_list(arr_new_games);
+  main_list_new_games(arr_new_games);
+  main_list_popular_games(arr_popular_games);
+  main_list_top_games(arr_top_games);
+  main_list_week_game(arr_week_game);
+  main_list_discount_games(arr_discount_games);
+  main_list_free_game(arr_free_game);
+  main_list_preprodaction_games(arr_preprodaction_games);
+  main_list_online_games(arr_online_games);
+
+  (place_new_pict = document.querySelectorAll(".items-new-games")),
+    //place_discount_pict = document.querySelectorAll('.items-discount-games'),
+    (place_preproduce_pict = document.querySelectorAll(
+      ".items-preproduce-games"
+    )),
+    (place_best_online_pict = document.querySelectorAll(
+      ".items-best-online-games"
+    ));
+  place_discount_pict = document.querySelectorAll(".items-discount-games");
+  Array.from(document.querySelectorAll("img")).forEach((element) =>
+    element.addEventListener("click", () => find_choose_game(element.alt))
+  );
 };
 
 //---------------------------------------------------------
@@ -612,7 +712,7 @@ window.onload = () => {
 document.getElementById("preproduces-prev").addEventListener("click", () => {
   default_slider_for_previus_elements(
     id_preproduces_game,
-    mass_pict_new_game,
+    arr_preprodaction_games,
     place_preproduce_pict,
     4
   ).then((res) => (id_preproduces_game = res));
@@ -620,7 +720,7 @@ document.getElementById("preproduces-prev").addEventListener("click", () => {
 document.getElementById("preproduces-next").addEventListener("click", () => {
   default_slider_for_next_elements(
     id_preproduces_game,
-    mass_pict_new_game,
+    arr_preprodaction_games,
     place_preproduce_pict,
     4
   ).then((res) => (id_preproduces_game = res));
@@ -628,22 +728,44 @@ document.getElementById("preproduces-next").addEventListener("click", () => {
 document.getElementById("best-online-prev").addEventListener("click", () => {
   default_slider_for_previus_elements(
     id_best_online_game,
-    mass_pict_new_game,
+    arr_online_games,
     place_best_online_pict,
     5
   ).then((res) => (id_best_online_game = res));
 });
+
+document.getElementById("discount-prev").addEventListener("click", () => {
+  discaunt_slider_for_previus_elements(
+    id_discaunt_game,
+    arr_discount_games,
+    place_discount_pict,
+    5
+  ).then((res) => (id_best_online_game = res));
+});
+
+document.getElementById("discount-next").addEventListener("click", () => {
+  console.log("element ", place_discount_pict[0].childNodes[7].childNodes[1]);
+  console.log("element ", place_discount_pict[0].childNodes[7].childNodes[3]);
+  console.log("element ", place_discount_pict[0].childNodes[7].childNodes[5]);
+  discaunt_slider_for_next_elements(
+    id_discaunt_game,
+    arr_discount_games,
+    place_discount_pict,
+    5
+  ).then((res) => (id_discaunt_game = res));
+});
+
 document.getElementById("best-online-next").addEventListener("click", () => {
   default_slider_for_next_elements(
     id_best_online_game,
-    mass_pict_new_game,
+    arr_online_games,
     place_best_online_pict,
     5
   ).then((res) => (id_best_online_game = res));
 });
 document.getElementById("view").addEventListener("click", () => {
-  console.log("all_game");
-  all_game(mass_pict_new_game);
+  console.log(arr_all_games);
+  all_game(arr_all_games);
 });
 
 document.getElementById("more_top_gaems").addEventListener("click", () => {
@@ -655,12 +777,22 @@ document.getElementById("log_in").addEventListener("click", () => {
 document.getElementById("sign_up").addEventListener("click", () => {
   sign_up();
 });
-listener_for_img();
+//listener_for_img();
 
 // document.querySelector('.search_game').addEventListener('');
 
 document.querySelector(".search-wrapper").addEventListener("submit", () => {
-  console.log("submit");
+  find_choose_game(document.querySelector(".search").value);
 });
 
-export { add_new_game_db, add_new_user, log_in_user, add_new_status };
+document.querySelector(".find").addEventListener("click", () => {
+  find_choose_game(document.querySelector(".search").value);
+});
+
+export {
+  add_new_game_db,
+  add_new_user,
+  log_in_user,
+  add_new_status,
+  find_choose_game,
+};
