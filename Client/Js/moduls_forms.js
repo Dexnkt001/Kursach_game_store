@@ -101,9 +101,17 @@ function top_chart(massPict) {
       .querySelector(".back-modul")
       .parentNode.removeChild(document.querySelector(".back-modul"));
   });
-  Array.from(document.querySelectorAll("img")).forEach((element) =>
-    element.addEventListener("click", () => find_choose_game(element.alt))
-  );
+  Array.from(document.querySelectorAll("img")).forEach((element) => {
+    element.addEventListener("click", () => {
+      find_choose_game(element.alt);
+      document
+        .querySelector(".modul-window")
+        .parentNode.removeChild(document.querySelector(".modul-window"));
+      document
+        .querySelector(".back-modul")
+        .parentNode.removeChild(document.querySelector(".back-modul"));
+    });
+  });
 }
 
 function log_in() {

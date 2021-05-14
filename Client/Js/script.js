@@ -769,7 +769,7 @@ document.getElementById("view").addEventListener("click", () => {
 });
 
 document.getElementById("more_top_gaems").addEventListener("click", () => {
-  top_chart(mass_pict_new_game);
+  top_chart(arr_top_games);
 });
 document.getElementById("log_in").addEventListener("click", () => {
   log_in();
