@@ -12,6 +12,7 @@ import {
   module_game,
   status,
   admin_buttons,
+  user_list,
 } from "./moduls_forms.js";
 
 import {
@@ -182,7 +183,8 @@ let mass_pict_new_game = [
   arr_free_game = [],
   arr_preprodaction_games = [],
   arr_online_games = [],
-  arr_all_games = [];
+  arr_all_games = [],
+  user_info = 0;
 
 let place_new_pict,
   place_discount_pict,
@@ -194,6 +196,7 @@ function ForEach(mass, fun) {
 }
 
 const add_class = (place_pict) => {
+  console.log(place_pict);
   ForEach(place_pict, (element) => {
     element.classList.add("slider-popcity");
   });
@@ -202,6 +205,41 @@ const add_class = (place_pict) => {
 const delete_class = (place_pict) => {
   ForEach(place_pict, (element) => element.classList.remove("slider-popcity"));
 };
+
+async function add_buyer_game(user, game) {
+  const game_info = [user, game];
+  try {
+    await fetch("http://localhost:5500/add_user_buyer_game", {
+      method: "POST",
+      body: JSON.stringify({
+        game_info,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function add_intresting_game(user, game) {
+  console.log(user);
+  const game_info = [user, game];
+  try {
+    await fetch("http://localhost:5500/add_user_intresting_game", {
+      method: "POST",
+      body: JSON.stringify({
+        game_info,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 async function default_slider_for_previus_elements(
   id_game,
@@ -334,7 +372,7 @@ async function find_choose_game(name) {
     const game = await response.json().then((res) => {
       return res.game;
     });
-    module_game(game);
+    module_game(game, user_info);
   } catch (err) {
     console.log(err);
   }
@@ -418,6 +456,14 @@ async function add_new_user(arr, arr_inp) {
         <img src="../images/account_edit_icon_135995.png" alt="sign up">
         ${arr[0]}
     </a>
+    <a id="sign_up" href="#">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <img src="../images/bag_buy_cart_market_shop_shopping_tote_icon_123191.png" alt="sign up">
+    basket
+</a>
         `;
         document
           .querySelector(".enter-site")
@@ -436,8 +482,9 @@ async function log_in_user(arr) {
     console.log(val);
     const response = await fetch(`http://localhost:5500/log_in/${val}`);
     const list = await response.json().then();
+    user_info = list;
     console.log(Object.keys(list).length);
-    if (Object.keys(list).length === 2) {
+    if (Object.keys(list).length === 4) {
       document
         .querySelector(".log_in")
         .parentNode.removeChild(document.querySelector(".log_in"));
@@ -487,10 +534,22 @@ async function log_in_user(arr) {
         <img src="../images/account_edit_icon_135995.png" alt="sign up">
         ${list.login}
     </a>
+    <a class="basket" id="sign_up" href="#">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <img src="../images/bag_buy_cart_market_shop_shopping_tote_icon_123191.png" alt="sign up">
+    basket
+</a>
         `;
         document
           .querySelector(".enter-site")
           .insertAdjacentHTML("beforeend", html);
+        document.querySelector(".basket").addEventListener("click", () => {
+          console.log("basket");
+          user_list(user_info);
+        });
       }
     } else {
       Array.from(document.querySelectorAll(".nick input")).forEach(
@@ -771,6 +830,7 @@ document.getElementById("view").addEventListener("click", () => {
 document.getElementById("more_top_gaems").addEventListener("click", () => {
   top_chart(arr_top_games);
 });
+
 document.getElementById("log_in").addEventListener("click", () => {
   log_in();
 });
@@ -795,4 +855,6 @@ export {
   log_in_user,
   add_new_status,
   find_choose_game,
+  add_buyer_game,
+  add_intresting_game,
 };

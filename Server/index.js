@@ -174,6 +174,72 @@ app.post("/new_user", cb, (req, res) => {
   });
 });
 
+app.post("/add_user_buyer_game", cb, (req, res) => {
+  const game = req.body.game_info;
+
+  User.find({ login: game[0].login }).then((result) => {
+    if (
+      result[0].buyr_games.some((element) => {
+        return JSON.stringify(element) == JSON.stringify(game[1]);
+      }) == false
+    ) {
+      User.findOneAndUpdate(
+        { login: game[0].login },
+        { $push: { buyr_games: game[1] } },
+        { new: true },
+        (err, doc) => {
+          if (err) {
+            console.log("we have a problem");
+            res.json({ status: "error" });
+          } else {
+            console.log(doc);
+            if (doc !== null) {
+              res.json({ status: "complited" });
+            } else {
+              res.json({ status: "error" });
+            }
+          }
+        }
+      );
+    } else {
+      res.json({ status: "существует" });
+    }
+  });
+});
+
+app.post("/add_user_intresting_game", cb, (req, res) => {
+  const game = req.body.game_info;
+
+  User.find({ login: game[0].login }).then((result) => {
+    if (
+      result[0].intrsting_games.some((element) => {
+        return JSON.stringify(element) == JSON.stringify(game[1]);
+      }) == false
+    ) {
+      User.findOneAndUpdate(
+        { login: game[0].login },
+        { $push: { intrsting_games: game[1] } },
+        { new: true },
+        (err, doc) => {
+          if (err) {
+            console.log("we have a problem");
+            res.json({ status: "error" });
+          } else {
+            console.log(doc);
+            if (doc !== null) {
+              res.json({ status: "complited" });
+            } else {
+              res.json({ status: "error" });
+            }
+          }
+        }
+      );
+    } else {
+      res.json({ status: "существует" });
+    }
+  });
+});
+
 app.post("/new_status", cb, (req, res) => {
   console.log(req.body.user_status);
   const user = req.body.user_status;
@@ -204,7 +270,12 @@ app.get("/log_in/:word", (req, res) => {
   User.find({ login: val[0], password: val[1] }).then((result) => {
     if (result.length !== 0) {
       console.log(result[0].status);
-      res.json({ login: val[0], status: result[0].status });
+      res.json({
+        login: val[0],
+        status: result[0].status,
+        buyr_games: result[0].buyr_games,
+        intrsting_games: result[0].intrsting_games,
+      });
     } else {
       res.json({ status: "Error!" });
     }

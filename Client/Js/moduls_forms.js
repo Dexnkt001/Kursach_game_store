@@ -4,6 +4,8 @@ import {
   log_in_user,
   add_new_status,
   find_choose_game,
+  add_buyer_game,
+  add_intresting_game,
 } from "./script.js";
 
 function all_game(massPict) {
@@ -60,6 +62,43 @@ function all_game(massPict) {
   });
 }
 
+function buy() {
+  let html_text = ` <div class="back-modul"></div>
+   <div class='sign_up'>
+  <div class="up-module-window">
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class='content_log_in'>
+    <h1>Card inforamtion</h1>
+<div class="inputs inputs_sign_up">
+  <div class="nick"><input placeholder="Card number" type="text"></div>
+  <div class="nick"><input placeholder="CV" type="text"></div>
+<div class="nick"><input placeholder="Data" type="text"></div>
+<button type="submit" class="add_user">Add</button>
+</div>
+</div>
+</div>`;
+
+  document.querySelector("header").insertAdjacentHTML("afterend", html_text);
+
+  document.getElementById("exit").addEventListener("click", () => {
+    document
+      .querySelector(".modul-window")
+      .parentNode.removeChild(document.querySelector(".modul-window"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
+  document.querySelector(".add_user").addEventListener("click", () => {
+    document
+      .querySelector(".sign_up")
+      .parentNode.removeChild(document.querySelector(".sign_up"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
+}
+
 function top_chart(massPict) {
   const module_window_all_game = document.createElement("div"),
     back_module_window = document.createElement("div"),
@@ -112,6 +151,103 @@ function top_chart(massPict) {
         .parentNode.removeChild(document.querySelector(".back-modul"));
     });
   });
+}
+
+function user_list(user) {
+  console.log("user_list");
+
+  let str_game_buy = ``,
+    str_game_intresting = ``;
+  console.log(user);
+
+  user.buyr_games.forEach((element) => {
+    str_game_buy =
+      str_game_buy +
+      `<div class='relative-for-game-text'> <img class="user-buyr_games" src="${element.images.main_img}" alt="${element.name}"><spam class="text-buer-game">Скачать</spam></div>`;
+  });
+
+  user.intrsting_games.forEach((element) => {
+    str_game_intresting =
+      str_game_intresting +
+      `<div class='relative-for-game-text'> <img class="user-int_games" src="${element.images.main_img}" alt="${element.name}"><spam class="text-intrest-game">Смотреть</spam></div>`;
+  });
+
+  let html_text = `<div class="back-modul"></div>
+<div class="modul-window assasin_bg">
+  <div class="up-module-window-user">
+    <span class="login-user-layot">${user.login} </span>
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class="content-grid-user">
+    <div class='img-user'>
+      <img  class="img_user" src="../images/none_name.jpg" alt="none_name">
+    </div>
+    <div class='main-content-user'>
+      <div class='buyr-games'>
+        <h2>
+  Купленные
+        </h2>
+        ${str_game_buy}
+      </div>
+    <div class='intresting-games'>
+      <h2>
+Интересующие
+      </h2>
+      ${str_game_intresting}
+    </div>
+  </div>
+  </div>
+  </div>`;
+  document.querySelector("header").insertAdjacentHTML("afterend", html_text);
+
+  document.getElementById("exit").addEventListener("click", () => {
+    document
+      .querySelector(".modul-window")
+      .parentNode.removeChild(document.querySelector(".modul-window"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
+
+  Array.from(document.querySelectorAll(".user-int_games")).forEach(
+    (element) => {
+      element.addEventListener("click", () => {
+        document
+          .querySelector(".modul-window")
+          .parentNode.removeChild(document.querySelector(".modul-window"));
+        document
+          .querySelector(".back-modul")
+          .parentNode.removeChild(document.querySelector(".back-modul"));
+        find_choose_game(element.alt);
+      });
+    }
+  );
+
+  Array.from(document.querySelectorAll(".user-buyr_games")).forEach(
+    (element) => {
+      element.removeEventListener("click", find_choose_game);
+    }
+  );
+
+  // Array.from(document.querySelectorAll(".user-buyr_int_games")).forEach(
+  //   (element) => {
+  //     console.log(user.buyr_games);
+  //     if (user.buyr_games.includes(element.alt)) {
+  //       console.log(element);
+  //       element.removeEventListener("click", find_choose_game);
+  //     } else {
+  //       element.addEventListener("click", () => {
+  //         document
+  //           .querySelector(".modul-window")
+  //           .parentNode.removeChild(document.querySelector(".modul-window"));
+  //         document
+  //           .querySelector(".back-modul")
+  //           .parentNode.removeChild(document.querySelector(".back-modul"));
+  //         find_choose_game(element.alt);
+  //       });
+  //     }
+  //   }
+  // );
 }
 
 function log_in() {
@@ -305,7 +441,7 @@ function status() {
   });
 }
 
-function module_game(obj) {
+function module_game(obj, user) {
   console.log(obj);
   let str = obj.images.all_img
     .map((element) => {
@@ -447,6 +583,27 @@ function module_game(obj) {
     document
       .querySelector(".back-modul-game")
       .parentNode.removeChild(document.querySelector(".back-modul-game"));
+  });
+
+  console.log(user);
+
+  if (user !== 0) {
+    add_intresting_game(user, obj);
+  }
+
+  document.querySelector(".module_button_buy").addEventListener("click", () => {
+    document
+      .querySelector(".modul-window")
+      .parentNode.removeChild(document.querySelector(".modul-window"));
+    document
+      .querySelector(".back-modul-game")
+      .parentNode.removeChild(document.querySelector(".back-modul-game"));
+    if (user === 0) {
+      log_in();
+    } else {
+      buy();
+      add_buyer_game(user, obj);
+    }
   });
 }
 
@@ -638,4 +795,6 @@ export {
   module_game,
   status,
   admin_buttons,
+  user_list,
+  buy,
 };
