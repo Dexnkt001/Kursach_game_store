@@ -209,7 +209,7 @@ const delete_class = (place_pict) => {
 async function add_buyer_game(user, game) {
   const game_info = [user, game];
   try {
-    await fetch("http://localhost:5500/add_user_buyer_game", {
+    let response = await fetch("http://localhost:5500/add_user_buyer_game", {
       method: "POST",
       body: JSON.stringify({
         game_info,
@@ -217,6 +217,12 @@ async function add_buyer_game(user, game) {
       headers: {
         "Content-type": "application/json",
       },
+    });
+    response.json().then((res) => {
+      if (res.status != "error") {
+        user_info = res;
+        console.log(user_info);
+      }
     });
   } catch (error) {
     console.log(error);
@@ -227,14 +233,23 @@ async function add_intresting_game(user, game) {
   console.log(user);
   const game_info = [user, game];
   try {
-    await fetch("http://localhost:5500/add_user_intresting_game", {
-      method: "POST",
-      body: JSON.stringify({
-        game_info,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
+    let response = await fetch(
+      "http://localhost:5500/add_user_intresting_game",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          game_info,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+    response.json().then((res) => {
+      if (res.status != "error") {
+        user_info = res;
+        console.log(user_info);
+      }
     });
   } catch (error) {
     console.log(error);
@@ -474,6 +489,23 @@ async function add_new_user(arr, arr_inp) {
     console.log(error);
   }
 }
+
+// async function log_in_after_game(user) {
+//   console.log(user);
+//   let val = user.login;
+//   try {
+//     console.log(val);
+//     const response = await fetch(
+//       `http://localhost:5500/log_in_after_game/${val}`
+//     );
+//     const list = await response.json().then();
+//     console.log(list);
+//     user_info = list;
+//     console.log(user_info);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
 
 async function log_in_user(arr) {
   const val = arr;
@@ -857,4 +889,5 @@ export {
   find_choose_game,
   add_buyer_game,
   add_intresting_game,
+  //log_in_after_game,
 };

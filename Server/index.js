@@ -194,7 +194,12 @@ app.post("/add_user_buyer_game", cb, (req, res) => {
           } else {
             console.log(doc);
             if (doc !== null) {
-              res.json({ status: "complited" });
+              res.json({
+                login: doc.login,
+                status: doc.status,
+                buyr_games: doc.buyr_games,
+                intrsting_games: doc.intrsting_games,
+              });
             } else {
               res.json({ status: "error" });
             }
@@ -227,7 +232,13 @@ app.post("/add_user_intresting_game", cb, (req, res) => {
           } else {
             console.log(doc);
             if (doc !== null) {
-              res.json({ status: "complited" });
+              console.log(doc, " --------- обновленный юзер");
+              res.json({
+                login: doc.login,
+                status: doc.status,
+                buyr_games: doc.buyr_games,
+                intrsting_games: doc.intrsting_games,
+              });
             } else {
               res.json({ status: "error" });
             }
@@ -282,6 +293,25 @@ app.get("/log_in/:word", (req, res) => {
   });
   // JSON.stringify(arr)
 });
+
+// app.get("/log_in_after_game/:word", (req, res) => {
+//   const val = req.params.word;
+//   console.log(val, " -------- val");
+//   User.find({ login: val }).then((result) => {
+//     if (result.length !== 0) {
+//       console.log(result[0].status);
+//       res.json({
+//         login: val,
+//         status: result[0].status,
+//         buyr_games: result[0].buyr_games,
+//         intrsting_games: result[0].intrsting_games,
+//       });
+//     } else {
+//       res.json({ status: "Error!" });
+//     }
+//   });
+//   // JSON.stringify(arr)
+// });
 
 app.get("/find_game/:word", (req, res) => {
   const val = req.params.word;

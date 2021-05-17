@@ -6,6 +6,7 @@ import {
   find_choose_game,
   add_buyer_game,
   add_intresting_game,
+  //log_in_after_game,
 } from "./script.js";
 
 function all_game(massPict) {
@@ -226,6 +227,14 @@ function user_list(user) {
   Array.from(document.querySelectorAll(".user-buyr_games")).forEach(
     (element) => {
       element.removeEventListener("click", find_choose_game);
+      element.addEventListener("click", () => {
+        document
+          .querySelector(".modul-window")
+          .parentNode.removeChild(document.querySelector(".modul-window"));
+        document
+          .querySelector(".back-modul")
+          .parentNode.removeChild(document.querySelector(".back-modul"));
+      });
     }
   );
 
@@ -533,7 +542,7 @@ function module_game(obj, user) {
             <div>${obj.full_min_info.RAM}</div>
           </div>
           <div><div class="title_req">Memory</div>
-            <div>${obj.memory}</div>
+            <div>${obj.full_min_info.memory}</div>
           </div>
           <div><div class="title_req">Direct X</div>
             <div>${obj.full_min_info.direct}</div>
@@ -589,6 +598,7 @@ function module_game(obj, user) {
 
   if (user !== 0) {
     add_intresting_game(user, obj);
+    // log_in_after_game(user);
   }
 
   document.querySelector(".module_button_buy").addEventListener("click", () => {

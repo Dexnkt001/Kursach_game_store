@@ -8,6 +8,7 @@ function default_previus_slider(id, mass_pict, mass_place, numb_pict) {
     console.log("больше нуля");
     for (let i = id_in_slider - numb_pict; i < id_in_slider; i++) {
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[5].innerHTML = mass_pict[i].developer;
       mass_place[index].childNodes[7].innerHTML =
@@ -21,6 +22,7 @@ function default_previus_slider(id, mass_pict, mass_place, numb_pict) {
     for (let i = id_in_slider - 1; i >= 0; i--) {
       console.log("первый", "------", i);
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[7].innerHTML =
         mass_pict[i].prize + " &#8381;";
@@ -30,6 +32,7 @@ function default_previus_slider(id, mass_pict, mass_place, numb_pict) {
     for (let i = mass_len - 1; i > mass_len - 1 - numb_pict + id; i--) {
       console.log("второй", "------", i);
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[5].innerHTML = mass_pict[i].developer;
       mass_place[index].childNodes[7].innerHTML =
@@ -54,6 +57,7 @@ function default_next_slider(id, mass_pict, mass_place, numb_pict) {
     ) {
       console.log("pozicia i : ", i);
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[5].innerHTML = mass_pict[i].developer;
       mass_place[index].childNodes[7].innerHTML =
@@ -66,6 +70,7 @@ function default_next_slider(id, mass_pict, mass_place, numb_pict) {
       step = 0;
     for (let i = id_in_slider + numb_pict; i < mass_len; i++) {
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[7].innerHTML =
         mass_pict[i].prize + " &#8381;";
@@ -75,6 +80,7 @@ function default_next_slider(id, mass_pict, mass_place, numb_pict) {
     }
     for (let i = 0; i < numb_pict - step; i++) {
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[5].innerHTML = mass_pict[i].developer;
       mass_place[index].childNodes[7].innerHTML =
@@ -97,6 +103,7 @@ function discaunt_previus_slider(id, mass_pict, mass_place, numb_pict) {
     console.log("больше нуля");
     for (let i = id_in_slider - numb_pict; i < id_in_slider; i++) {
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[5].innerHTML = mass_pict[i].developer;
       mass_place[
@@ -117,6 +124,7 @@ function discaunt_previus_slider(id, mass_pict, mass_place, numb_pict) {
     for (let i = id_in_slider - 1; i >= 0; i--) {
       console.log("первый", "------", i);
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[
         index
@@ -133,6 +141,7 @@ function discaunt_previus_slider(id, mass_pict, mass_place, numb_pict) {
     for (let i = mass_len - 1; i > mass_len - 1 - numb_pict + id; i--) {
       console.log("второй", "------", i);
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[5].innerHTML = mass_pict[i].developer;
       mass_place[
@@ -166,6 +175,7 @@ function discaunt_next_slider(id, mass_pict, mass_place, numb_pict) {
       console.log("pozicia i : ", i);
       console.log("element ", mass_place[index].childNodes[1]);
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[5].innerHTML = mass_pict[i].developer;
       mass_place[
@@ -187,6 +197,7 @@ function discaunt_next_slider(id, mass_pict, mass_place, numb_pict) {
       step = 0;
     for (let i = id_in_slider + numb_pict; i < mass_len; i++) {
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[
         index
@@ -205,6 +216,7 @@ function discaunt_next_slider(id, mass_pict, mass_place, numb_pict) {
     }
     for (let i = 0; i < numb_pict - step; i++) {
       mass_place[index].childNodes[1].src = mass_pict[i].images.main_img;
+      mass_place[index].childNodes[1].alt = mass_pict[i].name;
       mass_place[index].childNodes[3].innerHTML = mass_pict[i].name;
       mass_place[index].childNodes[5].innerHTML = mass_pict[i].developer;
       mass_place[
