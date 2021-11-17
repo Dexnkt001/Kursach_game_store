@@ -4,8 +4,8 @@ import {
   log_in_user,
   add_new_status,
   find_choose_game,
-  add_buyer_game,
-  add_intresting_game,
+  //add_buyer_game,
+  // add_intresting_game,
   //log_in_after_game,
 } from "./script.js";
 
@@ -596,10 +596,10 @@ function module_game(obj, user) {
 
   console.log(user);
 
-  if (user !== 0) {
-    add_intresting_game(user, obj);
-    // log_in_after_game(user);
-  }
+  // if (user !== 0) {
+  //   add_intresting_game(user, obj);
+  // log_in_after_game(user);
+  //}
 
   document.querySelector(".module_button_buy").addEventListener("click", () => {
     document
@@ -612,8 +612,34 @@ function module_game(obj, user) {
       log_in();
     } else {
       buy();
-      add_buyer_game(user, obj);
+      // add_buyer_game(user, obj);
     }
+  });
+}
+
+function add_code() {
+  const text = `<div class="back-modul"></div>
+  <div class='log_in'>
+    <div class="up-module-window">
+      <div id='exit' class="exit"><span>&#10006</span></div>
+    </div>
+    <div class='content_log_in'>
+      <h1>Discount Code</h1>
+  <div class="inputs">
+    <div class="content-code"><input class='module_code' type="text" placeholder="Code"></div>
+  </div>
+  <button class="sub-code">Submit</button>
+    </div>
+  </div>
+  </div>`;
+  document.body.insertAdjacentHTML("afterbegin", text);
+  document.getElementById("exit").addEventListener("click", () => {
+    document
+      .querySelector(".log_in")
+      .parentNode.removeChild(document.querySelector(".log_in"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
   });
 }
 
@@ -644,6 +670,7 @@ function add_new_game() {
 <div class="nick"><input placeholder="Memory" type="text"></div>
 <div class="nick"><input placeholder="Direct" type="text"></div>
 <div class="nick"><input placeholder="Video card" type="text"></div>
+<div class="nick"><input placeholder="genre" type="text"></div>
 <button type="submit" class="add_user">Add</button>
 </div>
   </div>
@@ -807,4 +834,5 @@ export {
   admin_buttons,
   user_list,
   buy,
+  add_code,
 };

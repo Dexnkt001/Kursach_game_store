@@ -146,7 +146,6 @@ function main_list_week_game(new_arr) {
   <div class="name-top-week-game">${new_arr[0].name}</div>
   <div class="short-inormatio-top-week-game">${new_arr[0].info.short_info}</div>
   <div class="prise-top-week-game">${new_arr[0].prize} &#8381;</div>
-  <div class="button full-butt orange">Купить</div>
 </div>
 `;
 
@@ -172,7 +171,7 @@ function main_list_discount_games(new_arr) {
   <div class="discount">-${new_arr[0].discaunt}%</div>
   <div class="befor-discount-game-prise">${new_arr[0].prize}&#8381;</div>
   <div class="after-discount-game-prise">${
-    (new_arr[0].prize * new_arr[0].discaunt) / 100
+    new_arr[0].prize - (new_arr[0].prize * new_arr[0].discaunt) / 100
   }&#8381;</div>
 </div>
 </div>
@@ -187,7 +186,7 @@ function main_list_discount_games(new_arr) {
   <div class="discount">-${new_arr[1].discaunt}%</div>
   <div class="befor-discount-game-prise">${new_arr[1].prize}&#8381;</div>
   <div class="after-discount-game-prise">${
-    (new_arr[1].prize * new_arr[1].discaunt) / 100
+    new_arr[1].prize - (new_arr[1].prize * new_arr[1].discaunt) / 100
   }&#8381;</div>
 </div>
 </div>
@@ -202,7 +201,7 @@ function main_list_discount_games(new_arr) {
   <div class="discount">-${new_arr[2].discaunt}%</div>
   <div class="befor-discount-game-prise">${new_arr[2].prize}&#8381;</div>
   <div class="after-discount-game-prise">${
-    (new_arr[2].prize * new_arr[2].discaunt) / 100
+    new_arr[2].prize - (new_arr[2].prize * new_arr[2].discaunt) / 100
   }&#8381;</div>
 </div>
 </div>
@@ -217,7 +216,7 @@ function main_list_discount_games(new_arr) {
   <div class="discount">-${new_arr[3].discaunt}%</div>
   <div class="befor-discount-game-prise">${new_arr[3].prize}&#8381;</div>
   <div class="after-discount-game-prise">${
-    (new_arr[3].prize * new_arr[3].discaunt) / 100
+    new_arr[3].prize - (new_arr[3].prize * new_arr[3].discaunt) / 100
   }&#8381;</div>
 </div>
 </div>
@@ -232,7 +231,7 @@ function main_list_discount_games(new_arr) {
   <div class="discount">-${new_arr[4].discaunt}%</div>
   <div class="befor-discount-game-prise">${new_arr[4].prize}&#8381;</div>
   <div class="after-discount-game-prise">${
-    (new_arr[4].prize * new_arr[4].discaunt) / 100
+    new_arr[4].prize - (new_arr[4].prize * new_arr[4].discaunt) / 100
   }&#8381;</div>
 </div>
 </div>
@@ -253,7 +252,7 @@ function main_list_free_game(new_arr) {
 <div class="inormatio-free-test-game">
   <div class="name-free-test-game">${new_arr[0].name}</div>
   <div class="short-inormatio-free-test-game">${new_arr[0].info.short_info}</div>
-  <div class="button full-butt blue lern-more-butt">Узнать больше</div>
+
 </div>
 `;
 

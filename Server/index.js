@@ -81,6 +81,7 @@ app.post("/new_game", cb, (req, res) => {
       direct: direct[1],
       video_card: video_card[1],
     },
+    gener: game_info[0],
   });
 
   game.save();
@@ -146,11 +147,40 @@ app.post("/change_game", cb, (req, res) => {
   }
 });
 
+app.post("/add_new_user", cb, (req, res) => {
+  const user_info = req.body.user_info;
+  console.log("ia v fun");
+  User.find({ login: user_info[2][0] }).then((result) => {
+    if (result.length === 0) {
+      User.find({ email: user_info[2][1] }).then((result) => {
+        if (result.length === 0) {
+          const user = new User({
+            login: user_info[2][0],
+            email: user_info[2][1],
+            password: user_info[2][2],
+            status: "client",
+            phone: user_info[2][5],
+            country: user_info[2][3],
+            town: user_info[2][4],
+            genre: user_info[0],
+            develop: user_info[1],
+          });
+          user.save();
+          res.json({ status: "добавлен" });
+        } else {
+          res.json({ status: "существует" });
+        }
+      });
+    } else {
+      res.json({ status: "существует" });
+    }
+  });
+});
+
 app.post("/new_user", cb, (req, res) => {
   const user_info = req.body.user_info;
   console.log("ia v fun");
   User.find({ login: user_info[0] }).then((result) => {
-    console.log(result);
     if (result.length === 0) {
       User.find({ email: user_info[1] }).then((result) => {
         if (result.length === 0) {
@@ -163,12 +193,10 @@ app.post("/new_user", cb, (req, res) => {
           user.save();
           res.json({ status: "добавлен" });
         } else {
-          console.log("существует");
           res.json({ status: "существует" });
         }
       });
     } else {
-      console.log("существует");
       res.json({ status: "существует" });
     }
   });
@@ -177,19 +205,18 @@ app.post("/new_user", cb, (req, res) => {
 app.post("/add_user_buyer_game", cb, (req, res) => {
   const game = req.body.game_info;
 
-  User.find({ login: game[0].login }).then((result) => {
+  User.find({ login: game[0] }).then((result) => {
     if (
       result[0].buyr_games.some((element) => {
         return JSON.stringify(element) == JSON.stringify(game[1]);
       }) == false
     ) {
       User.findOneAndUpdate(
-        { login: game[0].login },
+        { login: game[0] },
         { $push: { buyr_games: game[1] } },
         { new: true },
         (err, doc) => {
           if (err) {
-            console.log("we have a problem");
             res.json({ status: "error" });
           } else {
             console.log(doc);
@@ -207,22 +234,27 @@ app.post("/add_user_buyer_game", cb, (req, res) => {
         }
       );
     } else {
-      res.json({ status: "существует" });
+      res.json({
+        login: result.login,
+        status: result.status,
+        buyr_games: result.buyr_games,
+        intrsting_games: result.intrsting_games,
+      });
     }
   });
 });
 
 app.post("/add_user_intresting_game", cb, (req, res) => {
   const game = req.body.game_info;
-
-  User.find({ login: game[0].login }).then((result) => {
+  console.log(game);
+  User.find({ login: game[0] }).then((result) => {
     if (
       result[0].intrsting_games.some((element) => {
         return JSON.stringify(element) == JSON.stringify(game[1]);
       }) == false
     ) {
       User.findOneAndUpdate(
-        { login: game[0].login },
+        { login: game[0] },
         { $push: { intrsting_games: game[1] } },
         { new: true },
         (err, doc) => {
@@ -246,7 +278,12 @@ app.post("/add_user_intresting_game", cb, (req, res) => {
         }
       );
     } else {
-      res.json({ status: "существует" });
+      res.json({
+        login: result.login,
+        status: result.status,
+        buyr_games: result.buyr_games,
+        intrsting_games: result.intrsting_games,
+      });
     }
   });
 });

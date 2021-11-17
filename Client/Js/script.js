@@ -9,10 +9,10 @@ import {
   top_chart,
   log_in,
   sign_up,
-  module_game,
   status,
   admin_buttons,
   user_list,
+  add_code,
 } from "./moduls_forms.js";
 
 import {
@@ -27,149 +27,7 @@ import {
   main_list_online_games,
 } from "./home_page.js";
 
-let mass_pict_new_game = [
-    {
-      link: "../images/Medal_of_honor.jpg",
-      name: "Medal of honor",
-      develop: "Respawn Entartaimont",
-      prize: "1000",
-      // link: "../images/FarCray.jpg",
-      // name: "FarCray",
-      // develop: "Ubisoft",
-      // prize: "1500",
-      // all_img: [
-      //   "../images/FarCray.jpg",
-      //   "../images/FarCry_2.jpg",
-      //   "../images/FarCry_3.jpg",
-      // ],
-      // short_info:
-      //   "Игра про времена индертальцев как в те далекие времена выживали наши предки",
-      // publish: "Ubisoft",
-      // release: "6 октября 2015",
-      // tag: "За жизнь надо бороться!",
-      // rait: "4",
-      // platform: "Windows",
-      // full_info:
-      //   "игра про давние времена когда челоек еще не находился на вершине пищевой цепи и каждый день был на грани жизни и смерти и что бы выжить люди шли на отчаенные меры",
-      // proc: ["intel_1", "intel_2"],
-      // cpu: ["8gb", "16gb"],
-      // memory: ["70gb", "100gb"],
-      // direct: ["10", "11"],
-      // video: ["960", "1660ti"],
-    },
-    {
-      link: "../images/Back4Blood.jpg",
-      name: "Back4Blood",
-      develop: "Turtle Rock Studios",
-      prize: "1200",
-    },
-    {
-      link: "../images/Batman.jpg",
-      name: "Batman",
-      develop: "Rocksteady Studios",
-      prize: "1100",
-    },
-    {
-      link: "../images/FarCray.jpg",
-      name: "FarCray",
-      develop: "Ubisoft",
-      prize: "1500",
-      all_img: [
-        "../images/FarCray.jpg",
-        "../images/FarCry_2.jpg",
-        "../images/FarCry_3.jpg",
-      ],
-      short_info:
-        "Игра про времена индертальцев как в те далекие времена выживали наши предки",
-      publish: "Ubisoft",
-      release: "6 октября 2015",
-      tag: "За жизнь надо бороться!",
-      rait: "4",
-      platform: "Windows",
-      full_info:
-        "игра про давние времена когда челоек еще не находился на вершине пищевой цепи и каждый день был на грани жизни и смерти и что бы выжить люди шли на отчаенные меры",
-      proc: ["intel_1", "intel_2"],
-      cpu: ["8gb", "16gb"],
-      memory: ["70gb", "100gb"],
-      direct: ["10", "11"],
-      video: ["960", "1660ti"],
-    },
-
-    {
-      link: "../images/GTA_5.jpg",
-      name: "GTA 5",
-      develop: "Rockstar Games",
-
-      prize: "1900",
-    },
-    {
-      link: "../images/Hitman.jpeg",
-      name: "Hitman",
-      develop: "IO Interactive",
-      prize: "2500",
-    },
-    {
-      link: "../images/Left4Dead.jpg",
-      name: "Left4Dead",
-      develop: "Turtle Rock Studios",
-      prize: "2000",
-    },
-    {
-      link: "../images/Assasin.jpg",
-      name: "Assasin",
-      develop: "Ubisoft",
-      prize: "1400",
-    },
-    {
-      link: "../images/Metpo.jpg",
-      name: "Metpo",
-      develop: "4A Games",
-      prize: "3000",
-    },
-    {
-      link: "../images/NFS.jpg",
-      name: "NFS",
-      develop: "Electronic Arts",
-      prize: "2800",
-    },
-    {
-      link: "../images/TombRaider.jpg",
-      name: "Tomb Raider",
-      develop: "Eidos Montreal",
-      prize: "2700",
-    },
-    {
-      link: "../images/WatchDogs.jpg",
-      name: "WatchDogs",
-      develop: "Ubisoft",
-      prize: "2200",
-    },
-    {
-      link: "../images/Witcher_3.jpg",
-      name: "Witcher 3",
-      develop: "CD Projekt RED",
-      prize: "3100",
-    },
-    {
-      link: "../images/WoF3.jpg",
-      name: "World of Warcraft 3",
-      develop: "BLIZZARD",
-      prize: "900",
-    },
-    {
-      link: "../images/Skyrim.jpg",
-      name: "Skyrim",
-      develop: "Bethesda Game Studios",
-      prize: "2900",
-    },
-    {
-      link: "../images/RDR_2.jpg",
-      name: "Red Dead Redamtion 2",
-      develop: "Rockstar Games",
-      prize: "3000",
-    },
-  ],
-  id_new_game = 0,
+let id_new_game = 0,
   id_discaunt_game = 0,
   id_preproduces_game = 0,
   id_best_online_game = 0,
@@ -206,55 +64,55 @@ const delete_class = (place_pict) => {
   ForEach(place_pict, (element) => element.classList.remove("slider-popcity"));
 };
 
-async function add_buyer_game(user, game) {
-  const game_info = [user, game];
-  try {
-    let response = await fetch("http://localhost:5500/add_user_buyer_game", {
-      method: "POST",
-      body: JSON.stringify({
-        game_info,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    response.json().then((res) => {
-      if (res.status != "error") {
-        user_info = res;
-        console.log(user_info);
-      }
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
+// async function add_buyer_game(user, game) {
+//   const game_info = [user, game];
+//   try {
+//     let response = await fetch("http://localhost:5500/add_user_buyer_game", {
+//       method: "POST",
+//       body: JSON.stringify({
+//         game_info,
+//       }),
+//       headers: {
+//         "Content-type": "application/json",
+//       },
+//     });
+//     response.json().then((res) => {
+//       if (res.status != "error") {
+//         user_info = res;
+//         console.log(user_info);
+//       }
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
-async function add_intresting_game(user, game) {
-  console.log(user);
-  const game_info = [user, game];
-  try {
-    let response = await fetch(
-      "http://localhost:5500/add_user_intresting_game",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          game_info,
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      }
-    );
-    response.json().then((res) => {
-      if (res.status != "error") {
-        user_info = res;
-        console.log(user_info);
-      }
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
+// async function add_intresting_game(user, game) {
+//   console.log(user);
+//   const game_info = [user, game];
+//   try {
+//     let response = await fetch(
+//       "http://localhost:5500/add_user_intresting_game",
+//       {
+//         method: "POST",
+//         body: JSON.stringify({
+//           game_info,
+//         }),
+//         headers: {
+//           "Content-type": "application/json",
+//         },
+//       }
+//     );
+//     response.json().then((res) => {
+//       if (res.status != "error") {
+//         user_info = res;
+//         console.log(user_info);
+//       }
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 async function default_slider_for_previus_elements(
   id_game,
@@ -370,13 +228,9 @@ async function discaunt_slider_for_previus_elements(
   return return_promise;
 }
 
-// function listener_for_img() {
-//   for (let i = 0; i < click_img.length; i++) {
-//     click_img[i].addEventListener("click", (e) => {
-//       find_choose_game(e);
-//     });
-//   }
-// }
+//Запрос на интересующею игру, который отправляется на бэк и делает запрос в БД
+//после возвращения результата вызывается функция которая создает модульное окно
+//с полной информацией о игре
 
 async function find_choose_game(name) {
   console.log("lol");
@@ -387,11 +241,17 @@ async function find_choose_game(name) {
     const game = await response.json().then((res) => {
       return res.game;
     });
-    module_game(game, user_info);
+    new_window(game, user_info);
   } catch (err) {
     console.log(err);
   }
 }
+
+//функция добавления игры в базу данных (данная функция доступна тоько админу)\
+//в функцию приходит массив из введенных данных, идет проверка на количество элементов массива
+// так как данная функция используется не только для создания новой игры но и для обновления данных уже сущесвующей
+// после отправки запроса в зависимости от длины происходят следующие действия, если массив состоял из четырех элементов до будет вызван запрос на обновление данных
+//если же там будет массив с большим количесвтом элементов то будет вызван запрос на добавление новой игры
 
 async function add_new_game_db(arr) {
   console.log(arr);
@@ -426,6 +286,10 @@ async function add_new_game_db(arr) {
     }
   }
 }
+
+//Это функция регистрации куда приходит два параметра, массив из введеных данных и массив строк ввода
+//здесб отправляется запрос на бэк для регистрации пользователя, там же происхожит и проверкаа на наличие этого пользователя, если данный пользоватеь уже существует то будет выведена ошибка регистрации
+// если же данного пользователя нет то регистрацияя пройдет успешно и по завершению пользователь автоматический зайдет на свою новую страницу
 
 async function add_new_user(arr, arr_inp) {
   console.log("dobavlenie novogo usera");
@@ -483,11 +347,279 @@ async function add_new_user(arr, arr_inp) {
         document
           .querySelector(".enter-site")
           .insertAdjacentHTML("beforeend", html);
+        open_fun_user();
       }
     });
   } catch (error) {
     console.log(error);
   }
+}
+
+function open_fun_user() {
+  document.querySelector(".fun_user").classList.toggle("activ_user_fun");
+  document.querySelector(".cont_user a").classList.toggle("activ_user");
+}
+
+function new_window_bascet(user) {
+  console.log(user.intrsting_games);
+  let str_interes = user.intrsting_games
+    .map((element) => {
+      return `<img class="main-slide" src="${element.images.main_img}" alt="${element.name}">`;
+    })
+    .join(",")
+    .replace(/[,]/g, "");
+
+  let str_buyrs = user.buyr_games
+    .map((element) => {
+      return `<img class="main-slide" src="${element.images.main_img}" alt="${element.name}">`;
+    })
+    .join(",")
+    .replace(/[,]/g, "");
+
+  let new_window = window.open(
+    `http://127.0.0.1:5500/Client/html/bascet.html?name=${user.login}`,
+    "bascet"
+  );
+
+  const content_bascet = `
+<div class="container">
+<div class="top"><div class='top-left'>
+  <span>Главная страница</span> Все игры
+</div>
+<div class='top-right'><input type="text"><img src="../images/loopa.png" alt="search"></div>
+</div>
+<div class="container">
+<div class="content-grid-user">
+<div class='img-user'>
+  <div class="nick-name">
+    <span class="login-user-layot">${user.login}</span>
+  </div>
+  <img  class="img_user" src="../images/none_name.jpg" alt="none_name">
+</div>
+<div class='main-content-user'>
+  <div class='buyr-games'>
+    <h2>
+Купленные
+    </h2>
+    ${str_buyrs}
+  </div>
+<div class='intresting-games'>
+  <h2>
+Интересующие
+  </h2>
+  ${str_interes}
+</div>
+</div>
+</div>
+</div>
+`;
+
+  new_window.onload = function () {
+    new_window.document.body.insertAdjacentHTML("afterbegin", content_bascet);
+  };
+}
+
+function new_window(obj, user) {
+  let str = obj.images.all_img.map((element) => {
+    return `<img class="main-slide" src="${element}" alt="cyber">`;
+  });
+  // .join(",");
+  // .replace(/[,]/g, "");
+
+  console.log(user);
+  var game = JSON.stringify(obj);
+
+  document.cookie = `game=${game}`;
+
+  var newWin = window.open(
+    `http://127.0.0.1:5500/Client/html/two.html?number=${user.login}`,
+    `${obj.name}`
+  );
+
+  console.log(str);
+
+  const main_info = `<div class="container">
+  <div class="top"><div class='top-left'>
+    <a href="../html/index.html">&lt; Главная страница</a> ${obj.name}
+  </div>
+  <div class='top-right'><input type="text"><img src="../images/loopa.png" alt="search"></div>
+</div>
+<div class='container-content'><h1>${obj.name}</h1>
+  <img src="${obj.images.main_img}" alt=""></div>
+  <div class='purchase'>
+    <img src="../images/HITMAN_3_LOGO.png" alt="pict">
+    <span>${obj.prize} &#8381;</span>
+    <button type="button" class="buy btn btn-danger">Купить сейчас</button>
+    <button type="button" class="intres btn btn-outline-secondary">В список желаемого</button>
+    <ul class="list-group list-group-flush">
+     <li class="list-group-item">An item</li>
+     <li class="list-group-item">A second item</li>
+     <li class="list-group-item">A third item</li>
+     <li class="list-group-item">A fourth item</li>
+     <li class="list-group-item">And a fifth one</li>
+    </ul>
+  </div>
+    <div class="container-min">
+      <div class="under-img">
+        <div class="short-info">
+          <h3> ${obj.info.short_info}</h3>
+        </div>
+        <div class="gener-tag">
+          <div>
+            <div class='title-gener'>Жанр</div>
+          <div>Шутер, дедектив, приключения</div>
+        </div>
+        <div>
+          <div class='title-tag'>Тег</div>
+          <div>${obj.info.tag}</div>
+        </div>
+      </div>
+      <div class='many-imgs'>
+        <h4>${obj.name}</h4>
+        <div>${obj.info.full_info}.</div>
+        <div class='imgs'>
+          <img class='img-in-many' src="${obj.images.main_img}" alt="hit">
+          <div class='but-all-imgs'>Показать больше &#8744;</div>
+        </div>
+        <div class='all-many-imgs'>
+        ${str[1]}
+        ${str[2]}
+          <div class='but-all-imgs-up'>Свернуть &#8744;</div>
+        </div>
+      </div>
+      </div>
+      <div class='raiting'>
+        <h4>Рэйтинг</h4>
+        <div class='cont-progress'>
+          <div class="progress-game">
+           <svg class='prgress-right' width='120' height='120'>
+             <circle class="progress-ring__circle_1" stroke='red' stroke-width='4' cx='60' cy='60' r='52' fill='transparent'>
+             </circle>
+             </svg>
+             <div class="points-game">7/10</div>
+             <div class='critic'>Рэйтинг от Game informer</div>
+             <div class='discript-crititic'>
+               <div class='title-discript'>Game informer</div>
+               <div class='points-discript'>7/10</div>
+               <div class='info-disript'>" Agent 47's journey ends on a high note, at least as far as players are concerned. New levels are memorable and cater to the freedom fans have come to expect "</div>
+             </div>
+          </div>
+          <div class="progress-game">
+           <svg class='prgress-right' width='120' height='120'>
+             <circle class="progress-ring__circle_2" stroke='red' stroke-width='4' cx='60' cy='60' r='52' fill='transparent'>
+             </circle>
+             </svg>
+             <div class="points-game">65%</div>
+             <div class='critic'>Рэйтинг от IMD Studio</div>
+             <div class='discript-crititic'>
+               <div class='title-discript'>IMD Studio</div>
+               <div class='points-discript'>65%</div>
+               <div class='info-disript'>" Agent 47's journey ends on a high note, at least as far as players are concerned. New levels are memorable and cater to the freedom fans have come to expect "</div>
+             </div>
+          </div>
+          <div class="progress-game">
+           <svg class='prgress-right' width='120' height='120'>
+             <circle class="progress-ring__circle_3" stroke='red' stroke-width='4' cx='60' cy='60' r='52' fill='transparent'>
+             </circle>
+             </svg>
+             <div class="points-game">5/10</div>
+             <div class='critic'>Рэйтинг от Geme Studio</div>
+             <div class='discript-crititic'>
+               <div class='title-discript'>Geme Studio</div>
+               <div class='points-discript'>5/10</div>
+               <div class='info-disript'>" Agent 47's journey ends on a high note, at least as far as players are concerned. New levels are memorable and cater to the freedom fans have come to expect "</div>
+             </div>
+          </div>
+       </div>
+       </div>
+       <div class='req'>
+       <h4>Системные требования</h4>
+       <div class='main-req'>
+         <div class='min-req'>
+          <div class='title-req-item title-req'>Минимальные</div>
+          <div class='req-item'>
+           <div class='title-req-item'>ОС Windows</div>
+           <div>${obj.full_min_info.platform}</div>
+          </div>
+          <div class='req-item'>
+           <div class='title-req-item'>Процессор Windows</div>
+           <div>${obj.full_min_info.proc}</div>
+          </div>
+          <div class='req-item'>
+           <div class='title-req-item'>Память Windows</div>
+           <div>${obj.full_min_info.RAM}</div>
+          </div>
+          <div class='req-item'>
+           <div class='title-req-item'>Место на диске Windows</div>
+           <div>${obj.full_min_info.memory}</div>
+          </div>
+          <div class='req-item'>
+           <div class='title-req-item'>Windows Direct X</div>
+           <div>${obj.full_min_info.direct}</div>
+          </div>
+          <div class='req-item last-req'>
+           <div class='title-req-item'>Видеокарта для Windows</div>
+           <div>${obj.full_min_info.video_card}</div>
+          </div>
+         </div>
+         <div class='rec-req'>
+         <div class='title-req-item title-req'>Минимальные</div>
+         <div class='req-item'>
+          <div class='title-req-item'>ОС Windows</div>
+          <div>${obj.full_recomend_info.platform}</div>
+         </div>
+         <div class='req-item'>
+          <div class='title-req-item'>Процессор Windows</div>
+          <div>${obj.full_recomend_info.proc}</div>
+         </div>
+         <div class='req-item'>
+          <div class='title-req-item'>Память Windows</div>
+          <div>${obj.full_recomend_info.RAM}</div>
+         </div>
+         <div class='req-item'>
+          <div class='title-req-item'>Место на диске Windows</div>
+          <div>${obj.full_recomend_info.memory}</div>
+         </div>
+         <div class='req-item'>
+          <div class='title-req-item'>Windows Direct X</div>
+          <div>${obj.full_recomend_info.direct}</div>
+         </div>
+         <div class='req-item last-req'>
+          <div class='title-req-item'>Видеокарта для Windows</div>
+          <div>${obj.full_recomend_info.video_card}</div>
+         </div>
+        </div>
+</div>
+
+    `;
+
+  newWin.onload = function () {
+    newWin.document.body.insertAdjacentHTML("afterbegin", main_info);
+  };
+}
+
+{
+  /* <script>
+    if (${user} !== 0) {
+      ${add_intresting_game(user, obj)});
+      // log_in_after_game(user);
+    }
+
+    document.querySelector(".buy, .btn, .btn-danger").addEventListener("click", () => {
+      // document
+      //   .querySelector(".modul-window")
+      //   .parentNode.removeChild(document.querySelector(".modul-window"));
+      // document
+      //   .querySelector(".back-modul-game")
+      //   .parentNode.removeChild(document.querySelector(".back-modul-game"));
+      if (${user} === 0) {
+        ${log_in()};
+      } else {
+        ${buy()};
+        ${add_buyer_game(user, obj)};
+      }
+    });
+    </script> */
 }
 
 // async function log_in_after_game(user) {
@@ -506,6 +638,13 @@ async function add_new_user(arr, arr_inp) {
 //     console.log(err);
 //   }
 // }
+
+//функция авторизации в данную функцию приходит массив введенных пользователем (логин и пароль)
+//производиться запрос на бэк и от туда в базу данных, идет сравнение введных данных
+//и если логин и пароль овпадает возвращается объект с полной информацией о пользователе, она нужна что бы узнать
+//какую роль имеет пользователь, админ он или просто клиент и в зависимости от этих данных будут созданы кнопки
+//у админа появится возможность добавлять игру и изменять ее и изменять статус придавая клиентам статуса админа,
+//клиент эе получит доступ к своей корзине
 
 async function log_in_user(arr) {
   const val = arr;
@@ -557,15 +696,22 @@ async function log_in_user(arr) {
           .addEventListener("click", () => status());
         admin_buttons();
       } else {
+        console.log("login_nov");
         let html = `
-        <a id="sign_up" href="#">
+        <div class="cont_user">
+        <a class='logo_nick' id="log_in" href="#">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
-        <img src="../images/account_edit_icon_135995.png" alt="sign up">
+        <img src="../images/account_edit_icon_135995.png" alt="login">
         ${list.login}
     </a>
+    <div class="fun_user">
+    <div class="chan"><span>Change</span></div>
+    <div class="code"><span>Code</span></div>
+  </div>
+</div>
     <a class="basket" id="sign_up" href="#">
     <span></span>
     <span></span>
@@ -580,7 +726,13 @@ async function log_in_user(arr) {
           .insertAdjacentHTML("beforeend", html);
         document.querySelector(".basket").addEventListener("click", () => {
           console.log("basket");
-          user_list(user_info);
+          new_window_bascet(user_info);
+        });
+        document.querySelector(".logo_nick").addEventListener("click", () => {
+          open_fun_user();
+        });
+        document.querySelector(".code").addEventListener("click", () => {
+          add_code();
         });
       }
     } else {
@@ -761,6 +913,9 @@ async function serv_arr_online_games() {
 
 //-------------------------------------------------------
 
+//здесь происходит запуск сайта, то есть происходят запросы в бд который ждет ответа на наличие игр
+// далее в массивы записываются данные которые пришли с базы данных и на основе этих данных строится главня страница
+
 window.onload = async function () {
   await serv_arr_new_games();
   await serv_arr_online_games();
@@ -854,10 +1009,10 @@ document.getElementById("best-online-next").addEventListener("click", () => {
     5
   ).then((res) => (id_best_online_game = res));
 });
-document.getElementById("view").addEventListener("click", () => {
-  console.log(arr_all_games);
-  all_game(arr_all_games);
-});
+// document.getElementById("view").addEventListener("click", () => {
+//   console.log(arr_all_games);
+//   all_game(arr_all_games);
+// });
 
 document.getElementById("more_top_gaems").addEventListener("click", () => {
   top_chart(arr_top_games);
@@ -866,9 +1021,9 @@ document.getElementById("more_top_gaems").addEventListener("click", () => {
 document.getElementById("log_in").addEventListener("click", () => {
   log_in();
 });
-document.getElementById("sign_up").addEventListener("click", () => {
-  sign_up();
-});
+// document.getElementById("sign_up").addEventListener("click", () => {
+//   sign_up();
+// });
 //listener_for_img();
 
 // document.querySelector('.search_game').addEventListener('');
@@ -887,7 +1042,7 @@ export {
   log_in_user,
   add_new_status,
   find_choose_game,
-  add_buyer_game,
-  add_intresting_game,
+  //add_buyer_game,
+  // add_intresting_game,
   //log_in_after_game,
 };

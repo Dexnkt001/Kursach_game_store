@@ -1,0 +1,290 @@
+:root {
+  --white: #fff;
+  --gray: #92969bb2;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --danger: #dc3545;
+  --success: #28a745;
+  --black: black;
+  --green: rgb(54, 236, 166);
+  --container: 75%;
+  --small: "Brutal Type Thin";
+  --medium: "Brutal Type Regular";
+  --big: "Brutal Type Medium";
+}
+
+@font-face {
+  font-family: "Brutal Type Thin";
+  src: local("Brutal Type Thin"), local("Brutal-Type-Thin"),
+    url("/Client/fonts/BrutalType-Thin.woff2") format("woff2");
+  /* url("BrutalType-Thin.woff") format("woff"),
+    url("BrutalType-Thin.ttf") format("truetype"); */
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Brutal Type Regular";
+  src: local("Brutal Type Regular"), local("Brutal-Type-Regular"),
+    url("/Client/fonts/BrutalType.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Brutal Type Medium";
+  src: local("Brutal Type Medium"), local("Brutal-Type-Medium"),
+    url("/Client/fonts/BrutalType-Medium.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Brutal Type Bold";
+  src: local("Brutal Type Bold"), local("Brutal-Type-Bold"),
+    url("/Client/fonts/BrutalType-Bold.woff2") format("woff2");
+  font-weight: 1000;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Brutal Type Light";
+  src: local("Brutal Type Extra Light"), local("Brutal-Type-Extra-Light"),
+    url("/Client/fonts/BrutalType-Light.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  cursor: default;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.9);
+  display: block;
+  width: 100%;
+}
+
+.container {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 0;
+}
+
+.top {
+  display: flex;
+  width: 80%;
+  height: 70px;
+  margin: 0 auto;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 10%;
+  z-index: 1000;
+  background-color: #1a1919fa;
+}
+
+.top-left {
+  display: flex;
+  width: 250px;
+  height: 20px;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s ease-in;
+  font-family: "Brutal Type Regular", "Times New Roman";
+}
+
+.top-left span {
+  padding-right: 22px;
+  border-right: 1px solid white;
+  cursor: pointer;
+  transition: color 0.2s ease-in;
+}
+
+.top-left span:hover {
+  color: var(--green);
+}
+
+.top-right {
+  display: block;
+  width: 300px;
+  position: relative;
+  margin-right: 5%;
+}
+
+.top-right input {
+  display: block;
+  width: 86%;
+  height: 28px;
+  font-size: 20px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.274);
+  padding-left: 35px;
+  font-weight: 400;
+  list-style: none;
+  border: none;
+  border-radius: 5px;
+  font-family: "Brutal Type Regular", "Times New Roman";
+  cursor: text;
+  margin-right: 140px;
+}
+
+.top-right input:active,
+.top-right input:hover,
+.top-right input:focus {
+  outline: 0;
+  outline-offset: 0;
+  border: 1px solid var(--green);
+}
+
+.top-right img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 5px;
+  left: 6px;
+}
+
+.content-all-games {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: "Brutal Type Medium", "Times New Roman";
+  color: white;
+  margin-top: 100px;
+}
+
+.module-content {
+  display: flex;
+  width: 77%;
+  flex-wrap: wrap;
+}
+
+.all-gemes-item {
+  display: block;
+  width: 230px;
+  margin: 0 10px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.module-content img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.module-content img:hover {
+  opacity: 0.5;
+}
+
+.all-gemes-item:hover {
+  background-color: rgba(54, 236, 166, 0.2);
+}
+
+.bar-all-games {
+  display: block;
+  width: 20%;
+}
+
+.develop-game {
+  color: #5f5f5f;
+}
+
+.all-gemes-item > div {
+  margin-top: 10px;
+}
+
+.sort-elements-list {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+  color: #5f5f5f;
+}
+
+.active_sorts_item {
+  background-color: #5f5f5f77;
+  color: white;
+}
+
+.accept-n {
+  opacity: 0;
+}
+.active_accept {
+  opacity: 1;
+}
+
+.activ_sort {
+  display: none;
+}
+
+.title-sort-elements {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #5f5f5f;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  color: #5f5f5f;
+  cursor: pointer;
+}
+
+ul {
+  padding-left: 0px;
+  color: #5f5f5f;
+}
+
+ul li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 32px;
+  margin: 7px 0 7px 0;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  border-radius: 3px;
+}
+
+ul li span {
+  cursor: pointer;
+  margin: 0 10px 0 10px;
+}
+
+ul li:hover {
+  color: white;
+}
+
+ul li span:hover ~ ul li {
+  color: white;
+}
+
+.btn-sort {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  background-color: var(--green);
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-sort:hover {
+  box-shadow: var(--green) 0 0 5px;
+}

@@ -17,6 +17,7 @@
   height: 5%;
   justify-content: flex-end;
   align-items: center;
+  margin-top: 10px;
 }
 
 .exit {
@@ -172,20 +173,18 @@
 .sign_up,
 .module_wind_new_game {
   display: flex;
-  background-color: rgb(49, 49, 49);
+  background-color: rgba(0, 0, 0, 0.473);
   position: fixed;
   top: 324px;
   left: 576px;
   width: 40vw;
   height: 40vh;
-  border-radius: 10px;
   justify-content: flex-start;
   text-align: center;
   flex-direction: column;
   z-index: 10000;
   color: white;
   font-size: 25px;
-  overflow-y: scroll;
 }
 
 .up_mod {
@@ -241,10 +240,18 @@ input:focus {
   width: 60%;
   height: 30px;
   display: flex;
-  margin-left: 150px;
+  margin-left: 110px;
   margin-top: 10px;
   justify-content: space-between;
   text-align: center;
+}
+
+.nick span {
+  margin-right: 10px;
+}
+
+.nick input {
+  width: 70%;
 }
 
 .add_user {
@@ -264,7 +271,7 @@ input:focus {
 
 input[type="text"],
 input[type="password"] {
-  width: 100%;
+  width: 333px;
   line-height: 25px;
   border-radius: 5px;
   padding-left: 5px;
@@ -627,4 +634,33 @@ select {
 .buyr-games img:hover ~ .text-buer-game,
 .intresting-games img:hover ~ .text-intrest-game {
   opacity: 1;
+}
+
+.content-code {
+  width: 60%;
+  height: 30px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.module_code {
+  width: 100% !important;
+}
+
+.sub-code {
+  width: 150px;
+  letter-spacing: 1px;
+  height: 30px;
+  margin: 0 auto;
+  color: white;
+  background-color: rgb(18, 18, 18);
+  border: 2px solid var(--green);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sub-code:hover {
+  box-shadow: var(--green) 0 0 10px;
 }

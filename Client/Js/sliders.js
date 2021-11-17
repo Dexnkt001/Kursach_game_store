@@ -113,7 +113,7 @@ function discaunt_previus_slider(id, mass_pict, mass_place, numb_pict) {
         index
       ].childNodes[7].childNodes[3].innerHTML = `${mass_pict[i].prize}&#8381;`;
       mass_place[index].childNodes[7].childNodes[5].innerHTML = `${
-        (mass_pict[i].prize * mass_pict[i].discaunt) / 100
+        mass_pict[i].prize - (mass_pict[i].prize * mass_pict[i].discaunt) / 100
       }&#8381;`;
       index++;
     }
@@ -133,7 +133,7 @@ function discaunt_previus_slider(id, mass_pict, mass_place, numb_pict) {
         index
       ].childNodes[7].childNodes[3].innerHTML = `${mass_pict[i].prize}&#8381;`;
       mass_place[index].childNodes[7].childNodes[5].innerHTML = `${
-        (mass_pict[i].prize * mass_pict[i].discaunt) / 100
+        mass_pict[i].prize - (mass_pict[i].prize * mass_pict[i].discaunt) / 100
       }&#8381;`;
       mass_place[index].childNodes[5].innerHTML = mass_pict[i].developer;
       index++;
@@ -151,7 +151,7 @@ function discaunt_previus_slider(id, mass_pict, mass_place, numb_pict) {
         index
       ].childNodes[7].childNodes[3].innerHTML = `${mass_pict[i].prize}&#8381;`;
       mass_place[index].childNodes[7].childNodes[5].innerHTML = `${
-        (mass_pict[i].prize * mass_pict[i].discaunt) / 100
+        mass_pict[i].prize - (mass_pict[i].prize * mass_pict[i].discaunt) / 100
       }&#8381;`;
       index++;
       temp = i;
@@ -185,7 +185,7 @@ function discaunt_next_slider(id, mass_pict, mass_place, numb_pict) {
         index
       ].childNodes[7].childNodes[3].innerHTML = `${mass_pict[i].prize}&#8381;`;
       mass_place[index].childNodes[7].childNodes[5].innerHTML = `${
-        (mass_pict[i].prize * mass_pict[i].discaunt) / 100
+        mass_pict[i].prize - (mass_pict[i].prize * mass_pict[i].discaunt) / 100
       }&#8381;`;
       // mass_place[index].childNodes[7].innerHTML =
       //   mass_pict[i].prize + " &#8381;";
@@ -206,7 +206,7 @@ function discaunt_next_slider(id, mass_pict, mass_place, numb_pict) {
         index
       ].childNodes[7].childNodes[3].innerHTML = `${mass_pict[i].prize}&#8381;`;
       mass_place[index].childNodes[7].childNodes[5].innerHTML = `${
-        (mass_pict[i].prize * mass_pict[i].discaunt) / 100
+        mass_pict[i].prize - (mass_pict[i].prize * mass_pict[i].discaunt) / 100
       }&#8381;`;
       // mass_place[index].childNodes[7].innerHTML =
       //   mass_pict[i].prize + " &#8381;";
@@ -226,7 +226,7 @@ function discaunt_next_slider(id, mass_pict, mass_place, numb_pict) {
         index
       ].childNodes[7].childNodes[3].innerHTML = `${mass_pict[i].prize}&#8381;`;
       mass_place[index].childNodes[7].childNodes[5].innerHTML = `${
-        (mass_pict[i].prize * mass_pict[i].discaunt) / 100
+        mass_pict[i].prize - (mass_pict[i].prize * mass_pict[i].discaunt) / 100
       }&#8381;`;
       // mass_place[index].childNodes[7].innerHTML =
       //   mass_pict[i].prize + " &#8381;";

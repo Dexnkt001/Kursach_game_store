@@ -135,7 +135,7 @@ nav a:hover {
 }
 
 .enter-site a:nth-child(2) {
-  filter: hue-rotate(200deg);
+  filter: hue-rotate(0deg);
 }
 
 .enter-site a span {
@@ -237,6 +237,8 @@ nav a:hover {
 .change_game {
   transition: 0.2s ease-in;
   cursor: pointer;
+  text-decoration: none;
+  color: #f8f9fa8e;
 }
 
 .view,
@@ -255,11 +257,11 @@ nav a:hover {
 .search-wrapper {
   position: relative;
   display: flex;
-  width: 500px;
+  width: 400px;
   height: 45px;
   left: 365px;
   top: 0;
-  margin-right: 500px;
+  margin-right: 630px;
   border-radius: 25px;
 }
 
@@ -296,7 +298,7 @@ nav a:hover {
   top: 12px;
   border: none;
   background: no-repeat;
-  right: 10px;
+  right: 20px;
 }
 
 .main-slider {
@@ -544,6 +546,13 @@ ul li .slides:last-child {
 
 .popular-title img {
   margin-top: -5px;
+}
+
+.new-wind {
+  display: block;
+  width: 100px;
+  height: 50px;
+  cursor: pointer;
 }
 
 .new-games span,
@@ -862,4 +871,49 @@ footer a:hover {
 
 .disp_none {
   display: none;
+}
+
+.cont_user {
+  position: relative;
+}
+
+.fun_user {
+  display: none;
+  width: 160px;
+  position: absolute;
+  top: 27px;
+  left: 37px;
+  background-color: black;
+  z-index: 999;
+  border-radius: 0 0 5px 5px;
+  border-bottom: 1px solid var(--green);
+  border-left: 1px solid var(--green);
+  border-right: 1px solid var(--green);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.activ_user_fun {
+  display: block;
+  opacity: 1;
+}
+
+.fun_user div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0 5px 0;
+  cursor: pointer;
+}
+
+.fun_user div span {
+  cursor: pointer;
+}
+
+.activ_user {
+  background: var(--green);
+  color: #050801 !important;
+  box-shadow: 0 0 5px var(--green), 0 0 25px var(--green), 0 0 50px var(--green),
+    0 0 200px var(--green);
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
 }

@@ -45,6 +45,10 @@ const gameSchema = new Schema({
     type: Number,
     default: 0,
   },
+  genre: {
+    type: Array,
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("game", gameSchema);

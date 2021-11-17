@@ -6,6 +6,9 @@ const usersSchema = new Schema({
   email: String,
   password: String,
   status: String,
+  phone: String,
+  country: String,
+  town: String,
   buyr_games: {
     type: Array,
     default: [],
@@ -13,6 +16,18 @@ const usersSchema = new Schema({
   intrsting_games: {
     type: Array,
     default: [],
+  },
+  genre: {
+    type: Array,
+    default: [],
+  },
+  develop: {
+    type: Array,
+    default: [],
+  },
+  photo: {
+    type: String,
+    default: "../images/none_name.jpg",
   },
 });
 
