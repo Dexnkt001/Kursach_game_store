@@ -5,7 +5,8 @@ const express = require("express"),
   cors = require("cors"),
   bodyParser = require("body-parser"),
   User = require("./models/users"),
-  Game = require("./models/games");
+  Game = require("./models/games"),
+  Code = require("./models/code");
 
 const PORT = process.env.PORT || 5500;
 
@@ -38,8 +39,6 @@ start();
 
 app.post("/new_game", cb, (req, res) => {
   const game_info = req.body.game_info;
-
-  console.log(game_info);
 
   const all_img = game_info[3].split(","),
     proc = game_info[12].split(","),
@@ -89,11 +88,8 @@ app.post("/new_game", cb, (req, res) => {
 });
 
 app.post("/change_game", cb, (req, res) => {
-  console.log(req.body.game_info);
   const change_game_info = req.body.game_info;
   if (change_game_info[2] === "Effect" && change_game_info.length === 3) {
-    console.log("effect");
-    console.log("ne disc");
     Game.findOneAndUpdate(
       { name: change_game_info[0] },
       { $push: { effect: change_game_info[1] } },
@@ -124,7 +120,6 @@ app.post("/change_game", cb, (req, res) => {
           console.log(err);
           res.json({ status: "error" });
         } else {
-          console.log(respons);
           res.json({ status: "complite" });
         }
       }
@@ -139,7 +134,6 @@ app.post("/change_game", cb, (req, res) => {
           console.log(err);
           res.json("error");
         } else {
-          console.log(resp);
           res.json({ status: "coplite" });
         }
       }
@@ -149,7 +143,6 @@ app.post("/change_game", cb, (req, res) => {
 
 app.post("/add_new_user", cb, (req, res) => {
   const user_info = req.body.user_info;
-  console.log("ia v fun");
   User.find({ login: user_info[2][0] }).then((result) => {
     if (result.length === 0) {
       User.find({ email: user_info[2][1] }).then((result) => {
@@ -177,49 +170,64 @@ app.post("/add_new_user", cb, (req, res) => {
   });
 });
 
-app.post("/new_user", cb, (req, res) => {
-  const user_info = req.body.user_info;
-  console.log("ia v fun");
-  User.find({ login: user_info[0] }).then((result) => {
-    if (result.length === 0) {
-      User.find({ email: user_info[1] }).then((result) => {
-        if (result.length === 0) {
-          const user = new User({
-            login: user_info[0],
-            email: user_info[1],
-            password: user_info[2],
-            status: "client",
+app.post("/add_user_new_info", cb, (req, res) => {
+  const user_i = req.body.user_info;
+  User.findOneAndUpdate(
+    { login: user_i[3] },
+    {
+      $set: {
+        login: user_i[2][0],
+        email: user_i[2][1],
+        password: user_i[2][2],
+        status: "client",
+        phone: user_i[2][5],
+        country: user_i[2][3],
+        town: user_i[2][4],
+        genre: user_i[0],
+        develop: user_i[1],
+      },
+    },
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        res.json({ status: "error" });
+      } else {
+        if (doc !== null) {
+          res.json({
+            login: doc.login,
+            email: doc.email,
+            password: doc.password,
+            status: doc.status,
+            phone: doc.phone,
+            country: doc.country,
+            town: doc.town,
+            genre: doc.genre,
+            develop: doc.develop,
           });
-          user.save();
-          res.json({ status: "добавлен" });
         } else {
-          res.json({ status: "существует" });
+          res.json({ status: "error" });
         }
-      });
-    } else {
-      res.json({ status: "существует" });
+      }
     }
-  });
+  );
 });
 
-app.post("/add_user_buyer_game", cb, (req, res) => {
+app.post("/add_user_intresting_game", cb, (req, res) => {
   const game = req.body.game_info;
-
   User.find({ login: game[0] }).then((result) => {
     if (
-      result[0].buyr_games.some((element) => {
+      result[0].intrsting_games.some((element) => {
         return JSON.stringify(element) == JSON.stringify(game[1]);
       }) == false
     ) {
       User.findOneAndUpdate(
         { login: game[0] },
-        { $push: { buyr_games: game[1] } },
+        { $push: { intrsting_games: game[1] } },
         { new: true },
         (err, doc) => {
           if (err) {
             res.json({ status: "error" });
           } else {
-            console.log(doc);
             if (doc !== null) {
               res.json({
                 login: doc.login,
@@ -244,27 +252,48 @@ app.post("/add_user_buyer_game", cb, (req, res) => {
   });
 });
 
-app.post("/add_user_intresting_game", cb, (req, res) => {
+// app.post("/new_user", cb, (req, res) => {
+//   const user_info = req.body.user_info;
+//   User.find({ login: user_info[0] }).then((result) => {
+//     if (result.length === 0) {
+//       User.find({ email: user_info[1] }).then((result) => {
+//         if (result.length === 0) {
+//           const user = new User({
+//             login: user_info[0],
+//             email: user_info[1],
+//             password: user_info[2],
+//             status: "client",
+//           });
+//           user.save();
+//           res.json({ status: "добавлен" });
+//         } else {
+//           res.json({ status: "существует" });
+//         }
+//       });
+//     } else {
+//       res.json({ status: "существует" });
+//     }
+//   });
+// });
+
+app.post("/add_user_buyer_game", cb, (req, res) => {
   const game = req.body.game_info;
-  console.log(game);
+
   User.find({ login: game[0] }).then((result) => {
     if (
-      result[0].intrsting_games.some((element) => {
+      result[0].buyr_games.some((element) => {
         return JSON.stringify(element) == JSON.stringify(game[1]);
       }) == false
     ) {
       User.findOneAndUpdate(
         { login: game[0] },
-        { $push: { intrsting_games: game[1] } },
+        { $push: { buyr_games: game[1] } },
         { new: true },
         (err, doc) => {
           if (err) {
-            console.log("we have a problem");
             res.json({ status: "error" });
           } else {
-            console.log(doc);
             if (doc !== null) {
-              console.log(doc, " --------- обновленный юзер");
               res.json({
                 login: doc.login,
                 status: doc.status,
@@ -289,19 +318,15 @@ app.post("/add_user_intresting_game", cb, (req, res) => {
 });
 
 app.post("/new_status", cb, (req, res) => {
-  console.log(req.body.user_status);
   const user = req.body.user_status;
-  console.log(user);
   User.findOneAndUpdate(
     { login: user },
     { $set: { status: "admin" } },
     { new: true },
     (err, doc) => {
       if (err) {
-        console.log("we have a problem");
         res.json({ status: "error" });
       } else {
-        console.log(doc);
         if (doc !== null) {
           res.json({ status: "complited" });
         } else {
@@ -314,13 +339,19 @@ app.post("/new_status", cb, (req, res) => {
 
 app.get("/log_in/:word", (req, res) => {
   const val = req.params.word.toString().split(",");
-  console.log(val);
   User.find({ login: val[0], password: val[1] }).then((result) => {
     if (result.length !== 0) {
-      console.log(result[0].status);
+      console.log(result);
       res.json({
         login: val[0],
         status: result[0].status,
+        email: result[0].email,
+        password: result[0].password,
+        genre: result[0].genre,
+        develop: result[0].develop,
+        phone: result[0].phone,
+        country: result[0].country,
+        town: result[0].town,
         buyr_games: result[0].buyr_games,
         intrsting_games: result[0].intrsting_games,
       });
@@ -352,10 +383,8 @@ app.get("/log_in/:word", (req, res) => {
 
 app.get("/find_game/:word", (req, res) => {
   const val = req.params.word;
-  console.log("finde_game ----- ", val);
   Game.find({ name: val }).then((result) => {
     if (result.length !== 0) {
-      console.log(result[0].status);
       res.json({ game: result[0] });
     } else {
       res.json({ status: "Error!" });
@@ -368,15 +397,12 @@ app.get("/find_game/:word", (req, res) => {
 
 app.get("/new_game_arr/:word", (req, res) => {
   // const val = req.params.word.toString().split(",");
-  console.log("new_game_arr");
   let arr_new = [];
   Game.find({}).then((result) => {
     if (result.length !== 0) {
-      console.log(result);
       arr_new = result.filter((element) => {
         return element.effect.includes("new");
       });
-      console.log(arr_new);
       res.json({ arr_new_games: arr_new });
     } else {
       res.json({ status: "Error!" });
@@ -387,7 +413,6 @@ app.get("/new_game_arr/:word", (req, res) => {
 
 app.get("/arr_all_games/:word", (req, res) => {
   // const val = req.params.word.toString().split(",");
-  console.log("arr_all_games");
   let arr_new = [];
   Game.find({}).then((result) => {
     if (result.length !== 0) {
@@ -403,11 +428,9 @@ app.get("/popular_arr/:word", (req, res) => {
   let popular_games = [];
   Game.find({}).then((result) => {
     if (result.length !== 0) {
-      console.log(result);
       popular_games = result.filter((element) => {
         return element.effect.includes("popular");
       });
-      console.log(popular_games);
       res.json({ arr_popular_games: popular_games });
     } else {
       res.json({ status: "Error!" });
@@ -420,11 +443,9 @@ app.get("/top_arr/:word", (req, res) => {
   let top_games = [];
   Game.find({}).then((result) => {
     if (result.length !== 0) {
-      console.log(result);
       top_games = result.filter((element) => {
         return element.effect.includes("top");
       });
-      console.log(top_games);
       res.json({ arr_top_games: top_games });
     } else {
       res.json({ status: "Error!" });
@@ -437,11 +458,9 @@ app.get("/week_arr/:word", (req, res) => {
   let week_games = [];
   Game.find({}).then((result) => {
     if (result.length !== 0) {
-      console.log(result);
       week_games = result.filter((element) => {
         return element.effect.includes("week");
       });
-      console.log(week_games);
       res.json({ arr_week_games: week_games });
     } else {
       res.json({ status: "Error!" });
@@ -454,11 +473,9 @@ app.get("/free_arr/:word", (req, res) => {
   let free_games = [];
   Game.find({}).then((result) => {
     if (result.length !== 0) {
-      console.log(result);
       free_games = result.filter((element) => {
         return element.effect.includes("free");
       });
-      console.log(free_games);
       res.json({ arr_free_games: free_games });
     } else {
       res.json({ status: "Error!" });
@@ -471,11 +488,9 @@ app.get("/preprodaction_arr/:word", (req, res) => {
   let preprodaction_games = [];
   Game.find({}).then((result) => {
     if (result.length !== 0) {
-      console.log(result);
       preprodaction_games = result.filter((element) => {
         return element.effect.includes("preprodaction");
       });
-      console.log(preprodaction_games);
       res.json({ arr_preprodaction_games: preprodaction_games });
     } else {
       res.json({ status: "Error!" });
@@ -491,7 +506,6 @@ app.get("/online_arr/:word", (req, res) => {
       online_games = result.filter((element) => {
         return element.effect.includes("online");
       });
-      console.log(online_games);
       res.json({ arr_online_games: online_games });
     } else {
       res.json({ status: "Error!" });
@@ -507,11 +521,22 @@ app.get("/discaunt_arr/:word", (req, res) => {
       discaunt_games = result.filter((element) => {
         return element.effect.includes("discaunt");
       });
-      console.log(discaunt_games);
       res.json({ arr_discaunt_games: discaunt_games });
     } else {
       res.json({ status: "Error!" });
     }
   });
   // JSON.stringify(arr)
+});
+
+app.post("/new_code", cb, (req, res) => {
+  const game_info = req.body.game_info;
+
+  const code = new Code({
+    name: game_info[0],
+    disc: game_info[1],
+  });
+
+  code.save();
+  res.sendStatus(200);
 });

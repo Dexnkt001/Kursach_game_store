@@ -49,6 +49,8 @@ let place_new_pict,
   place_preproduce_pict,
   place_best_online_pict;
 
+var myStorage = window.localStorage;
+
 function ForEach(mass, fun) {
   return Array.prototype.forEach.call(mass, fun);
 }
@@ -327,7 +329,7 @@ async function add_new_user(arr, arr_inp) {
           .getElementById("sign_up")
           .parentNode.removeChild(document.getElementById("sign_up"));
         let html = `
-        <a id="sign_up" href="#">
+        <a class='log-in-user-ind' id="sign_up" href="#">
         <span></span>
         <span></span>
         <span></span>
@@ -335,7 +337,7 @@ async function add_new_user(arr, arr_inp) {
         <img src="../images/account_edit_icon_135995.png" alt="sign up">
         ${arr[0]}
     </a>
-    <a id="sign_up" href="#">
+    <a class='log-in-user-ind' id="sign_up" href="#">
     <span></span>
     <span></span>
     <span></span>
@@ -357,7 +359,11 @@ async function add_new_user(arr, arr_inp) {
 
 function open_fun_user() {
   document.querySelector(".fun_user").classList.toggle("activ_user_fun");
-  document.querySelector(".cont_user a").classList.toggle("activ_user");
+  if (
+    document.querySelector(".cont_user a").classList.contains("chan") === false
+  ) {
+    document.querySelector(".cont_user a").classList.toggle("activ_user");
+  }
 }
 
 function new_window_bascet(user) {
@@ -654,8 +660,9 @@ async function log_in_user(arr) {
     const response = await fetch(`http://localhost:5500/log_in/${val}`);
     const list = await response.json().then();
     user_info = list;
+    console.log(user_info);
     console.log(Object.keys(list).length);
-    if (Object.keys(list).length === 4) {
+    if (Object.keys(list).length > 4) {
       document
         .querySelector(".log_in")
         .parentNode.removeChild(document.querySelector(".log_in"));
@@ -670,7 +677,7 @@ async function log_in_user(arr) {
         .parentNode.removeChild(document.getElementById("sign_up"));
       if (list.status === "admin") {
         let html = `
-        <a id="sign_up" href="#">
+        <a class='log-in-user-ind' id="sign_up" href="#">
         <span></span>
         <span></span>
         <span></span>
@@ -678,7 +685,7 @@ async function log_in_user(arr) {
         <img src="../images/account_edit_icon_135995.png" alt="sign up">
         ${list.login}
     </a>
-    <a id="log_in" href="#">
+    <a class='log-in-user-ind' id="log_in" href="#">
         <span></span>
         <span></span>
         <span></span>
@@ -708,7 +715,7 @@ async function log_in_user(arr) {
         ${list.login}
     </a>
     <div class="fun_user">
-    <div class="chan"><span>Change</span></div>
+    <a href="./sign_up.html" class="chan"><span>Change</span></a>
     <div class="code"><span>Code</span></div>
   </div>
 </div>
@@ -735,6 +742,9 @@ async function log_in_user(arr) {
           add_code();
         });
       }
+      var user_c = JSON.stringify(user_info);
+      console.log(user_c);
+      myStorage.setItem("user", user_c);
     } else {
       Array.from(document.querySelectorAll(".nick input")).forEach(
         (element) => (element.style.border = "2px solid red")
@@ -917,6 +927,8 @@ async function serv_arr_online_games() {
 // далее в массивы записываются данные которые пришли с базы данных и на основе этих данных строится главня страница
 
 window.onload = async function () {
+  window.localStorage.clear();
+
   await serv_arr_new_games();
   await serv_arr_online_games();
   await serv_arr_preprodaction_games();
@@ -926,6 +938,8 @@ window.onload = async function () {
   await serv_arr_top_games();
   await serv_arr_popular_games();
   await serv_arr_all_games();
+
+  console.log("загузка");
 
   main_list(arr_new_games);
   main_list_new_games(arr_new_games);
@@ -1035,6 +1049,10 @@ document.querySelector(".search-wrapper").addEventListener("submit", () => {
 document.querySelector(".find").addEventListener("click", () => {
   find_choose_game(document.querySelector(".search").value);
 });
+
+// window.onload = function () {
+//   window.localStorage.setItem('user') = window.localStorage.setItem('user');
+// };
 
 export {
   add_new_game_db,
