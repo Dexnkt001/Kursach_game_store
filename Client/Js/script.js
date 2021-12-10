@@ -143,6 +143,8 @@ async function default_slider_for_previus_elements(
 
   let return_promise = await promise;
 
+  console.log(return_promise);
+
   return return_promise;
 }
 
@@ -454,7 +456,7 @@ function new_window(obj, user) {
   <img src="${obj.images.main_img}" alt=""></div>
   <div class='purchase'>
     <img src="../images/HITMAN_3_LOGO.png" alt="pict">
-    <span>${obj.prize} &#8381;</span>
+    <span>${obj.prize * (1 - user.discount / 100)} &#8381;</span>
     <button type="button" class="buy btn btn-danger">Купить сейчас</button>
     <button type="button" class="intres btn btn-outline-secondary">В список желаемого</button>
     <ul class="list-group list-group-flush">
@@ -751,6 +753,46 @@ async function log_in_user(arr) {
       );
       alert("Неправильный Login или Пароль!");
     }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function enter_cod(name) {
+  console.log("user: ", user_info.login, "----", name);
+  const code_info = [name, user_info.login];
+
+  try {
+    const res = await fetch("http://localhost:5500/enter_code", {
+      method: "POST",
+      body: JSON.stringify({
+        code_info,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function add_new_code(name, dis) {
+  const code_info = [name, dis];
+  console.log("code: ", code_info);
+  try {
+    const res = await fetch("http://localhost:5500/new_code", {
+      method: "POST",
+      body: JSON.stringify({
+        code_info,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    res.json().then((res) => {
+      alert(res.status);
+    });
   } catch (error) {
     console.log(error);
   }
@@ -1063,4 +1105,6 @@ export {
   //add_buyer_game,
   // add_intresting_game,
   //log_in_after_game,
+  add_new_code,
+  enter_cod,
 };

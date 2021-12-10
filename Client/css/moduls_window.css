@@ -187,6 +187,26 @@
   font-size: 25px;
 }
 
+.module_wind_new_game {
+  height: 0;
+  overflow-y: scroll;
+}
+
+.module_wind_new_game input[type="text"],
+.module_wind_new_game .add_user {
+  margin: 0 auto;
+  width: 60%;
+}
+.module_wind_new_game .nick {
+  margin: 0 auto;
+  margin-top: 10px;
+}
+.module_wind_new_game .add_user {
+  margin: 0 auto;
+  width: 40%;
+  margin-top: 10px;
+}
+
 .up_mod {
   z-index: 11000;
 }

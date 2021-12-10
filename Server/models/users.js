@@ -29,6 +29,10 @@ const usersSchema = new Schema({
     type: String,
     default: "../images/none_name.jpg",
   },
+  discount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("user", usersSchema);

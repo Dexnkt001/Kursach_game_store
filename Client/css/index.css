@@ -258,16 +258,21 @@ nav a:hover {
   width: var(--container);
   color: #f8f9fa8e;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   height: 70px;
   margin: 0 auto;
 }
 
+.lower-header div {
+  width: 600px;
+}
+
 .find,
 .view,
 .add_new_game,
-.change_game {
+.change_game,
+.add_code {
   transition: 0.2s ease-in;
   cursor: pointer;
   text-decoration: none;
@@ -276,25 +281,27 @@ nav a:hover {
 
 .view,
 .add_new_game,
-.change_game {
+.change_game,
+.add_code {
   margin-left: 20px;
 }
 
 .find:hover,
 .view:hover,
 .add_new_game:hover,
-.change_game:hover {
+.change_game:hover,
+.add_code:hover {
   color: #36eca6;
 }
 
 .search-wrapper {
   position: relative;
   display: flex;
-  width: 400px;
+  width: 300px;
   height: 45px;
-  left: 365px;
+  left: 0px;
   top: 0;
-  margin-right: 630px;
+  margin-right: 200px;
   border-radius: 25px;
 }
 

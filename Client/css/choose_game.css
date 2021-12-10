@@ -99,6 +99,10 @@ body {
   font-family: "Brutal Type Regular", "Times New Roman";
 }
 
+.top-left a {
+  margin-right: 20px;
+}
+
 .top-left span {
   padding-right: 13px;
   border-right: 1px solid white;

@@ -354,6 +354,7 @@ app.get("/log_in/:word", (req, res) => {
         town: result[0].town,
         buyr_games: result[0].buyr_games,
         intrsting_games: result[0].intrsting_games,
+        discount: result[0].discount,
       });
     } else {
       res.json({ status: "Error!" });
@@ -423,6 +424,7 @@ app.get("/arr_all_games/:word", (req, res) => {
   });
   // JSON.stringify(arr)
 });
+
 
 app.get("/popular_arr/:word", (req, res) => {
   let popular_games = [];
@@ -529,14 +531,56 @@ app.get("/discaunt_arr/:word", (req, res) => {
   // JSON.stringify(arr)
 });
 
+app.post("/enter_code", cb, async function (req, res) {
+  const code_info = req.body.code_info;
+
+  let info = [];
+  let disc = 0;
+
+  await User.find({ login: code_info[1] }).then((resulte) => {
+    console.log("-------------", resulte, "------", resulte[0].discount);
+    info.push(resulte[0].discount);
+  });
+  await Code.find({ name: code_info[0] }).then((resulte) => {
+    info.push(resulte[0].disc);
+  });
+  console.log(info);
+  disc = info.reduce((acc, element) => {
+    if (acc + element > 70) {
+      return 70;
+    } else {
+      return acc + element;
+    }
+  }, 0);
+
+  console.log(disc);
+
+  User.findOneAndUpdate(
+    { login: code_info[1] },
+    { $set: { discount: disc } },
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        res.json({ status: "error" });
+      } else {
+        if (doc !== null) {
+          res.json({ status: doc.discount });
+        } else {
+          res.json({ status: "error" });
+        }
+      }
+    }
+  );
+});
+
 app.post("/new_code", cb, (req, res) => {
-  const game_info = req.body.game_info;
+  const code_info = req.body.code_info;
 
   const code = new Code({
-    name: game_info[0],
-    disc: game_info[1],
+    name: code_info[0],
+    disc: code_info[1],
   });
 
   code.save();
-  res.sendStatus(200);
+  res.json({ status: "Код добавлен" });
 });

@@ -7,6 +7,8 @@ import {
   //add_buyer_game,
   // add_intresting_game,
   //log_in_after_game,
+  add_new_code,
+  enter_cod,
 } from "./script.js";
 
 function all_game(massPict) {
@@ -628,12 +630,62 @@ function add_code() {
   <div class="inputs">
     <div class="content-code"><input class='module_code' type="text" placeholder="Code"></div>
   </div>
-  <button class="sub-code">Submit</button>
+  <button id='sub-code' class="sub-code">Submit</button>
     </div>
   </div>
   </div>`;
   document.body.insertAdjacentHTML("afterbegin", text);
   document.getElementById("exit").addEventListener("click", () => {
+    document
+      .querySelector(".log_in")
+      .parentNode.removeChild(document.querySelector(".log_in"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
+
+  document.getElementById("sub-code").addEventListener("click", () => {
+    const code_info = document.querySelector(".module_code").value;
+    enter_cod(code_info);
+    document
+      .querySelector(".log_in")
+      .parentNode.removeChild(document.querySelector(".log_in"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
+}
+
+function add_code_admin() {
+  const text = `<div class="back-modul"></div>
+  <div class='log_in'>
+    <div class="up-module-window">
+      <div id='exit' class="exit"><span>&#10006</span></div>
+    </div>
+    <div class='content_log_in'>
+      <h1>Discount Code</h1>
+  <div class="inputs">
+    <div class="content-code"><input class='module_code' type="text" placeholder="Code name"></div>
+    <div class="content-code"><input class='module_code' type="text" placeholder="Discount"></div>
+  </div>
+  <button id='sub-code' class="sub-code">Submit</button>
+    </div>
+  </div>
+  </div>`;
+  document.body.insertAdjacentHTML("afterbegin", text);
+  document.getElementById("exit").addEventListener("click", () => {
+    document
+      .querySelector(".log_in")
+      .parentNode.removeChild(document.querySelector(".log_in"));
+    document
+      .querySelector(".back-modul")
+      .parentNode.removeChild(document.querySelector(".back-modul"));
+  });
+  document.getElementById("sub-code").addEventListener("click", () => {
+    const code_info = Array.from(document.querySelectorAll(".module_code")).map(
+      (element) => element.value
+    );
+    add_new_code(code_info[0], code_info[1]);
     document
       .querySelector(".log_in")
       .parentNode.removeChild(document.querySelector(".log_in"));
@@ -771,7 +823,8 @@ function change_game_but() {
 
 function admin_buttons() {
   const add_game = `<span id="add_new_game" class="add_new_game">Добавить игру</span>`,
-    change_game = ` <span id="change_game" class="change_game">Изменить игру</span>`;
+    change_game = ` <span id="change_game" class="change_game">Изменить игру</span>`,
+    add_code = `<span id="add_code" class="add_code">Добавить код</span>`;
 
   document
     .querySelector(".lower-header div")
@@ -779,12 +832,18 @@ function admin_buttons() {
   document
     .querySelector(".lower-header div")
     .insertAdjacentHTML("beforeend", change_game);
+  document
+    .querySelector(".lower-header div")
+    .insertAdjacentHTML("beforeend", add_code);
 
   document.getElementById("add_new_game").addEventListener("click", () => {
     add_new_game();
   });
   document.getElementById("change_game").addEventListener("click", () => {
     change_game_but();
+  });
+  document.getElementById("add_code").addEventListener("click", () => {
+    add_code_admin();
   });
 }
 
