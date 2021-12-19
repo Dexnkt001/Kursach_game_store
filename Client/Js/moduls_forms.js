@@ -261,6 +261,10 @@ function user_list(user) {
   // );
 }
 
+function lol() {
+  console.log("module");
+}
+
 function log_in() {
   const log_window = document.createElement("div"),
     back_module_window = document.createElement("div"),
@@ -894,4 +898,5 @@ export {
   user_list,
   buy,
   add_code,
+  lol,
 };
