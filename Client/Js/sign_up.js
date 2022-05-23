@@ -39,7 +39,6 @@ if (typeof user !== "undefined" && user !== null) {
 
 function info_inputs() {
   return arr_inputs.map((element) => {
-    console.log(element.value);
     return element.value;
   });
 }
@@ -117,7 +116,7 @@ async function press_confirm_update() {
         "Content-type": "application/json",
       },
     });
-    // window.history.back();
+    window.history.back();
   } catch (error) {
     console.log(error);
   }
@@ -139,7 +138,7 @@ async function press_confirm() {
         "Content-type": "application/json",
       },
     });
-    // window.history.back();
+     window.history.back();
   } catch (error) {
     console.log(error);
   }

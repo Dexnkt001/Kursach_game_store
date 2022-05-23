@@ -78,10 +78,58 @@ function main_list_new_games(arr) {
     .insertAdjacentHTML("beforeend", new_games_html);
 }
 
+//---------------------
+
+function main_list_recommended_games(arr) {
+  let new_arr = arr.filter((element) => {
+    return element.effect.includes("new");
+  });
+
+  let new_games_html = `
+  <div class="items-new-games">
+
+      <img class="click_img" src="${new_arr[0].images.main_img}" alt="${new_arr[0].name}">
+      <div class="new-game-name">${new_arr[0].name}</div>
+      <div class="new-game-developer ">${new_arr[0].developer}</div>
+      <div class="new-game-prise">${new_arr[0].prize} &#8381;</div>
+    </div>
+    <div class="items-new-games">
+
+    <img class="click_img" src="${new_arr[1].images.main_img}" alt="${new_arr[1].name}">
+    <div class="new-game-name">${new_arr[1].name}</div>
+    <div class="new-game-developer ">${new_arr[1].developer}</div>
+    <div class="new-game-prise">${new_arr[1].prize} &#8381;</div>
+    </div>
+    <div class="items-new-games">
+
+    <img class="click_img" src="${new_arr[2].images.main_img}" alt="${new_arr[2].name}">
+    <div class="new-game-name">${new_arr[2].name}</div>
+    <div class="new-game-developer ">${new_arr[2].developer}</div>
+    <div class="new-game-prise">${new_arr[2].prize} &#8381;</div>
+    </div>
+    <div class="items-new-games">
+
+    <img class="click_img" src="${new_arr[3].images.main_img}" alt="${new_arr[3].name}">
+    <div class="new-game-name">${new_arr[3].name}</div>
+    <div class="new-game-developer ">${new_arr[3].developer}</div>
+    <div class="new-game-prise">${new_arr[3].prize} &#8381;</div>
+    </div>
+    <div class="items-new-games">
+
+    <img class="click_img" src="${new_arr[4].images.main_img}" alt="${new_arr[4].name}">
+    <div class="new-game-name">${new_arr[4].name}</div>
+    <div class="new-game-developer ">${new_arr[4].developer}</div>
+    <div class="new-game-prise">${new_arr[4].prize} &#8381;</div>
+    </div>
+  `;
+  document
+      .querySelector(".container-rec-games")
+      .insertAdjacentHTML("beforeend", new_games_html);
+}
+
+//---------------------
+
 function main_list_popular_games(new_arr) {
-  // let new_arr = arr.filter((element) => {
-  //   return element.effect.includes("popular");
-  // });
 
   let popular_games_html = `
 <div class="grid-container">
@@ -353,6 +401,7 @@ function main_list_online_games(new_arr) {
 export {
   main_list,
   main_list_new_games,
+  main_list_recommended_games,
   main_list_popular_games,
   main_list_top_games,
   main_list_week_game,

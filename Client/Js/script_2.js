@@ -37,7 +37,7 @@ document
           // add_buyer_game(user, obj);
         }
       });
-    game = JSON.parse(getCookie("game"));
+    const game = JSON.parse(getCookie("game"));
 
     document.querySelector(".buy").addEventListener("click", () => {
       add_buyer_game(login, game);
@@ -59,11 +59,14 @@ function getCookie(name) {
         "=([^;]*)"
     )
   );
+  console.log(document.cookie)
+  console.log(decodeURIComponent(matches[1]))
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
 async function add_intresting_game(user, game) {
   console.log(user);
+  console.log('добавление интересной игры')
   const game_info = [user, game];
   try {
     let response = await fetch(
@@ -84,6 +87,7 @@ async function add_intresting_game(user, game) {
       }
     });
   } catch (error) {
+    console.log('interes ne rabotaet!')
     console.log(error);
   }
 }
@@ -174,7 +178,7 @@ async function log_in() {
     const info_items = Array.from(full_information_new_game).map(
       (element) => element.value
     );
-    let aser = await log_in_user(info_items);
+    let aser =  log_in_user(info_items);
     return aser;
   });
 }

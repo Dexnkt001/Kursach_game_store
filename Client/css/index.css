@@ -455,7 +455,8 @@ ul li .slides:last-child {
 .container-top-games,
 .container-discount-games,
 .container-preproduce-games,
-.container-best-online-games {
+.container-best-online-games,
+.container-rec-games{
   display: flex;
   width: 100%;
   justify-content: space-evenly;

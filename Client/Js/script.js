@@ -24,13 +24,14 @@ import {
   main_list_discount_games,
   main_list_free_game,
   main_list_preprodaction_games,
-  main_list_online_games,
+  main_list_online_games, main_list_recommended_games,
 } from "./home_page.js";
 
 let id_new_game = 0,
   id_discaunt_game = 0,
   id_preproduces_game = 0,
   id_best_online_game = 0,
+    id_rec_game=0,
   click_img = document.querySelectorAll("click_img"),
   admin = false,
   arr_new_games = [],
@@ -56,7 +57,6 @@ function ForEach(mass, fun) {
 }
 
 const add_class = (place_pict) => {
-  console.log(place_pict);
   ForEach(place_pict, (element) => {
     element.classList.add("slider-popcity");
   });
@@ -66,55 +66,55 @@ const delete_class = (place_pict) => {
   ForEach(place_pict, (element) => element.classList.remove("slider-popcity"));
 };
 
-// async function add_buyer_game(user, game) {
-//   const game_info = [user, game];
-//   try {
-//     let response = await fetch("http://localhost:5500/add_user_buyer_game", {
-//       method: "POST",
-//       body: JSON.stringify({
-//         game_info,
-//       }),
-//       headers: {
-//         "Content-type": "application/json",
-//       },
-//     });
-//     response.json().then((res) => {
-//       if (res.status != "error") {
-//         user_info = res;
-//         console.log(user_info);
-//       }
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+async function add_buyer_game(user, game) {
+  const game_info = [user, game];
+  try {
+    let response = await fetch("http://localhost:5500/add_user_buyer_game", {
+      method: "POST",
+      body: JSON.stringify({
+        game_info,
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    response.json().then((res) => {
+      if (res.status != "error") {
+        user_info = res;
+        console.log(user_info);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-// async function add_intresting_game(user, game) {
-//   console.log(user);
-//   const game_info = [user, game];
-//   try {
-//     let response = await fetch(
-//       "http://localhost:5500/add_user_intresting_game",
-//       {
-//         method: "POST",
-//         body: JSON.stringify({
-//           game_info,
-//         }),
-//         headers: {
-//           "Content-type": "application/json",
-//         },
-//       }
-//     );
-//     response.json().then((res) => {
-//       if (res.status != "error") {
-//         user_info = res;
-//         console.log(user_info);
-//       }
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+async function add_intresting_game(user, game) {
+  console.log(user);
+  const game_info = [user, game];
+  try {
+    let response = await fetch(
+      "http://localhost:5500/add_user_intresting_game",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          game_info,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+    response.json().then((res) => {
+      if (res.status != "error") {
+        user_info = res;
+        console.log(user_info);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 async function default_slider_for_previus_elements(
   id_game,
@@ -385,7 +385,7 @@ function new_window_bascet(user) {
     .replace(/[,]/g, "");
 
   let new_window = window.open(
-    `http://127.0.0.1:5500/Client/html/bascet.html?name=${user.login}`,
+    `http://localhost:63342/Kursach_game_store/Client/html/bascet.html?name=${user.login}`,
     "bascet"
   );
 
@@ -427,6 +427,7 @@ function new_window_bascet(user) {
   };
 }
 
+console.log(document.cookie)
 function new_window(obj, user) {
   let str = obj.images.all_img.map((element) => {
     return `<img class="main-slide" src="${element}" alt="cyber">`;
@@ -440,7 +441,7 @@ function new_window(obj, user) {
   document.cookie = `game=${game}`;
 
   var newWin = window.open(
-    `http://127.0.0.1:5500/Client/html/two.html?number=${user.login}`,
+    `http://localhost:63342/Kursach_game_store/Client/html/two.html?number=${user.login}`,
     `${obj.name}`
   );
 
@@ -758,6 +759,8 @@ async function log_in_user(arr) {
   }
 }
 
+console.log(localStorage)
+
 async function enter_cod(name) {
   console.log("user: ", user_info.login, "----", name);
   const code_info = [name, user_info.login];
@@ -847,6 +850,23 @@ document.getElementById("new-next").addEventListener("click", () => {
   ).then((res) => (id_new_game = res));
 });
 
+document.getElementById("rec-prev").addEventListener("click", () => {
+  default_slider_for_previus_elements(
+      id_new_game,
+      arr_new_games,
+      place_new_pict,
+      5
+  ).then((res) => (id_new_game = res));
+});
+document.getElementById("rec-next").addEventListener("click", () => {
+  default_slider_for_next_elements(
+      id_new_game,
+      arr_new_games,
+      place_new_pict,
+      5
+  ).then((res) => (id_new_game = res));
+});
+
 //------------------------------
 //массивы на слайдеры
 
@@ -864,6 +884,25 @@ async function serv_arr_new_games() {
   console.log("вызов");
   try {
     const response = await fetch(`http://localhost:5500/new_game_arr/new_game`);
+    await response.json().then((res) => (arr_new_games = res.arr_new_games));
+    console.log(arr_new_games);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+if(user_info){
+  console.log(user_info.genre.join(''))
+}
+
+async function serv_arr_rec_games() {
+  console.log("вызов recommend");
+  if(!user_info){
+    user_info.genre.split('')
+  }
+  console.log(user_info)
+  try {
+    const response = await fetch(`http://localhost:5500/rec_game_arr/new_game`);
     await response.json().then((res) => (arr_new_games = res.arr_new_games));
     console.log(arr_new_games);
   } catch (error) {
@@ -985,6 +1024,7 @@ window.onload = async function () {
 
   main_list(arr_new_games);
   main_list_new_games(arr_new_games);
+  main_list_recommended_games(arr_new_games);
   main_list_popular_games(arr_popular_games);
   main_list_top_games(arr_top_games);
   main_list_week_game(arr_week_game);
@@ -1102,9 +1142,9 @@ export {
   log_in_user,
   add_new_status,
   find_choose_game,
-  //add_buyer_game,
+  // add_buyer_game,
   // add_intresting_game,
-  //log_in_after_game,
+  // log_in_after_game,
   add_new_code,
   enter_cod,
 };

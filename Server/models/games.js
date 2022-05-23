@@ -12,6 +12,10 @@ const gameSchema = new Schema({
     release: String,
     rait: String,
     tag: String,
+    raiting:{
+      type:String,
+      default:'0'
+    }
   },
   images: {
     main_img: String,

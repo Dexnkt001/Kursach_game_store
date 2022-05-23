@@ -1,3 +1,109 @@
+function user_list(user) {
+  console.log("user_list");
+
+  let str_game_buy = ``,
+      str_game_intresting = ``;
+  console.log(user);
+
+  user.buyr_games.forEach((element) => {
+    str_game_buy =
+        str_game_buy +
+        `<div class='relative-for-game-text'> <img class="user-buyr_games" src="${element.images.main_img}" alt="${element.name}"><spam class="text-buer-game">Скачать</spam></div>`;
+  });
+
+  user.intrsting_games.forEach((element) => {
+    str_game_intresting =
+        str_game_intresting +
+        `<div class='relative-for-game-text'> <img class="user-int_games" src="${element.images.main_img}" alt="${element.name}"><spam class="text-intrest-game">Смотреть</spam></div>`;
+  });
+
+  let html_text = `<div class="back-modul"></div>
+<div class="modul-window assasin_bg">
+  <div class="up-module-window-user">
+    <span class="login-user-layot">${user.login} </span>
+    <div id='exit' class="exit"><span>&#10006</span></div>
+  </div>
+  <div class="content-grid-user">
+    <div class='img-user'>
+      <img  class="img_user" src="../images/none_name.jpg" alt="none_name">
+    </div>
+    <div class='main-content-user'>
+      <div class='buyr-games'>
+        <h2>
+  Купленные
+        </h2>
+        ${str_game_buy}
+      </div>
+    <div class='intresting-games'>
+      <h2>
+Интересующие
+      </h2>
+      ${str_game_intresting}
+    </div>
+  </div>
+  </div>
+  </div>`;
+  document.querySelector("body").insertAdjacentHTML("afterbegin", html_text);
+
+  // document.getElementById("exit").addEventListener("click", () => {
+  //   document
+  //       .querySelector(".modul-window")
+  //       .parentNode.removeChild(document.querySelector(".modul-window"));
+  //   document
+  //       .querySelector(".back-modul")
+  //       .parentNode.removeChild(document.querySelector(".back-modul"));
+  // });
+
+  Array.from(document.querySelectorAll(".user-int_games")).forEach(
+      (element) => {
+        console.log(element)
+        element.addEventListener("click", () => {
+          // document
+          //     .querySelector(".modul-window")
+          //     .parentNode.removeChild(document.querySelector(".modul-window"));
+          // document
+          //     .querySelector(".back-modul")
+          //     .parentNode.removeChild(document.querySelector(".back-modul"));
+          find_choose_game(element.alt,user.login);
+        });
+      }
+  );
+
+  Array.from(document.querySelectorAll(".user-buyr_games")).forEach(
+      (element) => {
+        element.removeEventListener("click", find_choose_game);
+        element.addEventListener("click", () => {
+          document
+              .querySelector(".modul-window")
+              .parentNode.removeChild(document.querySelector(".modul-window"));
+          document
+              .querySelector(".back-modul")
+              .parentNode.removeChild(document.querySelector(".back-modul"));
+        });
+      }
+  );
+
+  Array.from(document.querySelectorAll(".user-buyr_int_games")).forEach(
+    (element) => {
+      console.log(user.buyr_games);
+      if (user.buyr_games.includes(element.alt)) {
+        console.log(element);
+        element.removeEventListener("click", find_choose_game);
+      } else {
+        element.addEventListener("click", () => {
+          document
+            .querySelector(".modul-window")
+            .parentNode.removeChild(document.querySelector(".modul-window"));
+          document
+            .querySelector(".back-modul")
+            .parentNode.removeChild(document.querySelector(".back-modul"));
+          find_choose_game(element.alt,user.login);
+        });
+      }
+    }
+  );
+}
+
 document
   .querySelector("body")
   .addEventListener("DOMSubtreeModified", function () {
@@ -10,12 +116,13 @@ document
     });
   });
 
+
 function finde_game_bascet(game_name, login) {
   find_choose_game(game_name, login);
 }
 
 async function find_choose_game(name, user) {
-  console.log("lol");
+  console.log("name");
   const val = name;
   try {
     console.log(val);
@@ -42,7 +149,7 @@ function new_window(obj, user) {
   document.cookie = `game=${game}`;
 
   var newWin = window.open(
-    `http://127.0.0.1:5500/Client/html/two.html?name=${user}`,
+    `http://localhost:63342/Kursach_game_store/Client/html/two.html?name=${user}`,
     `${obj.name}`
   );
 
@@ -206,4 +313,26 @@ function new_window(obj, user) {
   newWin.onload = function () {
     newWin.document.body.insertAdjacentHTML("afterbegin", main_info);
   };
+}
+
+window.onload= async function (){
+
+     const name = window
+          .location
+          .search
+          .replace('?','')
+          .split('&')
+          .reduce(
+              function(p,e){
+                var a = e.split('=');
+                p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+                return p;
+              },
+              {}
+          ).name
+console.log(name)
+  const response = await fetch(`http://localhost:5500/client/${name}`);
+  const list = await response.json().then();
+  console.log(list)
+   user_list(list)
 }

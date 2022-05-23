@@ -4,8 +4,8 @@ import {
   log_in_user,
   add_new_status,
   find_choose_game,
-  //add_buyer_game,
-  // add_intresting_game,
+  // add_buyer_game,
+   // add_intresting_game,
   //log_in_after_game,
   add_new_code,
   enter_cod,
@@ -602,10 +602,10 @@ function module_game(obj, user) {
 
   console.log(user);
 
-  // if (user !== 0) {
-  //   add_intresting_game(user, obj);
+  if (user !== 0) {
+    // add_intresting_game(user, obj);
   // log_in_after_game(user);
-  //}
+  }
 
   document.querySelector(".module_button_buy").addEventListener("click", () => {
     document
@@ -618,7 +618,7 @@ function module_game(obj, user) {
       log_in();
     } else {
       buy();
-      // add_buyer_game(user, obj);
+       // add_buyer_game(user, obj);
     }
   });
 }

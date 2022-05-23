@@ -363,6 +363,33 @@ app.get("/log_in/:word", (req, res) => {
   // JSON.stringify(arr)
 });
 
+app.get("/client/:word", (req, res) => {
+  console.log('client : ',req.params.word.toString())
+  const val = req.params.word.toString().split(",");
+  User.find({ login: val[0]}).then((result) => {
+    if (result.length !== 0) {
+      console.log(result);
+      res.json({
+        login: val[0],
+        status: result[0].status,
+        email: result[0].email,
+        password: result[0].password,
+        genre: result[0].genre,
+        develop: result[0].develop,
+        phone: result[0].phone,
+        country: result[0].country,
+        town: result[0].town,
+        buyr_games: result[0].buyr_games,
+        intrsting_games: result[0].intrsting_games,
+        discount: result[0].discount,
+      });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
 // app.get("/log_in_after_game/:word", (req, res) => {
 //   const val = req.params.word;
 //   console.log(val, " -------- val");
@@ -402,6 +429,22 @@ app.get("/new_game_arr/:word", (req, res) => {
   Game.find({}).then((result) => {
     if (result.length !== 0) {
       arr_new = result.filter((element) => {
+        return element.effect.includes("new");
+      });
+      res.json({ arr_new_games: arr_new });
+    } else {
+      res.json({ status: "Error!" });
+    }
+  });
+  // JSON.stringify(arr)
+});
+
+app.get("/rec_game_arr/:word", (req, res) => {
+  // const val = req.params.word.toString().split(",");
+  let arr_rec = [];
+  Game.find({}).then((result) => {
+    if (result.length !== 0) {
+      arr_rec = result.filter((element) => {
         return element.effect.includes("new");
       });
       res.json({ arr_new_games: arr_new });
