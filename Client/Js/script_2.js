@@ -1,6 +1,16 @@
-document
-  .querySelector("body")
-  .addEventListener("DOMSubtreeModified", function () {
+if(localStorage.user !== undefined){
+  var user = JSON.parse(localStorage.user).login
+}else{
+  var user = undefined
+}
+
+
+setTimeout(lolo, 2000)
+
+// document
+//   .querySelector("body")
+//   .addEventListener("DOMSubtreeModified",
+      function lolo() {
     const circle_1 = document.querySelector(".progress-ring__circle_1");
     const circle_2 = document.querySelector(".progress-ring__circle_2");
     const circle_3 = document.querySelector(".progress-ring__circle_3");
@@ -27,29 +37,68 @@ document
 
     let login = document.location.search.substr(1).split("=")[1];
 
-    document
-      .querySelector(".btn-danger")
-      .addEventListener("click", async () => {
-        if (user === undefined) {
-          log_in();
-        } else {
-          buy();
-          // add_buyer_game(user, obj);
-        }
-      });
+
+
+
     const game = JSON.parse(getCookie("game"));
 
-    document.querySelector(".buy").addEventListener("click", () => {
-      add_buyer_game(login, game);
+    document.querySelector(".btn-danger").removeEventListener('click', async () => {
+      console.log(user)
+      if (user === undefined) {
+        log_in();
+        document.querySelector(".buy").addEventListener("click", () => {
+          console.log('buy')
+          add_buyer_game(user, game);
+        });
+        document.querySelector(".intres").addEventListener("click", () => {
+          add_intresting_game(user, game);
+        });
+      } else {
+        buy();
+        console.log('buy2')
+        await add_buyer_game(user, game);
+      }
     });
 
-    document.querySelector(".intres").addEventListener("click", () => {
-      add_intresting_game(login, game);
-    });
+    document
+        .querySelector(".btn-danger")
+        .addEventListener("click", async () => {
+          console.log(user)
+          if (user === undefined) {
+            log_in();
+            document.querySelector(".buy").addEventListener("click", () => {
+              console.log('buy')
+              add_buyer_game(user, game);
+            });
+            document.querySelector(".intres").addEventListener("click", () => {
+              add_intresting_game(user, game);
+            });
+          } else {
+            buy();
+            console.log('buy2')
+            await add_buyer_game(user, game);
+          }
+        });
 
-    console.log("lol");
+    // document.querySelector(".buy").removeEventListener("click",() => {
+    //   console.log('buy')
+    //   add_buyer_game(user, game);
+    // });
+
+
+    // document.querySelector(".intres").removeEventListener("click", () => {
+    //   add_intresting_game(user, game);
+    // })
+    //
+    // document.querySelector(".intres").addEventListener("click", () => {
+    //   add_intresting_game(user, game);
+    // });
+
     console.log(JSON.parse(getCookie("game")));
-  });
+  }
+
+
+const game = JSON.parse(getCookie("game"));
 
 function getCookie(name) {
   let matches = document.cookie.match(
@@ -59,8 +108,6 @@ function getCookie(name) {
         "=([^;]*)"
     )
   );
-  console.log(document.cookie)
-  console.log(decodeURIComponent(matches[1]))
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
@@ -92,8 +139,8 @@ async function add_intresting_game(user, game) {
   }
 }
 
-async function add_buyer_game(user, game) {
-  const game_info = [user, game];
+async function add_buyer_game(user_i, game) {
+  const game_info = [user_i, game];
   try {
     let response = await fetch("http://localhost:5500/add_user_buyer_game", {
       method: "POST",
@@ -106,8 +153,8 @@ async function add_buyer_game(user, game) {
     });
     response.json().then((res) => {
       if (res.status != "error") {
-        user_info = res;
-        console.log(user_info);
+        user = res.login;
+        console.log(user);
       }
     });
   } catch (error) {
@@ -116,6 +163,7 @@ async function add_buyer_game(user, game) {
 }
 
 async function log_in() {
+  console.log('lollololo')
   const log_window = document.createElement("div"),
     back_module_window = document.createElement("div"),
     content_log_in = document.createElement("div"),
@@ -178,10 +226,11 @@ async function log_in() {
     const info_items = Array.from(full_information_new_game).map(
       (element) => element.value
     );
-    let aser =  log_in_user(info_items);
-    return aser;
+    let user =  log_in_user(info_items);
+    return user;
   });
 }
+
 
 function sign_up() {
   const log_window = document.createElement("div"),
@@ -318,13 +367,22 @@ async function add_new_user(arr, arr_inp) {
 
 async function log_in_user(arr) {
   const val = arr;
-  //console.log(val)
   try {
     console.log(val);
     const response = await fetch(`http://localhost:5500/log_in/${val}`);
     const list = await response.json().then();
-    user_info = list;
-    return user_info[0];
+    console.log('list: ', JSON.stringify(list))
+    user = list.login;
+    if(list.status !== 'Error!'){
+      localStorage.setItem('user', JSON.stringify(user))
+      document
+          .querySelector(".log_in")
+          .parentNode.removeChild(document.querySelector(".log_in"));
+      document
+          .querySelector(".back-modul")
+          .parentNode.removeChild(document.querySelector(".back-modul"));
+      return user[0];
+    }
   } catch (error) {
     console.log(error);
   }
@@ -351,13 +409,14 @@ function buy() {
 
   document.getElementById("exit").addEventListener("click", () => {
     document
-      .querySelector(".modul-window")
-      .parentNode.removeChild(document.querySelector(".modul-window"));
+      .querySelector(".sign_up")
+      .parentNode.removeChild(document.querySelector(".sign_up"));
     document
       .querySelector(".back-modul")
       .parentNode.removeChild(document.querySelector(".back-modul"));
   });
   document.querySelector(".add_user").addEventListener("click", () => {
+    console.log('exit')
     document
       .querySelector(".sign_up")
       .parentNode.removeChild(document.querySelector(".sign_up"));

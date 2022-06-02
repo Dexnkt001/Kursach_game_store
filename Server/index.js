@@ -278,16 +278,23 @@ app.post("/add_user_intresting_game", cb, (req, res) => {
 
 app.post("/add_user_buyer_game", cb, (req, res) => {
   const game = req.body.game_info;
-
+console.log('lololololo', game[1])
   User.find({ login: game[0] }).then((result) => {
     if (
       result[0].buyr_games.some((element) => {
         return JSON.stringify(element) == JSON.stringify(game[1]);
       }) == false
     ) {
+      let arr = game[1].genre.reduce((acc,val)=>{if(!acc.includes(val)){
+        acc.push(val)
+        return acc
+      }else {
+        return acc
+      }},result[0].genre)
       User.findOneAndUpdate(
         { login: game[0] },
-        { $push: { buyr_games: game[1] } },
+        { $push: { buyr_games: game[1] },
+        $set:{genre:arr}},
         { new: true },
         (err, doc) => {
           if (err) {
@@ -297,6 +304,7 @@ app.post("/add_user_buyer_game", cb, (req, res) => {
               res.json({
                 login: doc.login,
                 status: doc.status,
+                genre:doc.genre,
                 buyr_games: doc.buyr_games,
                 intrsting_games: doc.intrsting_games,
               });
@@ -338,6 +346,7 @@ app.post("/new_status", cb, (req, res) => {
 });
 
 app.get("/log_in/:word", (req, res) => {
+  console.log(req.params.word)
   const val = req.params.word.toString().split(",");
   User.find({ login: val[0], password: val[1] }).then((result) => {
     if (result.length !== 0) {
@@ -439,15 +448,73 @@ app.get("/new_game_arr/:word", (req, res) => {
   // JSON.stringify(arr)
 });
 
+function save(arr_g, arr_c){
+  const bool = arr_g.genre.reduce((acc, elem)=>{
+    console.log(acc)
+    if(!acc.skip){
+      if(arr_c[0].some(element => element === elem)){
+        return {skip:true}
+      }else {return {skip:false}}
+    }else{
+      return acc
+    }
+  },{skip:false}).skip;
+  return bool
+}
+
+function prov(arr_g, arr_c){
+  console.log('prov')
+  const bool = arr_g.genre.reduce((acc, elem)=>{
+    console.log(acc)
+    if(!acc.skip){
+      if(arr_c[0].some(element => element === elem)){
+        return {skip:true}
+      }else {return {skip:false}}
+    }else{
+      return acc
+    }
+  },{skip:false}).skip;
+
+  const bool_d = arr_c[1].some(element=>element === arr_g.develop)
+  console.log('bool : ', bool)
+  console.log('bool_d : ', bool_d)
+
+  return bool && bool_d
+
+}
+
 app.get("/rec_game_arr/:word", (req, res) => {
-  // const val = req.params.word.toString().split(",");
+  const arr = req.params.word.toString().split(";");
+  const info_user = [arr[0].split(','), arr[1].split(',')]
   let arr_rec = [];
-  Game.find({}).then((result) => {
-    if (result.length !== 0) {
-      arr_rec = result.filter((element) => {
-        return element.effect.includes("new");
-      });
-      res.json({ arr_new_games: arr_new });
+  console.log('genre : ', info_user[0])
+  console.log('develop : ', info_user[1])
+   Game.find({}).then((result) => {
+     if (result.length !== 0) {
+       //-----------
+       for(let i=0; i<result.length; i++){
+         if(prov(result[i], info_user)){
+           arr_rec.push(arr[i])
+           result.splice(i,1)
+           i--;
+         }
+       }
+       for(let i=0; i< result.length; i++){
+         if(save(result[i],info_user)){
+           arr_rec.push(result[i])
+           result.splice(i,1)
+           i--
+         }
+       }
+       for(let i=0; i< result.length; i++){
+         if(info_user[1].some(element=>element === result[i].develop)){
+           arr_rec.push(result[i]);
+           result.splice(i,1);
+           i--;
+         }
+       }
+       //----------
+      res.json({ arr_new_games: arr_rec });
     } else {
       res.json({ status: "Error!" });
     }

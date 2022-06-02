@@ -467,7 +467,8 @@ ul li .slides:last-child {
 .items-top-games,
 .items-discount-games,
 .items-preproduce-games,
-.items-best-online-games {
+.items-best-online-games,
+.items-rec-games{
   width: 18%;
   height: 500px;
   opacity: 1;
@@ -487,7 +488,8 @@ ul li .slides:last-child {
 .items-top-games img,
 .items-discount-games img,
 .items-preproduce-games img,
-.items-best-online-games img {
+.items-best-online-games img,
+.items-rec-games img{
   width: 100%;
   height: 70%;
   object-fit: cover;
@@ -499,7 +501,8 @@ ul li .slides:last-child {
 .items-top-games img:hover,
 .items-discount-games img:hover,
 .items-preproduce-games img:hover,
-.items-best-online-games img:hover {
+.items-best-online-games img:hover,
+.items-rec-games img:hover{
   filter: brightness(50%);
   box-shadow: var(--green) 0 0 20px;
 }

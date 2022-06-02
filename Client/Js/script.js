@@ -28,6 +28,7 @@ import {
 } from "./home_page.js";
 
 let id_new_game = 0,
+    // id_recc_game = 0,
   id_discaunt_game = 0,
   id_preproduces_game = 0,
   id_best_online_game = 0,
@@ -35,6 +36,7 @@ let id_new_game = 0,
   click_img = document.querySelectorAll("click_img"),
   admin = false,
   arr_new_games = [],
+    arr_rec_games=[],
   arr_popular_games = [],
   arr_top_games = [],
   arr_week_game = [],
@@ -46,11 +48,12 @@ let id_new_game = 0,
   user_info = 0;
 
 let place_new_pict,
+    place_rec_pict,
   place_discount_pict,
   place_preproduce_pict,
   place_best_online_pict;
 
-var myStorage = window.localStorage;
+var myStorage = localStorage;
 
 function ForEach(mass, fun) {
   return Array.prototype.forEach.call(mass, fun);
@@ -446,7 +449,7 @@ function new_window(obj, user) {
   );
 
   console.log(str);
-
+console.log(user)
   const main_info = `<div class="container">
   <div class="top"><div class='top-left'>
     <a href="../html/index.html">&lt; Главная страница</a> ${obj.name}
@@ -457,7 +460,7 @@ function new_window(obj, user) {
   <img src="${obj.images.main_img}" alt=""></div>
   <div class='purchase'>
     <img src="../images/HITMAN_3_LOGO.png" alt="pict">
-    <span>${obj.prize * (1 - user.discount / 100)} &#8381;</span>
+    <span>${obj.prize * (1 - (user !== 0 ? user.discount : 0) / 100)} &#8381;</span>
     <button type="button" class="buy btn btn-danger">Купить сейчас</button>
     <button type="button" class="intres btn btn-outline-secondary">В список желаемого</button>
     <ul class="list-group list-group-flush">
@@ -746,8 +749,13 @@ async function log_in_user(arr) {
         });
       }
       var user_c = JSON.stringify(user_info);
-      console.log(user_c);
+      console.log('user_info_rec : ', user_info);
       myStorage.setItem("user", user_c);
+      const respo = await fetch(`http://localhost:5500/rec_game_arr/${user_info.genre.join(',')};${user_info.develop.join(',')}`);
+      await respo.json().then((res) => (arr_rec_games = res.arr_new_games));
+      console.log(arr_rec_games)
+      main_list_recommended_games(arr_rec_games)
+      place_rec_pict = document.querySelectorAll(".items-rec-games")
     } else {
       Array.from(document.querySelectorAll(".nick input")).forEach(
         (element) => (element.style.border = "2px solid red")
@@ -834,6 +842,7 @@ async function add_new_status(user) {
 }
 
 document.getElementById("new-prev").addEventListener("click", () => {
+  console.log('knopka new!!!!!')
   default_slider_for_previus_elements(
     id_new_game,
     arr_new_games,
@@ -842,6 +851,7 @@ document.getElementById("new-prev").addEventListener("click", () => {
   ).then((res) => (id_new_game = res));
 });
 document.getElementById("new-next").addEventListener("click", () => {
+  console.log('knopka new!!!!!')
   default_slider_for_next_elements(
     id_new_game,
     arr_new_games,
@@ -852,19 +862,19 @@ document.getElementById("new-next").addEventListener("click", () => {
 
 document.getElementById("rec-prev").addEventListener("click", () => {
   default_slider_for_previus_elements(
-      id_new_game,
-      arr_new_games,
-      place_new_pict,
+      id_rec_game,
+      arr_rec_games,
+      place_rec_pict,
       5
-  ).then((res) => (id_new_game = res));
+  ).then((res) => (id_rec_game = res));
 });
 document.getElementById("rec-next").addEventListener("click", () => {
   default_slider_for_next_elements(
-      id_new_game,
-      arr_new_games,
-      place_new_pict,
+      id_rec_game,
+      arr_rec_games,
+      place_rec_pict,
       5
-  ).then((res) => (id_new_game = res));
+  ).then((res) => (id_rec_game = res));
 });
 
 //------------------------------
@@ -891,24 +901,39 @@ async function serv_arr_new_games() {
   }
 }
 
+// async function serv_arr_new_games() {
+//   console.log("вызов");
+//   try {
+//     const response = await fetch(`http://localhost:5500/new_game_arr/new_game`);
+//     await response.json().then((res) => (arr_new_games = res.arr_new_games));
+//     console.log(arr_new_games);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
 if(user_info){
   console.log(user_info.genre.join(''))
 }
 
-async function serv_arr_rec_games() {
-  console.log("вызов recommend");
-  if(!user_info){
-    user_info.genre.split('')
-  }
-  console.log(user_info)
-  try {
-    const response = await fetch(`http://localhost:5500/rec_game_arr/new_game`);
-    await response.json().then((res) => (arr_new_games = res.arr_new_games));
-    console.log(arr_new_games);
-  } catch (error) {
-    console.log(error);
-  }
+if(myStorage.user !== undefined){
+  console.log('eeeeeeeeeeeeeeeeeeeeeeeeeee')
 }
+
+// async function serv_arr_rec_games(user_info) {
+//   console.log("вызов recommend");
+//   if(!user_info){
+//     user_info.genre.split('')
+//   }
+//   console.log(user_info)
+//   try {
+//     const response = await fetch(`http://localhost:5500/rec_game_arr/new_game`);
+//     await response.json().then((res) => (arr_new_games = res.arr_new_games));
+//     console.log(arr_new_games);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 //serv_arr_new_games();
 
@@ -1024,7 +1049,6 @@ window.onload = async function () {
 
   main_list(arr_new_games);
   main_list_new_games(arr_new_games);
-  main_list_recommended_games(arr_new_games);
   main_list_popular_games(arr_popular_games);
   main_list_top_games(arr_top_games);
   main_list_week_game(arr_week_game);
@@ -1034,14 +1058,15 @@ window.onload = async function () {
   main_list_online_games(arr_online_games);
 
   (place_new_pict = document.querySelectorAll(".items-new-games")),
+       //place_rec_pict = document.querySelectorAll(".items-rec-games")
     //place_discount_pict = document.querySelectorAll('.items-discount-games'),
     (place_preproduce_pict = document.querySelectorAll(
       ".items-preproduce-games"
     )),
     (place_best_online_pict = document.querySelectorAll(
       ".items-best-online-games"
-    ));
-  place_discount_pict = document.querySelectorAll(".items-discount-games");
+    )),
+          (place_discount_pict = document.querySelectorAll(".items-discount-games"));
   Array.from(document.querySelectorAll("img")).forEach((element) =>
     element.addEventListener("click", () => find_choose_game(element.alt))
   );
